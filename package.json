@@ -1,0 +1,31 @@
+{
+   "name": "@toba/utility",
+   "description": "Toba Utility",
+   "version": "1.0.0",
+   "private": false,
+   "main": "./src/utility.ts",
+   "author": {
+      "name": "Jason Abbott"
+   },
+   "license": "MIT",
+   "scripts": {
+      "test": "node_modules/.bin/mocha --recursive"
+   },
+   "devDependencies": {
+      "@types/chai": "^4.0.1",
+      "chai": "^4.1.0",
+      "mocha": "^4.0.0",
+      "prettier": "^1.9.2",
+      "tslint": "^5.5.0",
+      "tslint-config-prettier": "^1.6.0",
+      "tslint-consistent-codestyle": "^1.10.0"
+   },
+   "repository": {
+      "type": "git",
+      "url": "https://github.com/toba/utility"
+   },
+   "bugs": {
+      "url": "https://github.com/toba/utility/issues"
+   },
+   "dependencies": {}
+}
