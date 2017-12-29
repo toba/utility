@@ -1,6 +1,5 @@
 /* tslint:disable:no-unused-expression */
-import "mocha";
-import { expect } from "chai";
+import { expect } from "@toba/test";
 import { is, merge, format } from "./utility";
 
 type TestThing = { [key: string]: string | string[] | TestThing };
@@ -47,13 +46,20 @@ describe("Utilities", () => {
          key4: "value4",
          key5: ["one", "two"]
       });
-
    });
 
    it("merges nested objects", () => {
-      const base: TestThing = { key1: "value1", key2: "value2", key5: { key10: "value10", key11: "value11" } };
+      const base: TestThing = {
+         key1: "value1",
+         key2: "value2",
+         key5: { key10: "value10", key11: "value11" }
+      };
       const add1: TestThing = { key1: null, key3: "value3" };
-      const add2: TestThing = { key1: "newValue1", key4: "value4", key5: { key10: "new-value10", key12: "value12" } };
+      const add2: TestThing = {
+         key1: "newValue1",
+         key4: "value4",
+         key5: { key10: "new-value10", key12: "value12" }
+      };
 
       expect(merge(base, add1)).to.deep.equal({
          key1: "value1",
@@ -68,7 +74,6 @@ describe("Utilities", () => {
          key4: "value4",
          key5: { key10: "new-value10", key11: "value11", key12: "value12" }
       });
-
    });
 
    it("formats text with substitutions", () => {
