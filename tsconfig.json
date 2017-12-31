@@ -31,8 +31,7 @@
       "baseUrl": "."
    },
    "include": [
-      "./lib/**/*.ts",
-      "./modules/**/*.ts*"
+      "./src/**/*.ts",
    ],
    "exclude": [
       "./node_modules/"
