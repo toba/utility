@@ -4,7 +4,6 @@ import { is, merge, format } from "./utility";
 
 type TestThing = { [key: string]: string | string[] | TestThing };
 
-// https://journal.artfuldev.com/write-tests-for-typescript-projects-with-mocha-and-chai-in-typescript-86e053bdb2b6
 describe("Utilities", () => {
    describe("Identity Checks", () => {
       const u: string = undefined;
