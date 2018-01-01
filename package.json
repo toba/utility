@@ -3,7 +3,11 @@
    "description": "Toba Utility",
    "version": "1.0.0",
    "private": false,
+   "publishConfig": {
+      "access": "public"
+   },
    "main": "./src/utility.ts",
+   "files": ["src/*.ts"],
    "author": {
       "name": "Jason Abbott"
    },
@@ -24,6 +28,16 @@
       "@toba/tslint": "^1.0.1",
       "prettier": "^1.9.2",
       "typescript": "^2.6.2"
+   },
+   "prettier": {
+      "arrowParens": "avoid",
+      "bracketSpacing": true,
+      "printWidth": 80,
+      "semi": true,
+      "singleQuote": false,
+      "tabWidth": 3,
+      "trailingComma": "none",
+      "useTabs": false
    },
    "repository": {
       "type": "git",
