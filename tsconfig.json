@@ -3,7 +3,8 @@
    "compilerOptions": {
       "baseUrl": ".",
       "sourceMap": false,
-      "outDir": "./lib"
+      "outDir": "./lib",
+      "module": "commonjs"
    },
    "include": [
       "./src/**/*.ts",
