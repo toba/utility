@@ -1,6 +1,6 @@
 import { Time } from "./utility";
 
-interface Storage<T> {
+export interface Storage<T> {
    save(key: string, value: T, days?: number, includeSubdomain?: boolean): void;
    remove(key: string): void;
    item(key: string): T;

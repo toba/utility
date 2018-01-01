@@ -11,8 +11,8 @@
     js-tokens "^3.0.0"
 
 "@toba/lint@^1.0.8":
-  version "1.0.9"
-  resolved "https://registry.yarnpkg.com/@toba/lint/-/lint-1.0.9.tgz#541c9a58885bd52ade25dae6fd3f27d5fe17ddc3"
+  version "1.0.10"
+  resolved "https://registry.yarnpkg.com/@toba/lint/-/lint-1.0.10.tgz#00907de7c322f7d4ee4942feb748ff16ee81bc54"
   dependencies:
     stylelint "^8.4.0"
     stylelint-config-standard "^18.0.0"
