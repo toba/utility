@@ -1,22 +1,19 @@
 {
    "name": "@toba/utility",
    "description": "Toba Utility",
-   "version": "1.0.6",
+   "version": "1.0.8",
    "private": false,
    "publishConfig": {
       "access": "public"
    },
-   "main": "lib/index.js",
-   "typings": "lib/index",
-   "files": ["lib/"],
+   "main": "",
+   "files": ["index.ts", "lib/storage.ts", "lib/utility.ts"],
    "author": {
       "name": "Jason Abbott"
    },
    "license": "MIT",
    "scripts": {
-      "build": "./node_modules/.bin/tsc",
-      "test": "jest",
-      "prepare": "yarn build"
+      "test": "jest"
    },
    "jest": {
       "setupFiles": ["jest-localstorage-mock"],

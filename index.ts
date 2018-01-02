@@ -6,6 +6,6 @@ export {
    eventCoord,
    list,
    randomID
-} from "./utility";
+} from "./lib/utility";
 
-export { session, cookie } from "./storage";
+export { session, cookie } from "./lib/storage";

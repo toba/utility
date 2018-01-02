@@ -1,16 +1,11 @@
 {
    "extends": "./node_modules/@toba/lint/ts/config",
-   "compilerOptions": {
-      "baseUrl": ".",
-      "sourceMap": false,
-      "outDir": "./lib",
-      "module": "commonjs"
-   },
    "include": [
-      "./src/**/*.ts",
+      "./index.ts",
+      "./lib/**/*.ts",
    ],
    "exclude": [
       "./node_modules/",
-      "./src/**/*.test.ts",
+      "./lib/**/*.test.ts",
    ]
 }
