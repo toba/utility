@@ -1,4 +1,4 @@
-import { is, merge, format } from "./utility";
+import { is, merge, format, removeItem } from "./utility";
 
 type TestThing = { [key: string]: string | string[] | TestThing };
 const u: string = undefined;
@@ -72,6 +72,23 @@ test("merges nested objects", () => {
       key4: "value4",
       key5: { key10: "new-value10", key11: "value11", key12: "value12" }
    });
+});
+
+test("removes items from arrays", () => {
+   const a = () => 1;
+   const b = () => 2;
+   const c = () => 3;
+   const list = [a, b];
+
+   expect(list).toHaveLength(2);
+
+   removeItem(list, a);
+
+   expect(list).toHaveLength(1);
+
+   removeItem(list, c);
+
+   expect(list).toHaveLength(1);
 });
 
 test("formats text with substitutions", () => {
