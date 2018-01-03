@@ -108,11 +108,13 @@ export function format(text: string, ...insertions: any[]): string {
 /**
  * Remove item from an array.
  */
-export function removeItem<T>(list: T[], item: T) {
+export function removeItem<T>(list: T[], item: T): boolean {
    const i = list.indexOf(item);
    if (i >= 0) {
       list.splice(i, 1);
+      return true;
    }
+   return false;
 }
 
 /**

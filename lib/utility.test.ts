@@ -81,13 +81,9 @@ test("removes items from arrays", () => {
    const list = [a, b];
 
    expect(list).toHaveLength(2);
-
-   removeItem(list, a);
-
+   expect(removeItem(list, a)).toBe(true);
    expect(list).toHaveLength(1);
-
-   removeItem(list, c);
-
+   expect(removeItem(list, c)).toBe(false);
    expect(list).toHaveLength(1);
 });
 

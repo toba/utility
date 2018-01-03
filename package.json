@@ -1,17 +1,13 @@
 {
    "name": "@toba/utility",
    "description": "Toba Utility",
-   "version": "1.0.8",
+   "version": "1.0.9",
    "private": false,
    "publishConfig": {
       "access": "public"
    },
    "main": "",
-   "files": [
-      "index.ts",
-      "lib/storage.ts",
-      "lib/utility.ts"
-   ],
+   "files": ["index.ts", "lib/storage.ts", "lib/utility.ts"],
    "author": {
       "name": "Jason Abbott"
    },
@@ -20,24 +16,13 @@
       "test": "jest"
    },
    "jest": {
-      "setupFiles": [
-         "jest-localstorage-mock"
-      ],
+      "setupFiles": ["jest-localstorage-mock"],
       "transform": {
          "^.+\\.tsx?$": "ts-jest"
       },
-      "transformIgnorePatterns": [
-         "<rootDir>/node_modules/(?!@toba)"
-      ],
+      "transformIgnorePatterns": ["<rootDir>/node_modules/(?!@toba)"],
       "testRegex": "(/__tests__/.*|(\\.|/)(test|spec))\\.(jsx?|tsx?)$",
-      "moduleFileExtensions": [
-         "ts",
-         "tsx",
-         "js",
-         "jsx",
-         "json",
-         "node"
-      ]
+      "moduleFileExtensions": ["ts", "tsx", "js", "jsx", "json", "node"]
    },
    "devDependencies": {
       "@toba/lint": "^1.0.8",
