@@ -1,13 +1,19 @@
 {
    "name": "@toba/utility",
    "description": "Toba Utility",
-   "version": "1.1.0",
+   "version": "1.1.1",
    "private": false,
    "publishConfig": {
       "access": "public"
    },
    "main": "",
-   "files": ["index.ts", "lib/storage.ts", "lib/utility.ts"],
+   "files": [
+      "index.ts",
+      "lib/is.ts",
+      "lib/storage.ts",
+      "lib/url.ts",
+      "lib/utility.ts"
+   ],
    "author": {
       "name": "Jason Abbott"
    },
