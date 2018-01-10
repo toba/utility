@@ -3,14 +3,14 @@ import { is } from "../index";
 export namespace url {
    export function variables(path: string): { [key: string]: string } {
       if (is.empty(path) || !path.includes("?")) {
-         return null;
+         return {};
       }
       const pairs = path.split(/[\?&]/g);
 
       console.log(pairs);
 
       if (pairs.length == 0) {
-         return null;
+         return {};
       }
 
       return pairs.reduce(

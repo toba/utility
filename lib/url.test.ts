@@ -10,8 +10,8 @@ test("extracts query string variables", () => {
 
 test("handles URLs without querystring values", () => {
    let qs = url.variables(null);
-   expect(qs).toBeNull();
+   expect(qs).toEqual({});
 
    qs = url.variables("http://path.com");
-   expect(qs).toBeNull();
+   expect(qs).toEqual({});
 });
