@@ -45,6 +45,16 @@ export function inDaylightSavings(date = new Date()): boolean {
    return date.getTimezoneOffset() < nonDstOffset;
 }
 
+export const timeString = (d: Date) => {
+   let h = d.getHours();
+   let a = " AM";
+   if (h > 12) {
+      a = " PM";
+      h -= 12;
+   }
+   return h + ":" + d.getMinutes() + a;
+};
+
 /**
  * Return AM or PM
  */

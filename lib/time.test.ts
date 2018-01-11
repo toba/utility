@@ -1,6 +1,7 @@
 import {
    hoursAndMinutes,
    hourOfDay,
+   timeString,
    toDateString,
    inDaylightSavings
 } from "../index";
@@ -13,6 +14,11 @@ test("display date as MMM d, YYYY", () => {
 test("shows AM or PM for hour of day", () => {
    expect(hourOfDay(2)).toBe("AM 2");
    expect(hourOfDay(14)).toBe("PM 2");
+});
+
+test("creates time string", () => {
+   expect(timeString(new Date(2000, 1, 1, 5, 12))).toBe("5:12 AM");
+   expect(timeString(new Date(2000, 1, 1, 13, 12))).toBe("1:12 PM");
 });
 
 test("shows hours:minutes for fractional hour", () => {

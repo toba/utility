@@ -8,6 +8,7 @@ export {
    Time,
    hoursAndMinutes,
    hourOfDay,
+   timeString,
    toDateString,
    inDaylightSavings
 } from "./lib/time";
