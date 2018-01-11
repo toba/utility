@@ -1,4 +1,4 @@
-import { Time } from "./utility";
+import { Time } from "../index";
 
 export interface Storage<T> {
    save(key: string, value: T, days?: number, includeSubdomain?: boolean): void;
