@@ -5,6 +5,7 @@ export { is } from "./lib/is";
 export { url } from "./lib/url";
 export { session, cookie } from "./lib/storage";
 export {
+   Time,
    hoursAndMinutes,
    hourOfDay,
    toDateString,
