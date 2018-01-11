@@ -1,24 +1,6 @@
 import { is } from "../index";
 
 /**
- * Milliseconds per units of time.
- */
-export enum Time {
-   /** Milliseconds in a second */
-   Second = 1000,
-   /** Milliseconds in a minute */
-   Minute = Second * 60,
-   /** Milliseconds in an hour */
-   Hour = Minute * 60,
-   /** Milliseconds in a day */
-   Day = Hour * 24,
-   /** Milliseconds in a week */
-   Week = Day * 7,
-   /** Milliseconds in a year */
-   Year = Day * 365
-}
-
-/**
  * Merge additions into a base object, only replacing base values if the
  * additions are not null or undefined. Arrays will not be merged but will be
  * treated as values meaning additions supersede the base.
@@ -42,16 +24,6 @@ export function merge<T extends object>(base: T, ...additions: any[]): T {
          return existing;
       },
       Object.assign({}, base) as any
-   );
-}
-
-/**
- * Replace dollar-sign variables with substitutions.
- */
-export function format(text: string, ...insertions: any[]): string {
-   return insertions.reduce(
-      (out, insert, i) => out.replace("$" + (i + 1), insert),
-      text
    );
 }
 

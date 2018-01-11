@@ -1,7 +1,7 @@
 {
    "name": "@toba/utility",
    "description": "Toba Utility",
-   "version": "1.1.2",
+   "version": "1.2.0",
    "private": false,
    "publishConfig": {
       "access": "public"
@@ -9,8 +9,13 @@
    "main": "",
    "files": [
       "index.ts",
+      "lib/constants.ts",
       "lib/is.ts",
+      "lib/number.ts",
+      "lib/regex.ts",
       "lib/storage.ts",
+      "lib/text.ts",
+      "lib/time.ts",
       "lib/url.ts",
       "lib/utility.ts"
    ],

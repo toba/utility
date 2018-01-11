@@ -1,4 +1,4 @@
-import { session } from "./storage";
+import { session } from "../index";
 
 test("Save numbers", () => {
    session.save("test-key", 99);

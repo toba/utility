@@ -1,4 +1,4 @@
-import { merge, format, removeItem } from "./utility";
+import { merge, removeItem } from "./utility";
 
 type TestThing = { [key: string]: string | string[] | TestThing };
 
@@ -66,8 +66,4 @@ test("removes items from arrays", () => {
    expect(list).toHaveLength(1);
    expect(removeItem(list, c)).toBe(false);
    expect(list).toHaveLength(1);
-});
-
-test("formats text with substitutions", () => {
-   expect(format("this $1 thing", "one")).toBe("this one thing");
 });

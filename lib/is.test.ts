@@ -1,4 +1,4 @@
-import { is } from "./is";
+import { is } from "../index";
 
 const u: string = undefined;
 

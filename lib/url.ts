@@ -7,8 +7,6 @@ export namespace url {
       }
       const pairs = path.split(/[\?&]/g);
 
-      console.log(pairs);
-
       if (pairs.length == 0) {
          return {};
       }
