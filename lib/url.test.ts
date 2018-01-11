@@ -6,6 +6,11 @@ test("extracts query string variables", () => {
 
    qs = url.variables("http://path.com/?var1=value1&var2=value2");
    expect(qs["var2"]).toBe("value2");
+
+   qs = url.variables(
+      "file:///D:/dev/src/github.com/toba/timeline/index.html?key=23"
+   );
+   expect(qs["key"]).toBe("23");
 });
 
 test("handles URLs without querystring values", () => {
