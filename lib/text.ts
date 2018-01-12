@@ -99,3 +99,21 @@ export const slug = (text: string) =>
            .replace(/[\s\/-]+/g, "-")
            .replace("à", "a")
            .replace(/[^\-a-z0-9]/g, "");
+
+export const wrapText = (
+   text: string,
+   lineLength = 80,
+   lineBreak = "\n"
+): string =>
+   is.empty(text) ||
+   lineLength < 2 ||
+   is.empty(lineBreak) ||
+   text.length <= lineLength
+      ? text
+      : text.split(/\s+/).reduce((lines, word) => {
+           const l = word.length;
+           if (lines.length + l > lineLength) {
+              lines += lineBreak;
+           }
+           return lines + word;
+        }, "");

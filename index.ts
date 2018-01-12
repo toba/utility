@@ -1,5 +1,13 @@
 export { merge, removeItem, eventCoord, list, randomID } from "./lib/utility";
-export { format, printf, slug, rot13, capitalize, titleCase } from "./lib/text";
+export {
+   format,
+   printf,
+   slug,
+   rot13,
+   capitalize,
+   titleCase,
+   wrapText
+} from "./lib/text";
 export { re } from "./lib/regex";
 export { is } from "./lib/is";
 export { url } from "./lib/url";
