@@ -24,8 +24,9 @@ test("shows hours:minutes for fractional hour", () => {
    expect(hoursAndMinutes(5.5)).toBe("5:30");
 });
 
-test("builds duration string", () => {
+test("builds duration string from milliseconds", () => {
    expect(durationString(Time.Day)).toBe("1d");
+   expect(durationString(Time.Day * -1)).toBe("1d");
    expect(durationString(Time.Day + Time.Hour * 4)).toBe("1d4h");
    expect(durationString(Time.Hour * 2 + Time.Minute * 20)).toBe("2h20m");
    // rounding
@@ -38,6 +39,15 @@ test("builds duration string", () => {
          TimeUnit.Minute
       )
    ).toBe("4h20m");
+});
+
+test("builds duration string from date range", () => {
+   expect(durationString(new Date(2017, 1, 1), new Date(2017, 1, 2))).toBe(
+      "1d"
+   );
+   expect(
+      durationString(new Date(2017, 1, 1, 2, 30), new Date(2017, 1, 2, 4))
+   ).toBe("1d1h30m");
 });
 
 test("parse duration string", () => {

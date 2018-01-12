@@ -79,6 +79,13 @@ export const timeString = (d: Date) => {
    return h + ":" + leadingZeros(d.getMinutes(), 2) + a;
 };
 
+export function durationString(ms: number, roundTo?: TimeUnit): string;
+export function durationString(
+   start: Date,
+   end: Date,
+   roundTo?: TimeUnit
+): string;
+
 /**
  * Duration in typical project format:
  *    y=year
@@ -91,10 +98,21 @@ export const timeString = (d: Date) => {
  *    4 hours 10 minutes -> 4h10m
  *    1 day, 6 hours -> 1d6h
  */
-export const durationString = (
-   ms: number,
-   roundTo: TimeUnit = null
-): string => {
+export function durationString(
+   startOrMs: number | Date,
+   endOrRoundTo?: TimeUnit | Date,
+   roundTo?: TimeUnit
+): string {
+   if (typeof startOrMs == "number") {
+      return durationStringFromNumber(startOrMs, endOrRoundTo as TimeUnit);
+   } else if (endOrRoundTo instanceof Date) {
+      return durationStringFromDates(startOrMs, endOrRoundTo, roundTo);
+   } else {
+      return "";
+   }
+}
+
+const durationStringFromNumber = (ms: number, roundTo: TimeUnit = null) => {
    let d = "";
 
    const units = [
@@ -112,6 +130,8 @@ export const durationString = (
       }
    };
 
+   ms = Math.abs(ms);
+
    for (let i = 0; i < units.length; i++) {
       const u = units[i];
       add(unitDuration[u], u);
@@ -122,6 +142,11 @@ export const durationString = (
 
    return d;
 };
+
+const durationStringFromDates = (start: Date, end: Date, roundTo: TimeUnit) =>
+   is.empty(start) || is.empty(end)
+      ? ""
+      : durationStringFromNumber(end.getTime() - start.getTime(), roundTo);
 
 /**
  * Milliseconds for duration string.
