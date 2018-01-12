@@ -10,6 +10,7 @@ export {
    hoursAndMinutes,
    timeString,
    dateString,
+   parseDuration,
    durationString,
    inDaylightSavings
 } from "./lib/time";

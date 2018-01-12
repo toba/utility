@@ -19,6 +19,7 @@ test("extracts numbers from strings", () => {
    expect(parseNumber("hey 34")).toBe(34);
    expect(parseNumber("wow 28.9")).toBe(28.9);
    expect(parseNumber("nothing")).toBeNaN();
+   expect(parseNumber("nothing", 0)).toBe(0);
 });
 
 test("converts eligible strings to numbers", () => {

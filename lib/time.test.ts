@@ -4,6 +4,7 @@ import {
    hoursAndMinutes,
    timeString,
    dateString,
+   parseDuration,
    durationString,
    inDaylightSavings
 } from "../index";
@@ -37,6 +38,15 @@ test("builds duration string", () => {
          TimeUnit.Minute
       )
    ).toBe("4h20m");
+});
+
+test("parse duration string", () => {
+   expect(parseDuration(null)).toBe(0);
+   expect(parseDuration("12")).toBe(0);
+   expect(parseDuration("2" + TimeUnit.Hour)).toBe(2 * Time.Hour);
+   expect(parseDuration("4" + TimeUnit.Day + "2" + TimeUnit.Hour)).toBe(
+      4 * Time.Day + 2 * Time.Hour
+   );
 });
 
 test("detects if Daylight Savings Time is active", () => {

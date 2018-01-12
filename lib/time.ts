@@ -1,5 +1,6 @@
-import { leadingZeros } from "./number";
+import { leadingZeros, parseNumber } from "./number";
 import { month } from "./constants";
+import { is } from "./is";
 
 /**
  * Milliseconds per units of time.
@@ -30,7 +31,7 @@ export enum TimeUnit {
    Year = "y"
 }
 
-const unitDuration = {
+const unitDuration: { [index: string]: number } = {
    [TimeUnit.Second]: Time.Second,
    [TimeUnit.Minute]: Time.Minute,
    [TimeUnit.Hour]: Time.Hour,
@@ -120,6 +121,25 @@ export const durationString = (
    }
 
    return d;
+};
+
+/**
+ * Milliseconds for duration string.
+ */
+export const parseDuration = (d: string): number => {
+   if (is.empty(d)) {
+      return 0;
+   }
+   const matches = d.match(/\d+[ydmhs]/g);
+   if (is.empty(matches)) {
+      return 0;
+   }
+
+   return matches.reduce((total, m) => {
+      const u = m.slice(-1);
+      const n = parseInt(m.replace(u, ""));
+      return total + n * unitDuration[u];
+   }, 0);
 };
 
 /**

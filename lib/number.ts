@@ -82,9 +82,9 @@ export function sayNumber(n: number, capitalize = true): string {
 /**
  * Remove non-numeric characters from string
  */
-export function parseNumber(text: string): number {
+export function parseNumber(text: string, not = NaN): number {
    text = (text ? text : "").replace(/[^\d\.]/g, "");
-   return is.empty(text) ? NaN : parseFloat(text);
+   return is.empty(text) ? not : parseFloat(text);
 }
 
 export function maybeNumber(val: string): number | string {
