@@ -72,9 +72,11 @@ export function inDaylightSavings(date = new Date()): boolean {
 export const timeString = (d: Date) => {
    let h = d.getHours();
    let a = " AM";
-   if (h > 12) {
+   if (h >= 12) {
       a = " PM";
-      h -= 12;
+      if (h > 12) {
+         h -= 12;
+      }
    }
    return h + ":" + leadingZeros(d.getMinutes(), 2) + a;
 };
