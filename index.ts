@@ -7,9 +7,8 @@ export { session, cookie } from "./lib/storage";
 export {
    Time,
    hoursAndMinutes,
-   hourOfDay,
    timeString,
-   toDateString,
+   dateString,
    inDaylightSavings
 } from "./lib/time";
 export {

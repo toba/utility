@@ -27,13 +27,24 @@
       "test": "jest"
    },
    "jest": {
-      "setupFiles": ["jest-localstorage-mock"],
+      "setupFiles": [
+         "jest-localstorage-mock"
+      ],
       "transform": {
          "^.+\\.tsx?$": "ts-jest"
       },
-      "transformIgnorePatterns": ["<rootDir>/node_modules/(?!@toba)"],
+      "transformIgnorePatterns": [
+         "<rootDir>/node_modules/(?!@toba)"
+      ],
       "testRegex": "(/__tests__/.*|(\\.|/)(test|spec))\\.(jsx?|tsx?)$",
-      "moduleFileExtensions": ["ts", "tsx", "js", "jsx", "json", "node"]
+      "moduleFileExtensions": [
+         "ts",
+         "tsx",
+         "js",
+         "jsx",
+         "json",
+         "node"
+      ]
    },
    "devDependencies": {
       "@toba/lint": "^1.0.8",

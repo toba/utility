@@ -45,6 +45,9 @@ export function inDaylightSavings(date = new Date()): boolean {
    return date.getTimezoneOffset() < nonDstOffset;
 }
 
+/**
+ * Format time portion of date as h:mm AM/PM
+ */
 export const timeString = (d: Date) => {
    let h = d.getHours();
    let a = " AM";
@@ -52,16 +55,11 @@ export const timeString = (d: Date) => {
       a = " PM";
       h -= 12;
    }
-   return h + ":" + d.getMinutes() + a;
+   return h + ":" + leadingZeros(d.getMinutes(), 2) + a;
 };
-
-/**
- * Return AM or PM
- */
-export const hourOfDay = (h: number) => (h > 12 ? "PM " + (h - 12) : "AM " + h);
 
 /**
  * Format date as Month Day, Year (March 15, 1973)
  */
-export const toDateString = (d: Date) =>
+export const dateString = (d: Date) =>
    month[d.getMonth()] + " " + d.getDate() + ", " + d.getFullYear();

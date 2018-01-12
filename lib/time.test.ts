@@ -1,24 +1,19 @@
 import {
    hoursAndMinutes,
-   hourOfDay,
    timeString,
-   toDateString,
+   dateString,
    inDaylightSavings
 } from "../index";
 
 test("display date as MMM d, YYYY", () => {
    // month value is zero-based
-   expect(toDateString(new Date(1973, 2, 15))).toBe("March 15, 1973");
-});
-
-test("shows AM or PM for hour of day", () => {
-   expect(hourOfDay(2)).toBe("AM 2");
-   expect(hourOfDay(14)).toBe("PM 2");
+   expect(dateString(new Date(1973, 2, 15))).toBe("March 15, 1973");
 });
 
 test("creates time string", () => {
    expect(timeString(new Date(2000, 1, 1, 5, 12))).toBe("5:12 AM");
    expect(timeString(new Date(2000, 1, 1, 13, 12))).toBe("1:12 PM");
+   expect(timeString(new Date(2000, 1, 1, 13, 7))).toBe("1:07 PM");
 });
 
 test("shows hours:minutes for fractional hour", () => {
