@@ -104,16 +104,24 @@ export const wrapText = (
    text: string,
    lineLength = 80,
    lineBreak = "\n"
-): string =>
-   is.empty(text) ||
-   lineLength < 2 ||
-   is.empty(lineBreak) ||
-   text.length <= lineLength
+): string => {
+   let length = 0;
+
+   return is.empty(text) ||
+      lineLength < 2 ||
+      is.empty(lineBreak) ||
+      text.length <= lineLength
       ? text
       : text.split(/\s+/).reduce((lines, word) => {
-           const l = word.length;
-           if (lines.length + l > lineLength) {
+           // add one for the removed space
+           const l = word.length + 1;
+           if (length + l > lineLength) {
               lines += lineBreak;
+              length = 0;
+           } else if (length > 0) {
+              lines += " ";
            }
+           length += l;
            return lines + word;
         }, "");
+};
