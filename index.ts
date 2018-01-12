@@ -6,9 +6,11 @@ export { url } from "./lib/url";
 export { session, cookie } from "./lib/storage";
 export {
    Time,
+   TimeUnit,
    hoursAndMinutes,
    timeString,
    dateString,
+   durationString,
    inDaylightSavings
 } from "./lib/time";
 export {
