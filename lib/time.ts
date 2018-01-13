@@ -77,6 +77,8 @@ export const timeString = (d: Date) => {
       if (h > 12) {
          h -= 12;
       }
+   } else if (h == 0) {
+      h = 12;
    }
    return h + ":" + leadingZeros(d.getMinutes(), 2) + a;
 };

@@ -19,6 +19,7 @@ test("creates time string", () => {
    expect(timeString(new Date(2000, 1, 1, 13, 12))).toBe("1:12 PM");
    expect(timeString(new Date(2000, 1, 1, 13, 7))).toBe("1:07 PM");
    expect(timeString(new Date(2000, 1, 1, 12, 1))).toBe("12:01 PM");
+   expect(timeString(new Date(2000, 1, 1, 0, 23))).toBe("12:23 AM");
 });
 
 test("shows hours:minutes for fractional hour", () => {
