@@ -1,4 +1,4 @@
-export { merge, removeItem, eventCoord, list, randomID } from "./lib/utility";
+export { merge, removeItem, eventCoord, list, randomID } from './lib/utility';
 export {
    format,
    printf,
@@ -7,11 +7,11 @@ export {
    capitalize,
    titleCase,
    wrapText
-} from "./lib/text";
-export { re } from "./lib/regex";
-export { is } from "./lib/is";
-export { url } from "./lib/url";
-export { session, cookie } from "./lib/storage";
+} from './lib/text';
+export { re } from './lib/regex';
+export { is } from './lib/is';
+export { url } from './lib/url';
+export { session, cookie } from './lib/storage';
 export {
    Time,
    TimeUnit,
@@ -21,7 +21,7 @@ export {
    parseDuration,
    durationString,
    inDaylightSavings
-} from "./lib/time";
+} from './lib/time';
 export {
    alphabet,
    month,
@@ -30,10 +30,10 @@ export {
    httpStatus,
    mimeType,
    encoding
-} from "./lib/constants";
+} from './lib/constants';
 export {
    sayNumber,
    leadingZeros,
    parseNumber,
    maybeNumber
-} from "./lib/number";
+} from './lib/number';
