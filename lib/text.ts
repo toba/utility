@@ -1,20 +1,20 @@
-import { is } from "./is";
+import { is } from './is';
 
 const alwaysLower = [
-   "a",
-   "at",
-   "how",
-   "have",
-   "in",
-   "not",
-   "of",
-   "on",
-   "the",
-   "to",
-   "when",
-   "who"
+   'a',
+   'at',
+   'how',
+   'have',
+   'in',
+   'not',
+   'of',
+   'on',
+   'the',
+   'to',
+   'when',
+   'who'
 ];
-const alwaysUpper = ["blm", "fs", "i"];
+const alwaysUpper = ['blm', 'fs', 'i'];
 
 /**
  * Replace numerical, bracketed placeholders with arbitrary arguments. The same
@@ -29,7 +29,7 @@ export function format(
    ...insertions: (string | number)[]
 ): string {
    for (let i = 0; i < insertions.length; i++) {
-      text = text.replace("{" + i + "}", insertions[i] as string);
+      text = text.replace('{' + i + '}', insertions[i] as string);
    }
    return text;
 }
@@ -39,14 +39,14 @@ export function format(
  */
 export function printf(text: string, ...insertions: any[]): string {
    return insertions.reduce(
-      (out, insert, i) => out.replace("$" + (i + 1), insert),
+      (out, insert, i) => out.replace('$' + (i + 1), insert),
       text
    );
 }
 
 export const capitalize = (text: string) =>
    is.empty(text)
-      ? ""
+      ? ''
       : text.substr(0, 1).toUpperCase() + text.substr(1).toLowerCase();
 
 /**
@@ -54,7 +54,7 @@ export const capitalize = (text: string) =>
  */
 export const titleCase = (text: string) =>
    is.empty(text)
-      ? ""
+      ? ''
       : text
            // only lowercase actual words, not addresses with numbers
            .replace(
@@ -82,7 +82,7 @@ export const rot13 = (text: string) =>
    is.empty(text)
       ? null
       : text.replace(/[a-zA-Z]/g, chr => {
-           const start = chr <= "Z" ? 65 : 97;
+           const start = chr <= 'Z' ? 65 : 97;
            return String.fromCharCode(
               start + (chr.charCodeAt(0) - start + 13) % 26
            );
@@ -96,14 +96,14 @@ export const slug = (text: string) =>
       ? null
       : text
            .toLowerCase()
-           .replace(/[\s\/-]+/g, "-")
-           .replace("à", "a")
-           .replace(/[^\-a-z0-9]/g, "");
+           .replace(/[\s\/-]+/g, '-')
+           .replace('à', 'a')
+           .replace(/[^\-a-z0-9]/g, '');
 
 export const wrapText = (
    text: string,
    lineLength = 80,
-   lineBreak = "\n"
+   lineBreak = '\n'
 ): string => {
    let length = 0;
 
@@ -119,9 +119,9 @@ export const wrapText = (
               lines += lineBreak;
               length = 0;
            } else if (length > 0) {
-              lines += " ";
+              lines += ' ';
            }
            length += l;
            return lines + word;
-        }, "");
+        }, '');
 };

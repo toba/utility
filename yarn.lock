@@ -10,9 +10,9 @@
     esutils "^2.0.2"
     js-tokens "^3.0.0"
 
-"@toba/lint@^1.0.8":
-  version "1.1.0"
-  resolved "https://registry.yarnpkg.com/@toba/lint/-/lint-1.1.0.tgz#d5eaf51a686460879dba0b5fdc6b380e9604855c"
+"@toba/lint@^1.2.0":
+  version "1.3.0"
+  resolved "https://registry.yarnpkg.com/@toba/lint/-/lint-1.3.0.tgz#ccbddf621c30c582300eada612dd70b657e9a04b"
   dependencies:
     stylelint "^8.4.0"
     stylelint-config-standard "^18.0.0"

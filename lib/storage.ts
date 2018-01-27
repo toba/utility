@@ -1,4 +1,4 @@
-import { Time } from "../index";
+import { Time } from '../index';
 
 export interface Storage<T> {
    save(key: string, value: T, days?: number, includeSubdomain?: boolean): void;
@@ -27,26 +27,26 @@ export const session: Storage<any> = {
  */
 export const cookie: Storage<string> = {
    save(key: string, value: string, days = 0, includeSubdomain = false) {
-      let expires = "";
+      let expires = '';
       const domain = includeSubdomain
-         ? ""
-         : "; domain=." + window.location.hostname;
+         ? ''
+         : '; domain=.' + window.location.hostname;
 
       if (days != 0) {
          const date = new Date();
          date.setTime(date.getTime() + days * Time.Day);
-         expires = "; expires=" + date.toUTCString();
+         expires = '; expires=' + date.toUTCString();
       }
-      document.cookie = key + "=" + value + domain + expires + "; path=/";
+      document.cookie = key + '=' + value + domain + expires + '; path=/';
    },
 
    item(key: string): string {
-      const nameEQ = key + "=";
-      const pairs = document.cookie.split(";");
+      const nameEQ = key + '=';
+      const pairs = document.cookie.split(';');
 
       for (let i = 0; i < pairs.length; i++) {
          let kv = pairs[i];
-         while (kv.charAt(0) == " ") {
+         while (kv.charAt(0) == ' ') {
             kv = kv.substring(1, kv.length);
          }
          if (kv.indexOf(nameEQ) == 0) {
@@ -57,7 +57,7 @@ export const cookie: Storage<string> = {
    },
 
    remove(key: string) {
-      this.save(key, "", -1);
+      this.save(key, '', -1);
    }
 };
 

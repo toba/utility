@@ -1,6 +1,6 @@
-import { leadingZeros, parseNumber } from "./number";
-import { month } from "./constants";
-import { is } from "./is";
+import { leadingZeros } from './number';
+import { month } from './constants';
+import { is } from './is';
 
 /**
  * Milliseconds per units of time.
@@ -24,11 +24,11 @@ export enum Time {
  * Abbreviations for units of time.
  */
 export enum TimeUnit {
-   Second = "s",
-   Minute = "m",
-   Hour = "h",
-   Day = "d",
-   Year = "y"
+   Second = 's',
+   Minute = 'm',
+   Hour = 'h',
+   Day = 'd',
+   Year = 'y'
 }
 
 const unitDuration: { [index: string]: number } = {
@@ -46,7 +46,7 @@ export function hoursAndMinutes(hours: number): string {
    const h = Math.floor(hours);
    const m = hours - h;
 
-   return h + ":" + leadingZeros(Math.round(60 * m), 2);
+   return h + ':' + leadingZeros(Math.round(60 * m), 2);
 }
 
 /**
@@ -71,16 +71,16 @@ export function inDaylightSavings(date = new Date()): boolean {
  */
 export const timeString = (d: Date) => {
    let h = d.getHours();
-   let a = " AM";
+   let a = ' AM';
    if (h >= 12) {
-      a = " PM";
+      a = ' PM';
       if (h > 12) {
          h -= 12;
       }
    } else if (h == 0) {
       h = 12;
    }
-   return h + ":" + leadingZeros(d.getMinutes(), 2) + a;
+   return h + ':' + leadingZeros(d.getMinutes(), 2) + a;
 };
 
 export function durationString(ms: number, roundTo?: TimeUnit): string;
@@ -107,17 +107,17 @@ export function durationString(
    endOrRoundTo?: TimeUnit | Date,
    roundTo?: TimeUnit
 ): string {
-   if (typeof startOrMs == "number") {
+   if (typeof startOrMs == 'number') {
       return durationStringFromNumber(startOrMs, endOrRoundTo as TimeUnit);
    } else if (endOrRoundTo instanceof Date) {
       return durationStringFromDates(startOrMs, endOrRoundTo, roundTo);
    } else {
-      return "";
+      return '';
    }
 }
 
 const durationStringFromNumber = (ms: number, roundTo: TimeUnit = null) => {
-   let d = "";
+   let d = '';
 
    const units = [
       TimeUnit.Year,
@@ -149,7 +149,7 @@ const durationStringFromNumber = (ms: number, roundTo: TimeUnit = null) => {
 
 const durationStringFromDates = (start: Date, end: Date, roundTo: TimeUnit) =>
    is.empty(start) || is.empty(end)
-      ? ""
+      ? ''
       : durationStringFromNumber(end.getTime() - start.getTime(), roundTo);
 
 /**
@@ -166,7 +166,7 @@ export const parseDuration = (d: string): number => {
 
    return matches.reduce((total, m) => {
       const u = m.slice(-1);
-      const n = parseInt(m.replace(u, ""));
+      const n = parseInt(m.replace(u, ''));
       return total + n * unitDuration[u];
    }, 0);
 };
@@ -175,4 +175,4 @@ export const parseDuration = (d: string): number => {
  * Format date as Month Day, Year (March 15, 1973)
  */
 export const dateString = (d: Date) =>
-   month[d.getMonth()] + " " + d.getDate() + ", " + d.getFullYear();
+   month[d.getMonth()] + ' ' + d.getDate() + ', ' + d.getFullYear();

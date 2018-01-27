@@ -1,7 +1,7 @@
 {
    "name": "@toba/utility",
    "description": "Toba Utility",
-   "version": "1.5.3",
+   "version": "1.6.0",
    "private": false,
    "publishConfig": {
       "access": "public"
@@ -27,16 +27,27 @@
       "test": "jest"
    },
    "jest": {
-      "setupFiles": ["jest-localstorage-mock"],
+      "setupFiles": [
+         "jest-localstorage-mock"
+      ],
       "transform": {
          "^.+\\.tsx?$": "ts-jest"
       },
-      "transformIgnorePatterns": ["<rootDir>/node_modules/(?!@toba)"],
+      "transformIgnorePatterns": [
+         "<rootDir>/node_modules/(?!@toba)"
+      ],
       "testRegex": "(/__tests__/.*|(\\.|/)(test|spec))\\.(jsx?|tsx?)$",
-      "moduleFileExtensions": ["ts", "tsx", "js", "jsx", "json", "node"]
+      "moduleFileExtensions": [
+         "ts",
+         "tsx",
+         "js",
+         "jsx",
+         "json",
+         "node"
+      ]
    },
    "devDependencies": {
-      "@toba/lint": "^1.0.8",
+      "@toba/lint": "^1.2.0",
       "@toba/test": "^1.0.0",
       "prettier": "^1.9.2",
       "typescript": "^2.6.2"

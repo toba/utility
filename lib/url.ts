@@ -1,8 +1,8 @@
-import { is } from "../index";
+import { is } from '../index';
 
 export namespace url {
    export function variables(path: string): { [key: string]: string } {
-      if (is.empty(path) || !path.includes("?")) {
+      if (is.empty(path) || !path.includes('?')) {
          return {};
       }
       const pairs = path.split(/[\?&]/g);
@@ -13,7 +13,7 @@ export namespace url {
 
       return pairs.reduce(
          (vars, p) => {
-            const pair = p.split("=");
+            const pair = p.split('=');
             vars[pair[0]] = pair[1];
             return vars;
          },

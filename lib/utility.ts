@@ -1,4 +1,4 @@
-import { is } from "../index";
+import { is } from '../index';
 
 /**
  * Merge additions into a base object, only replacing base values if the
@@ -62,7 +62,7 @@ export function eventCoord(
  * Combine parameters into a comma-delimited list.
  */
 export function list(...items: (number | string)[]) {
-   return items.join(", ");
+   return items.join(', ');
 }
 
 /**
@@ -71,11 +71,11 @@ export function list(...items: (number | string)[]) {
 export function randomID(size: number = 7) {
    const chars = [];
    const possible =
-      "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+      'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
    const length = possible.length;
 
    for (let i = 0; i < size; i++) {
       chars.push(possible.charAt(Math.floor(Math.random() * length)));
    }
-   return chars.join("");
+   return chars.join('');
 }
