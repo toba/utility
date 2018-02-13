@@ -5,15 +5,15 @@ export namespace is {
    /**
     * EcmaScript type names.
     */
-   export const type = {
-      BOOLEAN: 'boolean',
-      FUNCTION: 'function',
-      NUMBER: 'number',
-      OBJECT: 'object',
-      STRING: 'string',
-      SYMBOL: 'symbol',
-      UNDEFINED: 'undefined'
-   };
+   export enum Type {
+      Boolean = 'boolean',
+      Functon = 'function',
+      Number = 'number',
+      Object = 'object',
+      String = 'string',
+      Symbol = 'symbol',
+      Undefined = 'undefined'
+   }
 
    /** Whether variable is defined and not null. */
    export function value<T>(x: any): x is T {
@@ -29,7 +29,7 @@ export namespace is {
 
    /** Whether value exists and is a type of number. */
    export function number(n: any): n is number {
-      return value(n) && typeof n === type.NUMBER;
+      return value(n) && typeof n === Type.Number;
    }
 
    /** Whether value is numeric even if its type is a string. */
@@ -54,7 +54,7 @@ export namespace is {
    }
 
    export function text(v: any): v is string {
-      return typeof (v) === type.STRING;
+      return typeof v === Type.String;
    }
 
    export function callable(v: any): v is Function {
