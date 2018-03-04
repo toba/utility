@@ -1,7 +1,10 @@
 /**
  * Retry a function until it resolves or number of retry times is reached.
+ *
+ * @param times Number of times to retry
+ * @param delay Milliseconds between retries
  */
-function retry<T>(
+export function retry<T>(
    fn: () => Promise<T>,
    times: number,
    delay: number
@@ -15,5 +18,11 @@ function retryLoop<T>(
    delay: number,
    count: number = 1
 ): Promise<T> {
-   return fn().catch(err, 
+   return fn().catch(err => {
+      if (count < times) {
+         setTimeout(() => {
+            retryLoop(fn, times, delay, count + 1);
+         }, delay);
+      }
+   });
 }
