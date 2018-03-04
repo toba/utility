@@ -21,9 +21,9 @@
     tslint-config-prettier "^1.7.0"
     tslint-consistent-codestyle "^1.10.0"
 
-"@toba/test@^1.0.5":
-  version "1.0.5"
-  resolved "https://registry.yarnpkg.com/@toba/test/-/test-1.0.5.tgz#dd370f90b74641f290bb389395ca2ad345c26036"
+"@toba/test@^1.1.0":
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/@toba/test/-/test-1.1.0.tgz#45d8d301a86a4e85a82659db08654018a2b4b8c0"
   dependencies:
     "@types/jest" "^22.1.1"
     jest "^22.4.0"
