@@ -27,9 +27,9 @@ export {
    month,
    weekday,
    Header,
-   httpStatus,
-   mimeType,
-   encoding
+   HttpStatus,
+   MimeType,
+   Encoding
 } from './lib/constants';
 export {
    sayNumber,

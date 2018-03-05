@@ -101,35 +101,35 @@ export const Header = {
    UserAgent: 'user-agent'
 };
 
-export enum httpStatus {
+export enum HttpStatus {
    OK = 200,
-   TEMP_REDIRECT = 301,
-   PERMANENT_REDIRECT = 302,
-   UNAUTHORIZED = 401,
-   FORBIDDEN = 403,
-   NOT_FOUND = 404,
-   INTERNAL_ERROR = 500,
-   UNSUPPORTED = 501,
-   BAD_GATEWAY = 502,
-   UNAVAILABLE = 503
+   TempRedirect = 301,
+   PermanentRedirect = 302,
+   Unauthorized = 401,
+   Forbidden = 403,
+   NotFound = 404,
+   InternalError = 500,
+   Unsupported = 501,
+   BadGateway = 502,
+   Unavailabile = 503
 }
 
 // http://www.sitepoint.com/web-foundations/mime-types-complete-list/
-export const mimeType = {
-   HTML: 'text/html',
-   JSON: 'application/json',
-   XML: 'text/xml',
-   GPX: 'application/gpx+xml',
-   JSONP: 'application/javascript',
-   JPEG: 'image/jpeg',
-   PNG: 'image/png',
-   TEXT: 'text/plain',
-   ZIP: 'application/zip'
-};
+export enum MimeType {
+   HTML = 'text/html',
+   JSON = 'application/json',
+   XML = 'text/xml',
+   GPX = 'application/gpx+xml',
+   JSONP = 'application/javascript',
+   JPEG = 'image/jpeg',
+   PNG = 'image/png',
+   TEXT = 'text/plain',
+   ZIP = 'application/zip'
+}
 
-export const encoding = {
-   BUFFER: 'buffer',
-   GZIP: 'gzip',
-   HEXADECIMAL: 'hex',
-   UTF8: 'utf8'
-};
+export enum Encoding {
+   Buffer = 'buffer',
+   GZip = 'gzip',
+   Hexadecimal = 'hex',
+   UTF8 = 'utf8'
+}
