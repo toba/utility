@@ -1,6 +1,6 @@
 {
-   "name": "@toba/utility",
-   "description": "Toba Utility",
+   "name": "@toba/tools",
+   "description": "Toba Tools",
    "version": "1.7.1",
    "private": false,
    "publishConfig": {
@@ -39,10 +39,10 @@
    },
    "repository": {
       "type": "git",
-      "url": "https://github.com/toba/utility"
+      "url": "https://github.com/toba/tools"
    },
    "bugs": {
-      "url": "https://github.com/toba/utility/issues"
+      "url": "https://github.com/toba/tools/issues"
    },
    "dependencies": {}
 }
