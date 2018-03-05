@@ -3,26 +3,35 @@ import { merge, removeItem } from './utility';
 type TestThing = { [key: string]: string | string[] | TestThing };
 
 test('merges objects', () => {
-   const base: TestThing = { key1: 'value1', key2: 'value2', key5: [] };
+   const base: TestThing = {
+      key1: 'value1',
+      key2: 'value2',
+      key5: [],
+      key6: null
+   };
    const add1: TestThing = { key1: null, key3: 'value3' };
    const add2: TestThing = {
       key1: 'newValue1',
       key4: 'value4',
-      key5: ['one', 'two']
+      key5: ['one', 'two'],
+      key6: 'newValue6'
    };
 
    expect(merge(base, add1)).toEqual({
       key1: 'value1',
       key2: 'value2',
       key3: 'value3',
-      key5: []
+      key5: [],
+      key6: null
    });
+
    expect(merge(base, add1, add2)).toEqual({
       key1: 'newValue1',
       key2: 'value2',
       key3: 'value3',
       key4: 'value4',
-      key5: ['one', 'two']
+      key5: ['one', 'two'],
+      key6: 'newValue6'
    });
 });
 
@@ -30,20 +39,23 @@ test('merges nested objects', () => {
    const base: TestThing = {
       key1: 'value1',
       key2: 'value2',
-      key5: { key10: 'value10', key11: 'value11' }
+      key5: { key10: 'value10', key11: 'value11' },
+      key6: null
    };
    const add1: TestThing = { key1: null, key3: 'value3' };
    const add2: TestThing = {
       key1: 'newValue1',
       key4: 'value4',
-      key5: { key10: 'new-value10', key12: 'value12' }
+      key5: { key10: 'new-value10', key12: 'value12' },
+      key6: { key13: 'new-value13', key14: 'value14' }
    };
 
    expect(merge(base, add1)).toEqual({
       key1: 'value1',
       key2: 'value2',
       key3: 'value3',
-      key5: { key10: 'value10', key11: 'value11' }
+      key5: { key10: 'value10', key11: 'value11' },
+      key6: null
    });
 
    expect(merge(base, add1, add2)).toEqual({
@@ -51,8 +63,53 @@ test('merges nested objects', () => {
       key2: 'value2',
       key3: 'value3',
       key4: 'value4',
-      key5: { key10: 'new-value10', key11: 'value11', key12: 'value12' }
+      key5: { key10: 'new-value10', key11: 'value11', key12: 'value12' },
+      key6: { key13: 'new-value13', key14: 'value14' }
    });
+});
+
+test('merges configurations', () => {
+   const defaultConfig = {
+      userID: null,
+      appID: null,
+      useCache: true,
+      maxCacheSize: 200,
+      featureSets: [],
+      excludeSets: [],
+      excludeTags: [],
+      searchPhotoSizes: ['url_l'],
+      setPhotoSizes: ['url_l'],
+      maxRetries: 3,
+      retryDelay: 500,
+      auth: null
+   };
+
+   const givenConfig = {
+      appID: '72157631007435048',
+      userID: '60950751@N04',
+      excludeSets: ['72157631638576162'],
+      excludeTags: [
+         'Idaho',
+         'United States of America',
+         'Abbott',
+         'LensTagger',
+         'Boise'
+      ],
+      featureSets: [{ id: '72157632729508554', title: 'Ruminations' }],
+      useCache: false,
+      auth: {
+         apiKey: 'FLICKR_API_KEY',
+         secret: 'FLICKR_SECRET',
+         callback: 'http://www.trailimage.com/auth/flickr',
+         token: {
+            access: 'FLICKR_ACCESS_TOKEN',
+            secret: 'FLICKR_TOKEN_SECRET',
+            request: null
+         }
+      }
+   };
+
+   expect(merge(defaultConfig, givenConfig)).toMatchSnapshot();
 });
 
 test('removes items from arrays', () => {

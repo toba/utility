@@ -1,5 +1,7 @@
 import { is } from '../index';
 
+type Hash = { [key: string]: any };
+
 /**
  * Merge additions into a base object, only replacing base values if the
  * additions are not null or undefined. Arrays will not be merged but will be
@@ -7,17 +9,19 @@ import { is } from '../index';
  */
 export function merge<T extends object>(base: T, ...additions: any[]): T {
    return additions.reduce(
-      (existing, add: { [key: string]: any }) => {
+      (existing, add: Hash) => {
          //for (const key of Reflect.ownKeys(add)) {
-         for (const key of Object.keys(add)) {
-            const v: any = add[key];
-            const exists = is.defined(existing, key);
-            if (is.value(v) || !exists) {
-               // only replace base value if addition is non-null
-               if (Array.isArray(v) || typeof v != is.Type.Object) {
-                  existing[key] = v;
-               } else {
-                  existing[key] = merge(existing[key], v);
+         if (is.value<Hash>(add)) {
+            for (const key of Object.keys(add)) {
+               const v: any = add[key];
+               const exists = is.defined(existing, key);
+               if (is.value(v) || !exists) {
+                  // only replace base value if addition is non-null
+                  if (Array.isArray(v) || typeof v != is.Type.Object) {
+                     existing[key] = v;
+                  } else {
+                     existing[key] = merge(existing[key], v);
+                  }
                }
             }
          }

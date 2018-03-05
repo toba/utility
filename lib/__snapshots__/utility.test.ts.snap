@@ -1,0 +1,44 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`merges configurations 1`] = `
+Object {
+  "appID": "72157631007435048",
+  "auth": Object {
+    "apiKey": "FLICKR_API_KEY",
+    "callback": "http://www.trailimage.com/auth/flickr",
+    "secret": "FLICKR_SECRET",
+    "token": Object {
+      "access": "FLICKR_ACCESS_TOKEN",
+      "request": Object {},
+      "secret": "FLICKR_TOKEN_SECRET",
+    },
+  },
+  "excludeSets": Array [
+    "72157631638576162",
+  ],
+  "excludeTags": Array [
+    "Idaho",
+    "United States of America",
+    "Abbott",
+    "LensTagger",
+    "Boise",
+  ],
+  "featureSets": Array [
+    Object {
+      "id": "72157632729508554",
+      "title": "Ruminations",
+    },
+  ],
+  "maxCacheSize": 200,
+  "maxRetries": 3,
+  "retryDelay": 500,
+  "searchPhotoSizes": Array [
+    "url_l",
+  ],
+  "setPhotoSizes": Array [
+    "url_l",
+  ],
+  "useCache": false,
+  "userID": "60950751@N04",
+}
+`;
