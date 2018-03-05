@@ -11,6 +11,7 @@ export {
 export { re } from './lib/regex';
 export { is } from './lib/is';
 export { url } from './lib/url';
+export { retry } from './lib/retry';
 export { session, cookie } from './lib/storage';
 export {
    Time,
