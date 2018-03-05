@@ -26,7 +26,7 @@ export {
    alphabet,
    month,
    weekday,
-   header,
+   Header,
    httpStatus,
    mimeType,
    encoding

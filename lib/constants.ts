@@ -52,45 +52,53 @@ export const weekday = [
    'Saturday'
 ];
 
-export const header = {
-   ACCEPT: 'Accept',
-   accept: {
-      ENCODING: 'accept-encoding',
-      LANGUAGE: 'accept-language'
+enum AccessControlAllow {
+   Credentials = 'Access-Control-Allow-Credentials',
+   Headers = 'Access-Control-Allow-Headers',
+   Methods = 'Access-Control-Allow-Methods',
+   Origin = 'Access-Control-Allow-Origin'
+}
+
+enum AccessControlRequest {
+   Headers = 'Access-Control-Request-Headers',
+   Method = 'Access-Control-Request-Method'
+}
+
+enum Content {
+   Disposition = 'Content-Disposition',
+   Encoding = 'Content-Encoding',
+   Length = 'Content-Length',
+   Type = 'Content-Type'
+}
+
+enum Accept {
+   Encoding = 'accept-encoding',
+   Language = 'accept-language'
+}
+
+export const Header = {
+   //ACCEPT: 'Accept',
+   Accept,
+   AccessControl: {
+      MaxAge: 'Access-Control-Max-Age',
+      allow: AccessControlAllow,
+      request: AccessControlRequest
    },
-   accessControl: {
-      MAX_AGE: 'Access-Control-Max-Age',
-      allow: {
-         CREDENTIALS: 'Access-Control-Allow-Credentials',
-         HEADERS: 'Access-Control-Allow-Headers',
-         METHODS: 'Access-Control-Allow-Methods',
-         ORIGIN: 'Access-Control-Allow-Origin'
-      },
-      request: {
-         HEADERS: 'Access-Control-Request-Headers',
-         METHOD: 'Access-Control-Request-Method'
-      }
-   },
-   CACHE_CONTROL: 'Cache-Control',
-   CONNECTION: 'connection',
-   content: {
-      DISPOSITION: 'Content-Disposition',
-      ENCODING: 'Content-Encoding',
-      LENGTH: 'Content-Length',
-      TYPE: 'Content-Type'
-   },
-   DO_NOT_TRACK: 'dnt',
-   E_TAG: 'Etag',
-   EXPIRES: 'expires',
-   HOST: 'host',
-   HTTP_METHOD: 'X-HTTP-Method-Override',
-   LAST_MODIFIED: 'Last-Modified',
-   ORIGIN: 'origin',
+   CacheControl: 'Cache-Control',
+   Connection: 'connection',
+   Content,
+   DoNotTrack: 'dnt',
+   eTag: 'Etag',
+   Expires: 'expires',
+   Host: 'host',
+   HttpMethod: 'X-HTTP-Method-Override',
+   LastModified: 'Last-Modified',
+   Origin: 'origin',
    PRAGMA: 'pragma',
-   REFERER: 'referer',
-   RESPONSE_TIME: 'X-Response-Time',
-   REQUESTED_WITH: 'X-Requested-With',
-   USER_AGENT: 'user-agent'
+   Referer: 'referer',
+   ResponseTime: 'X-Response-Time',
+   RequestedWith: 'X-Requested-With',
+   UserAgent: 'user-agent'
 };
 
 export enum httpStatus {
