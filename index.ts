@@ -8,6 +8,7 @@ export {
    titleCase,
    wrapText
 } from './lib/text';
+export { Cache, CachePolicy, EvictionListener } from './lib/cache';
 export { re } from './lib/regex';
 export { is } from './lib/is';
 export { url } from './lib/url';
