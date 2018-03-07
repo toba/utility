@@ -1,4 +1,11 @@
-export { merge, removeItem, eventCoord, list, randomID } from './lib/utility';
+export {
+   merge,
+   removeItem,
+   eventCoord,
+   list,
+   randomID,
+   inferMimeType
+} from './lib/utility';
 export {
    format,
    printf,

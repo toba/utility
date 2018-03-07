@@ -1,4 +1,4 @@
-import { merge, removeItem } from './utility';
+import { merge, removeItem, inferMimeType, MimeType } from '../index';
 
 type TestThing = { [key: string]: string | string[] | TestThing };
 
@@ -123,4 +123,14 @@ test('removes items from arrays', () => {
    expect(list).toHaveLength(1);
    expect(removeItem(list, c)).toBe(false);
    expect(list).toHaveLength(1);
+});
+
+test('infers Mime type from file name', () => {
+   expect(inferMimeType('file.jpg')).toBe(MimeType.JPEG);
+   expect(inferMimeType('long.file.jpeg')).toBe(MimeType.JPEG);
+
+   expect(inferMimeType('something.png')).toBe(MimeType.PNG);
+   expect(inferMimeType('my garmin file with spaces.gpx')).toBe(MimeType.GPX);
+
+   expect(inferMimeType('My Good Document.PDF')).toBe(MimeType.PDF);
 });

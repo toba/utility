@@ -119,12 +119,17 @@ export enum MimeType {
    HTML = 'text/html',
    JSON = 'application/json',
    XML = 'text/xml',
+   CSS = 'text/css',
+   GIF = 'image/gif',
    GPX = 'application/gpx+xml',
    JSONP = 'application/javascript',
    JPEG = 'image/jpeg',
    PNG = 'image/png',
-   TEXT = 'text/plain',
-   ZIP = 'application/zip'
+   PDF = 'application/pdf',
+   SVG = 'image/svg+xml',
+   Text = 'text/plain',
+   Zip = 'application/zip',
+   Binary = 'application/octet-stream'
 }
 
 export enum Encoding {

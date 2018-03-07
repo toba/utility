@@ -1,4 +1,4 @@
-import { is } from '../index';
+import { is, MimeType } from '../index';
 
 type Hash = { [key: string]: any };
 
@@ -82,4 +82,47 @@ export function randomID(size: number = 7) {
       chars.push(possible.charAt(Math.floor(Math.random() * length)));
    }
    return chars.join('');
+}
+
+/**
+ * Infer Mime type from file extension.
+ */
+export function inferMimeType(fileName: string): MimeType {
+   if (!fileName.includes('.')) {
+      return null;
+   }
+   const parts = fileName.split('.');
+   const ext = parts[parts.length - 1].toLowerCase();
+
+   switch (ext) {
+      case 'png':
+         return MimeType.PNG;
+      case 'jpg':
+      case 'jpeg':
+         return MimeType.JPEG;
+      case 'txt':
+      case 'text':
+         return MimeType.Text;
+      case 'xml':
+         return MimeType.XML;
+      case 'gpx':
+         return MimeType.GPX;
+      case 'zip':
+         return MimeType.Zip;
+      case 'htm':
+      case 'html':
+         return MimeType.HTML;
+      case 'json':
+         return MimeType.JSON;
+      case 'pdf':
+         return MimeType.PDF;
+      case 'gif':
+         return MimeType.GIF;
+      case 'css':
+         return MimeType.CSS;
+      case 'svg':
+         return MimeType.SVG;
+      default:
+         return null;
+   }
 }
