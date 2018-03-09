@@ -1,10 +1,17 @@
 import { is, merge, removeItem } from '../index';
 
+/**
+ * Method to reload cache item.
+ */
+export type Reloader<T> = (key: string) => Promise<T>;
+
 interface CacheItem<T> {
    key: string;
    /** Timestamp */
    added: number;
    value: T;
+   /** Method to reload item if it has been evicted due to a `maxAge` policy. */
+   reloader?: Reloader<T>;
 }
 
 /**
@@ -41,33 +48,52 @@ export class Cache<T> {
    private _policy: CachePolicy;
    private _evictListeners: EvictionListener[];
    private _evictTimer: number;
+   /**
+    * Method that can reload any cache item based on its key.
+    */
+   private _maxAgeReloader: Reloader<T>;
 
-   constructor(policy: CachePolicy = {}) {
+   constructor(policy: CachePolicy = {}, reloader: Reloader<T> = null) {
       this._items = {};
       this._policy = merge(defaultPolicy, policy);
       this._evictListeners = [];
       this._evictTimer = 0;
+      this._maxAgeReloader = reloader;
    }
 
    get size(): number {
       return Object.keys(this._items).length;
    }
 
-   add(key: string, value: T): Cache<T> {
+   add(key: string, value: T, reloader: Reloader<T> = null): Cache<T> {
       if (is.value(value)) {
-         this._items[key] = { key, value, added: new Date().getTime() };
+         if (reloader === null) {
+            // use common reloader if not given a specific reloader
+            reloader = this._maxAgeReloader;
+         }
+         this._items[key] = {
+            key,
+            value,
+            added: new Date().getTime(),
+            reloader
+         };
       }
       return this.schedulePrune();
    }
 
    /**
-    * Asynchronous check for evicatable items.
+    * Asynchronous check for evictable items.
     */
    private schedulePrune(): Cache<T> {
+      this.cancelPrune();
+      this._evictTimer = setTimeout(this.prune.bind(this), 10);
+      return this;
+   }
+
+   private cancelPrune(): Cache<T> {
       if (this._evictTimer > 0) {
          clearTimeout(this._evictTimer);
       }
-      this._evictTimer = setTimeout(this.prune.bind(this), 10);
       return this;
    }
 
@@ -81,6 +107,7 @@ export class Cache<T> {
       ) {
          let sorted = Object.keys(this._items).map(key => this._items[key]);
          let remove: string[] = [];
+         let reloaders: Reloader<T>[] = [];
 
          sorted.sort((a, b) => a.added - b.added);
 
@@ -90,6 +117,10 @@ export class Cache<T> {
                sorted.filter(i => i.added < oldest).map(i => i.key)
             );
             sorted = sorted.filter(i => i.added >= oldest);
+            reloaders = remove
+               .map(key => this._items[key])
+               .filter(i => i.reloader !== null)
+               .map(i => i.reloader)
          }
 
          if (
@@ -108,8 +139,13 @@ export class Cache<T> {
             this._evictListeners.forEach(fn => {
                fn(remove);
             });
+
+            if ()
          }
       }
+   }
+   private reload(reloader: Reloader<T>): Promise<T> {
+      return null;
    }
 
    get(key: string): T {
@@ -124,7 +160,7 @@ export class Cache<T> {
 
    clear(): Cache<T> {
       this._items = {};
-      return this;
+      return this.cancelPrune();
    }
 
    /**
