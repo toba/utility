@@ -1,7 +1,7 @@
 {
    "name": "@toba/tools",
    "description": "Toba Tools",
-   "version": "1.9.0",
+   "version": "1.10.0",
    "private": false,
    "publishConfig": {
       "access": "public"
@@ -11,6 +11,7 @@
       "index.ts",
       "lib/cache.ts",
       "lib/constants.ts",
+      "lib/emitter.ts",
       "lib/is.ts",
       "lib/number.ts",
       "lib/regex.ts",

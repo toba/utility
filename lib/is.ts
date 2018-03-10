@@ -21,8 +21,8 @@ export namespace is {
    }
 
    /** Whether named field is defined in the given object. */
-   export const defined = (obj: any, field: string | number) =>
-      value(obj) && obj.hasOwnProperty(field.toString()); // typeof(obj[field]) !== type.UNDEFINED;
+   export const defined = <T extends Object>(obj: T, field: string | number) =>
+      value<T>(obj) && obj.hasOwnProperty(field.toString()); // typeof(obj[field]) !== type.UNDEFINED;
 
    /** Whether value is null, undefined or an empty string. */
    export const empty = (x: any) => !value(x) || x === '';

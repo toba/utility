@@ -46,3 +46,4 @@ export {
    parseNumber,
    maybeNumber
 } from './lib/number';
+export { EventEmitter } from './lib/emitter';
