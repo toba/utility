@@ -29,11 +29,22 @@ export class EventEmitter<T extends number, E> {
       return fn;
    }
 
+   addEventListener(type: T, fn: (event: E) => void): (event: E) => void {
+      return this.subscribe(type, fn);
+   }
+
    /**
     * Remove listener method.
     */
    unsubscribe(type: T, fn: (event: E) => void): boolean {
       return this.hasType(type) ? removeItem(this.listeners[type], fn) : false;
+   }
+
+   /**
+    * Remove listener method.
+    */
+   removeEventListener(type: T, fn: (event: E) => void): boolean {
+      return this.unsubscribe(type, fn);
    }
 
    /**
@@ -50,5 +61,9 @@ export class EventEmitter<T extends number, E> {
          return true;
       }
       return false;
+   }
+
+   removeAll(type: T = null): boolean {
+      return this.unsubscribeAll(type);
    }
 }
