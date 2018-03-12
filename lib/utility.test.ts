@@ -1,4 +1,4 @@
-import { merge, removeItem, inferMimeType, MimeType } from '../index';
+import { merge, removeItem, inferMimeType, MimeType, byteSize } from '../index';
 
 type TestThing = { [key: string]: string | string[] | TestThing };
 
@@ -133,4 +133,12 @@ test('infers Mime type from file name', () => {
    expect(inferMimeType('my garmin file with spaces.gpx')).toBe(MimeType.GPX);
 
    expect(inferMimeType('My Good Document.PDF')).toBe(MimeType.PDF);
+});
+
+test('reports byte size of strings and buffers', () => {
+   const buf = Buffer.from([1, 2, 3]);
+
+   expect(byteSize('some text')).toBe(9);
+   expect(byteSize(buf)).toBe(3);
+   expect(byteSize({ random: 'object'})).toBe(-1);
 });
