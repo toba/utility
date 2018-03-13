@@ -43,7 +43,7 @@
     tslint-config-prettier "^1.9.0"
     tslint-consistent-codestyle "^1.11.0"
 
-"@toba/test@^1.1.0":
+"@toba/test@^1.6.0":
   version "1.6.0"
   resolved "https://registry.yarnpkg.com/@toba/test/-/test-1.6.0.tgz#8488ae578b09e7ad0ed520b2cc1403fe4cda22df"
   dependencies:

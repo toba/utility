@@ -1,4 +1,13 @@
-import { merge, removeItem, inferMimeType, MimeType, byteSize } from '../index';
+import {
+   merge,
+   removeItem,
+   inferMimeType,
+   MimeType,
+   byteSize,
+   gzip,
+   unzip
+} from '../index';
+import { lipsum } from '@toba/test';
 
 type TestThing = { [key: string]: string | string[] | TestThing };
 
@@ -140,5 +149,13 @@ test('reports byte size of strings and buffers', () => {
 
    expect(byteSize('some text')).toBe(9);
    expect(byteSize(buf)).toBe(3);
-   expect(byteSize({ random: 'object'})).toBe(-1);
+   expect(byteSize({ random: 'object' })).toBe(-1);
+});
+
+test('zips and unzips strings', async () => {
+   const buffer = await gzip(lipsum);
+   // raw length is 445
+   expect(byteSize(buffer)).toBeLessThan(300);
+   const text = await unzip(buffer);
+   expect(text).toBe(lipsum);
 });

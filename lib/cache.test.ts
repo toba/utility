@@ -1,7 +1,9 @@
-import { Cache, CachePolicy, CacheEventType } from '../index';
+import { Cache, CompressCache, CacheEventType } from '../index';
 import { totalSize, CacheItem } from './cache';
+import { lipsum } from '@toba/test';
 
 const cache = new Cache<string>();
+const compress = new CompressCache();
 
 beforeEach(() => {
    cache.clear();
@@ -101,4 +103,13 @@ test('removes items when cache exceeds policy byte size', () => {
    jest.runAllTimers();
 
    expect(listener).toHaveBeenCalledWith(['key1']);
+});
+
+test('compresses and decompresses text values', async () => {
+   await compress.addText('key1', lipsum);
+   expect(lipsum).toHaveLength(445);
+   expect(compress.size).toBe(282);
+
+   const text = await compress.getText('key1');
+   expect(text).toBe(lipsum);
 });

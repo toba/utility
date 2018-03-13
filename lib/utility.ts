@@ -1,5 +1,5 @@
 import * as compress from 'zlib';
-import { is, MimeType } from '../index';
+import { is, MimeType, Encoding } from '../index';
 
 type Hash = { [key: string]: any };
 
@@ -42,6 +42,21 @@ export async function gzip(text: string) {
             reject(err);
          } else {
             resolve(buffer);
+         }
+      });
+   });
+}
+
+/**
+ * GZip decompress a string.
+ */
+export async function unzip(value: Buffer) {
+   return new Promise<string>((resolve, reject) => {
+      compress.unzip(value, (err, buffer) => {
+         if (is.value(err)) {
+            reject(err);
+         } else {
+            resolve(buffer.toString(Encoding.UTF8));
          }
       });
    });

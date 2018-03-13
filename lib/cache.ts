@@ -1,4 +1,4 @@
-import { is, merge, removeItem, gzip, EventEmitter, byteSize } from '../index';
+import { is, merge, EventEmitter, byteSize, gzip, unzip } from '../index';
 
 export interface CacheItem<T> {
    key: string;
@@ -14,11 +14,6 @@ export interface CacheItem<T> {
  * undefined or set to `-1` to disable a particular threshold.
  */
 export interface CachePolicy {
-   /**
-    * Whether to compress cache values. Setting this incorrectly can cause
-    * performance degredation.
-    */
-   compress?: boolean;
    /** Maximum items before earliest is removed from cache. */
    maxItems?: number;
    /** Maximum age in milliseconds before item is removed from cache. */
@@ -41,7 +36,6 @@ export const totalSize = <T>(
       .reduce((total, i) => total + i.size, 0);
 
 const defaultPolicy: CachePolicy = {
-   compress: false,
    maxItems: 0,
    maxAge: 0,
    maxBytes: 0
@@ -89,7 +83,7 @@ export class Cache<T> {
       );
    }
 
-   async add(key: string, value: T) {
+   add(key: string, value: T) {
       if (is.value(value)) {
          let size = 0;
          if (this._canMeasureSize) {
@@ -108,6 +102,7 @@ export class Cache<T> {
          };
       }
       this.schedulePrune();
+      return this;
    }
 
    /**
@@ -200,5 +195,17 @@ export class Cache<T> {
    updatePolicy(policy: CachePolicy): Cache<T> {
       this._policy = merge(defaultPolicy, policy);
       return this.schedulePrune();
+   }
+}
+
+export class CompressCache extends Cache<Buffer> {
+   async addText(key: string, value: string) {
+      const zipped = await gzip(value);
+      return super.add(key, zipped);
+   }
+
+   async getText(key: string): Promise<string> {
+      const buffer = super.get(key);
+      return buffer === null ? null : await unzip(buffer);
    }
 }

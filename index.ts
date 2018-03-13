@@ -5,6 +5,7 @@ export {
    list,
    randomID,
    gzip,
+   unzip,
    byteSize,
    inferMimeType
 } from './lib/utility';
@@ -17,8 +18,12 @@ export {
    titleCase,
    wrapText
 } from './lib/text';
-export { CompressedCache } from './lib/compressed-cache';
-export { Cache, CachePolicy, EventType as CacheEventType } from './lib/cache';
+export {
+   Cache,
+   CompressCache,
+   CachePolicy,
+   EventType as CacheEventType
+} from './lib/cache';
 export { re } from './lib/regex';
 export { is } from './lib/is';
 export { url } from './lib/url';
