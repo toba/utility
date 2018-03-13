@@ -14,7 +14,10 @@ export interface CacheItem<T> {
  * undefined or set to `-1` to disable a particular threshold.
  */
 export interface CachePolicy {
-   /** Whether to compress cache values */
+   /**
+    * Whether to compress cache values. Setting this incorrectly can cause
+    * performance degredation.
+    */
    compress?: boolean;
    /** Maximum items before earliest is removed from cache. */
    maxItems?: number;
@@ -86,7 +89,7 @@ export class Cache<T> {
       );
    }
 
-   add(key: string, value: T): Cache<T> {
+   async add(key: string, value: T) {
       if (is.value(value)) {
          let size = 0;
          if (this._canMeasureSize) {
@@ -104,7 +107,7 @@ export class Cache<T> {
             size
          };
       }
-      return this.schedulePrune();
+      this.schedulePrune();
    }
 
    /**
