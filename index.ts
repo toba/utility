@@ -4,7 +4,8 @@ export {
    eventCoord,
    list,
    randomID,
-   inferMimeType
+   inferMimeType,
+   gzip
 } from './lib/utility';
 export {
    format,

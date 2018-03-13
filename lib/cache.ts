@@ -1,4 +1,4 @@
-import { is, merge, removeItem } from '../index';
+import { is, merge, removeItem, gzip } from '../index';
 
 interface CacheItem<T> {
    key: string;
@@ -12,6 +12,8 @@ interface CacheItem<T> {
  * undefined or set to `-1` to disable a particular threshold.
  */
 export interface CachePolicy {
+   /** Whether to compress cache values */
+   compress?: boolean;
    /** Maximum items before earliest is removed from cache. */
    maxItems?: number;
    /** Maximum age in milliseconds before item is removed from cache. */
@@ -31,6 +33,7 @@ export interface CachePolicy {
 export type EvictionListener = (keys: string[]) => void;
 
 const defaultPolicy: CachePolicy = {
+   compress: false,
    maxItems: 0,
    maxAge: 0,
    maxMemory: 0

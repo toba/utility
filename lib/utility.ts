@@ -1,3 +1,4 @@
+import * as compress from 'zlib';
 import { is, MimeType } from '../index';
 
 type Hash = { [key: string]: any };
@@ -29,6 +30,21 @@ export function merge<T extends object>(base: T, ...additions: any[]): T {
       },
       Object.assign({}, base) as any
    );
+}
+
+/**
+ * GZip compress a string.
+ */
+export async function gzip(text: string) {
+   return new Promise<Buffer>((resolve, reject) => {
+      compress.gzip(Buffer.from(text), (err, buffer) => {
+         if (is.value(err)) {
+            reject(err);
+         } else {
+            resolve(buffer);
+         }
+      });
+   });
 }
 
 /**
