@@ -45,8 +45,8 @@ export namespace is {
    export const bigInt = (n: any) => integer(n) && (n < -32768 || n > 32767);
 
    /** Whether value exists and is an array. */
-   export function array(x: any): x is any[] {
-      return value(x) && Array.isArray(x);
+   export function array<T>(x: any): x is T[] {
+      return value<T[]>(x) && Array.isArray(x);
    }
 
    export function date(v: any): v is Date {

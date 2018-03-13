@@ -48,6 +48,21 @@ export async function gzip(text: string) {
 }
 
 /**
+ * Only handling the very simple cases of strings and Buffers.
+ *
+ * https://stackoverflow.com/questions/1248302/how-to-get-the-size-of-a-javascript-object
+ */
+export function byteSize(obj: any): number {
+   if (typeof obj === is.Type.String) {
+      return obj.length;
+   }
+   if (obj instanceof Buffer) {
+      return obj.length;
+   }
+   return -1;
+}
+
+/**
  * Remove item from an array.
  */
 export function removeItem<T>(list: T[], item: T): boolean {
