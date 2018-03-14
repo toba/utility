@@ -1,6 +1,6 @@
 import { Cache, CompressCache, CacheEventType } from '../index';
 import { totalSize, CacheItem } from './cache';
-import { lipsum } from '@toba/test';
+import { lipsum, sleep } from '@toba/test';
 
 const cache = new Cache<string>();
 const compress = new CompressCache();
@@ -112,4 +112,34 @@ test('compresses and decompresses text values', async () => {
 
    const text = await compress.getText('key1');
    expect(text).toBe(lipsum);
+});
+
+test('automatically loads cache misses', async () => {
+   jest.useRealTimers();
+   const loader = jest.fn();
+   const key = 'some-key';
+   const value = 'some-value';
+   loader.mockReturnValue(Promise.resolve(value));
+
+   const testCache = new CompressCache(loader);
+   let match = await testCache.getText(key);
+
+   expect(match).toBe(value);
+   expect(loader).toHaveBeenCalledTimes(1);
+   expect(loader).toHaveBeenLastCalledWith(key);
+
+   // should hit cache the second time
+   await sleep(10);
+   match = await testCache.getText(key);
+
+   expect(match).toBe(value);
+   expect(loader).toHaveBeenCalledTimes(1);
+
+   // removal should prompt auto-load again
+   testCache.remove(key);
+   expect(testCache.size).toBe(0);
+
+   match = await testCache.getText(key);
+   expect(match).toBe(value);
+   expect(loader).toHaveBeenCalledTimes(2);
 });
