@@ -116,6 +116,29 @@ export function list(...items: (number | string)[]) {
 }
 
 /**
+ * Shuffle an array into new array.
+ *
+ * http://sroucheray.org/blog/2009/11/array-sort-should-not-be-used-to-shuffle-an-array/
+ */
+export function shuffle<T>(source: T[]): T[] {
+   if (!is.array(source) || source.length === 0) {
+      return null;
+   }
+
+   let i = source.length;
+   // clone source array
+   const out = source.slice(0);
+
+   while (--i) {
+      const j = Math.floor(Math.random() * (i + 1));
+      const temp = out[i];
+      out[i] = out[j];
+      out[j] = temp;
+   }
+   return out;
+}
+
+/**
  * Generate random letter/number sequence.
  */
 export function randomID(size: number = 7) {
