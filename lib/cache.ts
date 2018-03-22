@@ -26,6 +26,9 @@ export enum EventType {
    ItemsEvicted
 }
 
+/**
+ * Iterate cache items to report total size.
+ */
 export const totalSize = <T>(
    items: { [key: string]: CacheItem<T> },
    except: string[] = []
@@ -198,14 +201,44 @@ export class Cache<T> {
    }
 }
 
+/**
+ * Cache variant that only accepts text that it compresses.
+ */
 export class CompressCache extends Cache<Buffer> {
+   /**
+    * Optional method to automatically load key value when not present in cache.
+    */
+   private _loader: (key: string) => Promise<string>;
+
+   constructor(
+      loader: (key: string) => Promise<string> = null,
+      policy: CachePolicy = {}
+   ) {
+      super(policy);
+      this._loader = loader;
+   }
+
    async addText(key: string, value: string) {
+      if (is.empty(value)) {
+         return;
+      }
       const zipped = await gzip(value);
       return super.add(key, zipped);
    }
 
    async getText(key: string): Promise<string> {
       const buffer = super.get(key);
-      return buffer === null ? null : await unzip(buffer);
+      if (buffer === null) {
+         if (this._loader !== null) {
+            const value = await this._loader(key);
+            if (is.value<string>(value)) {
+               this.addText(key, value);
+            }
+            return value;
+         } else {
+            return null;
+         }
+      }
+      return unzip(buffer);
    }
 }

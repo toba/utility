@@ -7,7 +7,7 @@ export namespace is {
     */
    export enum Type {
       Boolean = 'boolean',
-      Functon = 'function',
+      Function = 'function',
       Number = 'number',
       Object = 'object',
       String = 'string',

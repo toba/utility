@@ -24,7 +24,7 @@
             "--runInBand",
             "cache.test.ts",
             "--testNamePattern",
-            "cache exceeds policy byte size"
+            "automatically loads"
          ],
          "cwd": "${workspaceRoot}"
       }
