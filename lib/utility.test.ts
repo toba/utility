@@ -5,7 +5,8 @@ import {
    MimeType,
    byteSize,
    gzip,
-   unzip
+   unzip,
+   shuffle
 } from '../index';
 import { lipsum } from '@toba/test';
 
@@ -158,4 +159,11 @@ test('zips and unzips strings', async () => {
    expect(byteSize(buffer)).toBeLessThan(300);
    const text = await unzip(buffer);
    expect(text).toBe(lipsum);
+});
+
+test('shuffles arrays', () => {
+   const list = ['one', 'two', 'three'];
+
+   expect(shuffle(list)).not.toEqual(list);
+   expect(shuffle(null)).toBeNull();
 });

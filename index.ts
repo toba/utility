@@ -3,6 +3,7 @@ export {
    removeItem,
    eventCoord,
    list,
+   shuffle,
    randomID,
    gzip,
    unzip,

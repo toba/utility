@@ -90,6 +90,11 @@ export const Header = {
    DoNotTrack: 'dnt',
    eTag: 'Etag',
    Expires: 'expires',
+   /**
+    * Identifies the originating IP address of a client connecting to a web
+    * server through an HTTP proxy or load balancer
+    */
+   ForwardedFor: 'x-forwarded-for',
    Host: 'host',
    HttpMethod: 'X-HTTP-Method-Override',
    LastModified: 'Last-Modified',
