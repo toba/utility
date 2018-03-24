@@ -7,7 +7,7 @@ export namespace is {
     */
    export enum Type {
       Boolean = 'boolean',
-      Functon = 'function',
+      Function = 'function',
       Number = 'number',
       Object = 'object',
       String = 'string',
@@ -58,6 +58,6 @@ export namespace is {
    }
 
    export function callable(v: any): v is Function {
-      return value(v) && v instanceof Function;
+      return value(v) && typeof v == Type.Functon;
    }
 }

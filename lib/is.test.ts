@@ -26,6 +26,9 @@ test('identifies functions', () => {
    const fn = () => false;
    expect(is.callable(fn)).toBe(true);
    expect(is.callable(u)).toBe(false);
+
+   const mockFn = jest.fn();
+   expect(is.callable(mockFn)).toBe(true);
 });
 
 test('identifies dates', () => {
