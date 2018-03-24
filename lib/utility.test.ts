@@ -9,6 +9,7 @@ import {
    shuffle
 } from '../index';
 import { lipsum } from '@toba/test';
+import { sayNumber } from '@toba/tools';
 
 type TestThing = { [key: string]: string | string[] | TestThing };
 
@@ -162,7 +163,10 @@ test('zips and unzips strings', async () => {
 });
 
 test('shuffles arrays', () => {
-   const list = ['one', 'two', 'three'];
+   const list = [];
+   for (let i = 0; i < 40; i++) {
+      list.push(sayNumber(i));
+   }
 
    expect(shuffle(list)).not.toEqual(list);
    expect(shuffle(null)).toBeNull();
