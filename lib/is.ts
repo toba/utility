@@ -58,6 +58,6 @@ export namespace is {
    }
 
    export function callable(v: any): v is Function {
-      return value(v) && typeof v == Type.Functon;
+      return value(v) && typeof v == Type.Function;
    }
 }
