@@ -1,5 +1,8 @@
 import { is, removeItem } from '../index';
 
+/**
+ * Manage event subscribers.
+ */
 export class EventEmitter<T extends number, E> {
    listeners: { [key: number]: ((event: E) => void)[] };
 
@@ -7,8 +10,18 @@ export class EventEmitter<T extends number, E> {
       this.listeners = {};
    }
 
+   /**
+    * Whether a listener type is already defined.
+    */
    private hasType(type: T): boolean {
       return is.defined(this.listeners, type);
+   }
+
+   /**
+    * Whether subscribers exist for an event type.
+    */
+   hasSubscribers(type: T): boolean {
+      return this.hasType(type) && this.listeners[type].length > 0;
    }
 
    emit(type: T, event?: E): boolean {
@@ -63,6 +76,10 @@ export class EventEmitter<T extends number, E> {
       return false;
    }
 
+   /**
+    * Remove all listeners to an event type or all listeners for all event types
+    * if no type given.
+    */
    removeAll(type: T = null): boolean {
       return this.unsubscribeAll(type);
    }

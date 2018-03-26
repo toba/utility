@@ -43,9 +43,9 @@
     tslint-config-prettier "^1.10.0"
     tslint-consistent-codestyle "^1.12.0"
 
-"@toba/test@^1.8.0":
-  version "1.9.1"
-  resolved "https://registry.yarnpkg.com/@toba/test/-/test-1.9.1.tgz#f157d4b44be4cecbf49ac5786be0f8a46a70fe5d"
+"@toba/test@^1.9.0":
+  version "1.9.4"
+  resolved "https://registry.yarnpkg.com/@toba/test/-/test-1.9.4.tgz#b1db4862d893f0696f72ee52472ca22509d3634c"
   dependencies:
     "@toba/tools" "^1.12.0"
     "@types/jest" "^22.2.0"
