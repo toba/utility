@@ -1,16 +1,13 @@
 export {
    merge,
-   removeItem,
-   addUnique,
    eventCoord,
-   list,
-   shuffle,
    randomID,
    gzip,
    unzip,
    byteSize,
    inferMimeType
 } from './lib/utility';
+export { list, removeItem, addUnique, shuffle } from './lib/list';
 export {
    format,
    printf,

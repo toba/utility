@@ -124,19 +124,6 @@ test('merges configurations', () => {
    expect(merge(defaultConfig, givenConfig)).toMatchSnapshot();
 });
 
-test('removes items from arrays', () => {
-   const a = () => 1;
-   const b = () => 2;
-   const c = () => 3;
-   const list = [a, b];
-
-   expect(list).toHaveLength(2);
-   expect(removeItem(list, a)).toBe(true);
-   expect(list).toHaveLength(1);
-   expect(removeItem(list, c)).toBe(false);
-   expect(list).toHaveLength(1);
-});
-
 test('infers Mime type from file name', () => {
    expect(inferMimeType('file.jpg')).toBe(MimeType.JPEG);
    expect(inferMimeType('long.file.jpeg')).toBe(MimeType.JPEG);
@@ -161,27 +148,4 @@ test('zips and unzips strings', async () => {
    expect(byteSize(buffer)).toBeLessThan(300);
    const text = await unzip(buffer);
    expect(text).toBe(lipsum);
-});
-
-test('shuffles arrays', () => {
-   const list = [];
-   for (let i = 0; i < 40; i++) {
-      list.push(sayNumber(i));
-   }
-
-   expect(shuffle(list)).not.toEqual(list);
-   expect(shuffle(null)).toBeNull();
-});
-
-test('uniquely adds array items', () => {
-   const list = ['one', 'two', 'three'];
-
-   expect(addUnique(list, 'one')).toBe(0);
-   expect(list).toHaveLength(3);
-
-   expect(addUnique(list, 'four')).toBe(1);
-   expect(list).toHaveLength(4);
-
-   expect(addUnique(list, 'four', 'five', 'six')).toBe(2);
-   expect(list).toHaveLength(6);
 });
