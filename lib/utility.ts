@@ -90,15 +90,19 @@ export function removeItem<T>(list: T[], item: T): boolean {
 }
 
 /**
- * Add item to array only if it's not already included.
+ * Add item to array only if it's not already included. Return number of added
+ * items.
  */
-export function addUnique<T>(list: T[], item: T): boolean {
-   const i = list.indexOf(item);
-   if (i < 0) {
-      list.push(item);
-      return true;
-   }
-   return false;
+export function addUnique<T>(list: T[], ...item: T[]): number {
+   let added = 0;
+   item.forEach(i => {
+      const index = list.indexOf(i);
+      if (index < 0) {
+         list.push(i);
+         added++;
+      }
+   });
+   return added;
 }
 
 /**

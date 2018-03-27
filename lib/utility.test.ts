@@ -176,9 +176,12 @@ test('shuffles arrays', () => {
 test('uniquely adds array items', () => {
    const list = ['one', 'two', 'three'];
 
-   expect(addUnique(list, 'one')).toBe(false);
+   expect(addUnique(list, 'one')).toBe(0);
    expect(list).toHaveLength(3);
 
-   expect(addUnique(list, 'four')).toBe(true);
+   expect(addUnique(list, 'four')).toBe(1);
    expect(list).toHaveLength(4);
+
+   expect(addUnique(list, 'four', 'five', 'six')).toBe(2);
+   expect(list).toHaveLength(6);
 });
