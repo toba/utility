@@ -1,6 +1,5 @@
-import { removeItem, shuffle, addUnique } from '../index';
+import { removeItem, shuffle, addUnique, isEqualList } from '../index';
 import { sayNumber } from '@toba/tools';
-import { isEqualList } from './list';
 
 test('removes items from arrays', () => {
    const a = () => 1;
