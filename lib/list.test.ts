@@ -1,4 +1,10 @@
-import { removeItem, shuffle, addUnique, isEqualList } from '../index';
+import {
+   removeItem,
+   shuffle,
+   addUnique,
+   isEqualList,
+   listDifference
+} from '../index';
 import { sayNumber } from '@toba/tools';
 
 test('removes items from arrays', () => {
@@ -44,4 +50,23 @@ test('compares arrays', () => {
    expect(isEqualList(list1, ['one', 'three'])).toBe(false);
    expect(isEqualList(list1, null)).toBe(false);
    expect(isEqualList(list1, ['one', 'three', 'two', 'four'])).toBe(false);
+});
+
+test('shows array differences', () => {
+   const list1 = ['one', 'two', 'three'];
+
+   expect(listDifference(list1, ['one', 'three', 'two'])).toEqual([]);
+   expect(listDifference(list1, ['one', 'three'])).toEqual(['two']);
+   expect(listDifference(list1, null)).toEqual(list1);
+   expect(listDifference(list1, ['one', 'three', 'two', 'four'])).toEqual([
+      'four'
+   ]);
+   expect(listDifference(list1, ['four', 'five', 'six'])).toEqual([
+      'one',
+      'two',
+      'three',
+      'four',
+      'five',
+      'six'
+   ]);
 });

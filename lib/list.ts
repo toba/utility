@@ -58,6 +58,9 @@ export function addUnique<T>(list: T[], ...item: T[]): number {
    return added;
 }
 
+/**
+ * Shallow comparison of two lists.
+ */
 export function isEqualList<T>(list1: T[], list2: T[]): boolean {
    if (list1 === null || list2 === null) {
       return false;
@@ -68,4 +71,19 @@ export function isEqualList<T>(list1: T[], list2: T[]): boolean {
    // must be equal if we can find no members that aren't also members of the
    // other list
    return list1.find(i => list2.indexOf(i) == -1) === undefined;
+}
+
+/**
+ * List elements that are different between two lists.
+ */
+export function listDifference<T>(list1: T[], list2: T[]): T[] {
+   if (list1 === null || list1.length == 0) {
+      return list2;
+   }
+   if (list2 === null || list2.length == 0) {
+      return list1;
+   }
+   return list1
+      .filter(i => list2.indexOf(i) == -1)
+      .concat(list2.filter(i => list1.indexOf(i) == -1));
 }
