@@ -7,7 +7,7 @@ export {
    byteSize,
    inferMimeType
 } from './lib/utility';
-export { list, removeItem, addUnique, shuffle } from './lib/list';
+export { list, removeItem, addUnique, shuffle, isEqualList } from './lib/list';
 export {
    format,
    printf,

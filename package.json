@@ -1,12 +1,12 @@
 {
    "name": "@toba/tools",
    "description": "Toba Tools",
-   "version": "1.15.1",
+   "version": "1.15.2",
    "private": false,
    "publishConfig": {
       "access": "public"
    },
-   "main": "",
+   "main": "index.ts",
    "files": [
       "index.ts",
       "lib/cache.ts",
