@@ -6,7 +6,8 @@ import {
    byteSize,
    gzip,
    unzip,
-   shuffle
+   shuffle,
+   addUnique
 } from '../index';
 import { lipsum } from '@toba/test';
 import { sayNumber } from '@toba/tools';
@@ -170,4 +171,14 @@ test('shuffles arrays', () => {
 
    expect(shuffle(list)).not.toEqual(list);
    expect(shuffle(null)).toBeNull();
+});
+
+test('uniquely adds array items', () => {
+   const list = ['one', 'two', 'three'];
+
+   expect(addUnique(list, 'one')).toBe(false);
+   expect(list).toHaveLength(3);
+
+   expect(addUnique(list, 'four')).toBe(true);
+   expect(list).toHaveLength(4);
 });

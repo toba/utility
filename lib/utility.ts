@@ -90,6 +90,18 @@ export function removeItem<T>(list: T[], item: T): boolean {
 }
 
 /**
+ * Add item to array only if it's not already included.
+ */
+export function addUnique<T>(list: T[], item: T): boolean {
+   const i = list.indexOf(item);
+   if (i < 0) {
+      list.push(item);
+      return true;
+   }
+   return false;
+}
+
+/**
  * Coordinates for a mouse click or a touch depending on the event.
  */
 export function eventCoord(

@@ -1,6 +1,7 @@
 export {
    merge,
    removeItem,
+   addUnique,
    eventCoord,
    list,
    shuffle,
