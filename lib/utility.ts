@@ -149,6 +149,10 @@ export function inferMimeType(fileName: string): MimeType {
          return MimeType.CSS;
       case 'svg':
          return MimeType.SVG;
+      case 'rss':
+         return MimeType.RSS;
+      case 'atom':
+         return MimeType.Atom;
       default:
          return null;
    }

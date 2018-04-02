@@ -132,6 +132,8 @@ test('infers Mime type from file name', () => {
    expect(inferMimeType('my garmin file with spaces.gpx')).toBe(MimeType.GPX);
 
    expect(inferMimeType('My Good Document.PDF')).toBe(MimeType.PDF);
+
+   expect(inferMimeType('feed.atom')).toBe(MimeType.Atom);
 });
 
 test('reports byte size of strings and buffers', () => {

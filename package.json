@@ -1,7 +1,7 @@
 {
    "name": "@toba/tools",
    "description": "Toba Tools",
-   "version": "1.16.0",
+   "version": "1.16.1",
    "private": false,
    "publishConfig": {
       "access": "public"
