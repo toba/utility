@@ -52,7 +52,8 @@ export {
    Header,
    HttpStatus,
    MimeType,
-   Encoding
+   Encoding,
+   LinkRelation
 } from './lib/constants';
 export {
    sayNumber,
