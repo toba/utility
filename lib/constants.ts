@@ -134,7 +134,9 @@ export enum MimeType {
    SVG = 'image/svg+xml',
    Text = 'text/plain',
    Zip = 'application/zip',
-   Binary = 'application/octet-stream'
+   Binary = 'application/octet-stream',
+   RSS = 'application/rss+xml',
+   Atom = 'application/atom+xml'
 }
 
 /**
