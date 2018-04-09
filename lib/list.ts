@@ -96,7 +96,7 @@ export function mapSet<T, U>(s: Set<T>, fn: (item: T) => U): U[] {
 }
 
 /**
- * Filter set items to a subset.
+ * Filter set items to a subset of the same type.
  */
 export function filterSet<T>(s: Set<T>, fn: (item: T) => boolean): Set<T> {
    const out = new Set<T>();
@@ -106,4 +106,16 @@ export function filterSet<T>(s: Set<T>, fn: (item: T) => boolean): Set<T> {
       }
    });
    return out;
+}
+
+/**
+ * Finds a particular set item.
+ */
+export function findInSet<T>(s: Set<T>, fn: (item: T) => boolean): T {
+   for (const item of s) {
+      if (fn(item)) {
+         return item;
+      }
+   }
+   return undefined;
 }

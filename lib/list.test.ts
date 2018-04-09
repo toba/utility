@@ -5,7 +5,8 @@ import {
    isEqualList,
    listDifference,
    mapSet,
-   filterSet
+   filterSet,
+   findInSet
 } from '../index';
 import { sayNumber } from '@toba/tools';
 
@@ -85,4 +86,10 @@ test('filters sets', () => {
    expect(out.has('one')).toBe(true);
    expect(out.has('two')).toBe(true);
    expect(out.has('three')).toBe(false);
+});
+
+test('finds first item in set matching predicate', () => {
+   const s = new Set<string>(['one', 'two', 'three']);
+   expect(findInSet(s, i => i === 'one')).toBe('one');
+   expect(findInSet(s, i => i === 'ten')).toBeUndefined();
 });

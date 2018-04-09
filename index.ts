@@ -15,7 +15,8 @@ export {
    isEqualList,
    listDifference,
    mapSet,
-   filterSet
+   filterSet,
+   findInSet
 } from './lib/list';
 export {
    format,
