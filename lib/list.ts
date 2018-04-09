@@ -87,3 +87,23 @@ export function listDifference<T>(list1: T[], list2: T[]): T[] {
       .filter(i => list2.indexOf(i) == -1)
       .concat(list2.filter(i => list1.indexOf(i) == -1));
 }
+
+/**
+ * Map set items to an array.
+ */
+export function mapSet<T, U>(s: Set<T>, fn: (item: T) => U): U[] {
+   return Array.from(s).map(fn);
+}
+
+/**
+ * Filter set items to a subset.
+ */
+export function filterSet<T>(s: Set<T>, fn: (item: T) => boolean): Set<T> {
+   const out = new Set<T>();
+   s.forEach(v => {
+      if (fn(v)) {
+         out.add(v);
+      }
+   });
+   return out;
+}

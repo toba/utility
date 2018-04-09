@@ -3,7 +3,9 @@ import {
    shuffle,
    addUnique,
    isEqualList,
-   listDifference
+   listDifference,
+   mapSet,
+   filterSet
 } from '../index';
 import { sayNumber } from '@toba/tools';
 
@@ -69,4 +71,18 @@ test('shows array differences', () => {
       'five',
       'six'
    ]);
+});
+
+test('maps set values to an array', () => {
+   const s = new Set<string>(['one', 'two', 'three']);
+   expect(mapSet(s, i => i + 'x')).toEqual(['onex', 'twox', 'threex']);
+});
+
+test('filters sets', () => {
+   const s = new Set<string>(['one', 'two', 'three']);
+   const out = filterSet(s, i => i != 'three');
+
+   expect(out.has('one')).toBe(true);
+   expect(out.has('two')).toBe(true);
+   expect(out.has('three')).toBe(false);
 });

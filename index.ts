@@ -13,7 +13,9 @@ export {
    addUnique,
    shuffle,
    isEqualList,
-   listDifference
+   listDifference,
+   mapSet,
+   filterSet
 } from './lib/list';
 export {
    format,
