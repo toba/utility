@@ -1,3 +1,4 @@
+import '@toba/test';
 import { Cache, CompressCache, CacheEventType } from '../index';
 import { totalSize, CacheItem } from './cache';
 import { lipsum, sleep } from '@toba/test';
@@ -63,26 +64,35 @@ test('eviction notification', () => {
 });
 
 test('calculates total cache size', () => {
-   const items: { [key: string]: CacheItem<string> } = {
-      first: {
-         key: 'first',
-         value: 'some text',
-         size: 10,
-         added: 0
-      },
-      second: {
-         key: 'second',
-         value: 'some text',
-         size: 12,
-         added: 0
-      },
-      third: {
-         key: 'third',
-         value: 'some text',
-         size: 15,
-         added: 0
-      }
-   };
+   const items: Map<string, CacheItem<string>> = new Map([
+      [
+         'first',
+         {
+            key: 'first',
+            value: 'some text',
+            size: 10,
+            added: 0
+         }
+      ],
+      [
+         'second',
+         {
+            key: 'second',
+            value: 'some text',
+            size: 12,
+            added: 0
+         }
+      ],
+      [
+         'third',
+         {
+            key: 'third',
+            value: 'some text',
+            size: 15,
+            added: 0
+         }
+      ]
+   ]);
 
    expect(totalSize(items)).toBe(37);
    // total size with item keys excluded

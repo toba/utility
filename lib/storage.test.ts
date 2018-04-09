@@ -1,3 +1,4 @@
+import '@toba/test';
 import { session } from '../index';
 
 /**

@@ -1,3 +1,4 @@
+import '@toba/test';
 import { EventEmitter } from '../index';
 
 const emitter = new EventEmitter<MockEvent, string>();
