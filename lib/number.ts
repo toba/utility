@@ -5,11 +5,7 @@ import { re } from './regex';
  * Pad integer with leading zeroes
  */
 export function leadingZeros(d: number, count: number): string {
-   let text = d.toString();
-   while (text.length < count) {
-      text = '0' + text;
-   }
-   return text;
+   return d.toString().padStart(count, '0');
 }
 
 export function sayNumber(n: number, capitalize = true): string {
