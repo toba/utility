@@ -13,6 +13,7 @@ export {
    addUnique,
    shuffle,
    isEqualList,
+   includesAll,
    listDifference,
    mapSet,
    filterSet,

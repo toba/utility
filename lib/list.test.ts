@@ -4,6 +4,7 @@ import {
    removeItem,
    shuffle,
    addUnique,
+   includesAll,
    isEqualList,
    listDifference,
    mapSet,
@@ -73,6 +74,14 @@ test('shows array differences', () => {
       'five',
       'six'
    ]);
+});
+
+test('indicates if one list contains all members of another', () => {
+   const haystack = ['one', 'two', 'three'];
+   expect(includesAll(haystack, 'two')).toBe(true);
+   expect(includesAll(haystack, 'two', 'one')).toBe(true);
+   expect(includesAll(haystack, 'two', 'one', 'three')).toBe(true);
+   expect(includesAll(haystack, 'four', 'one', 'three')).toBe(false);
 });
 
 test('maps set values to an array', () => {
