@@ -28,13 +28,14 @@ export enum EventType {
 
 /**
  * Iterate cache items to report total size.
+ *
+ * @param except Optional list of item keys to exclude from the result
  */
 export const totalSize = <T>(
-   items: { [key: string]: CacheItem<T> },
+   items: Map<string, CacheItem<T>>,
    except: string[] = []
 ): number =>
-   Object.keys(items)
-      .map(key => items[key])
+   Array.from(items.values())
       .filter(i => except.indexOf(i.key) < 0)
       .reduce((total, i) => total + i.size, 0);
 
@@ -45,7 +46,7 @@ const defaultPolicy: CachePolicy = {
 };
 
 export class Cache<T> {
-   private _items: { [key: string]: CacheItem<T> };
+   private _items: Map<string, CacheItem<T>>;
    private _policy: CachePolicy;
    private _evictTimer: number;
    /**
@@ -56,7 +57,7 @@ export class Cache<T> {
    events: EventEmitter<EventType, any>;
 
    constructor(policy: CachePolicy = {}) {
-      this._items = {};
+      this._items = new Map();
       this._policy = merge(defaultPolicy, policy);
       this._evictTimer = 0;
       this.events = new EventEmitter();
@@ -66,7 +67,7 @@ export class Cache<T> {
     * Number of items in cache.
     */
    get length(): number {
-      return Object.keys(this._items).length;
+      return this._items.size;
    }
 
    /**
@@ -81,13 +82,12 @@ export class Cache<T> {
     */
    contains(key: string, allowEmpty: boolean = false): boolean {
       return (
-         is.defined(this._items, key) &&
-         (allowEmpty || !is.empty(this._items[key]))
+         this._items.has(key) && (allowEmpty || !is.empty(this._items.get(key)))
       );
    }
 
    add(key: string, value: T) {
-      if (is.value(value)) {
+      if (is.value<T>(value)) {
          let size = 0;
          if (this._canMeasureSize) {
             size = byteSize(value);
@@ -97,12 +97,12 @@ export class Cache<T> {
             }
          }
 
-         this._items[key] = {
+         this._items.set(key, {
             key,
             value,
             added: new Date().getTime(),
             size
-         };
+         });
       }
       this.schedulePrune();
       return this;
@@ -130,7 +130,7 @@ export class Cache<T> {
             this._policy.maxBytes != 0)
       ) {
          /** Sorted objects allow removal of oldest */
-         let sorted = Object.keys(this._items).map(key => this._items[key]);
+         let sorted: CacheItem<T>[] = Array.from(this._items.values());
          /** List of item keys to be removed */
          let remove: string[] = [];
 
@@ -169,7 +169,7 @@ export class Cache<T> {
 
          if (remove.length > 0) {
             remove.forEach(key => {
-               delete this._items[key];
+               this._items.delete(key);
             });
 
             this.events.emit(EventType.ItemsEvicted, remove);
@@ -178,17 +178,17 @@ export class Cache<T> {
    }
 
    get(key: string): T {
-      const item = this._items[key];
+      const item = this._items.get(key);
       return is.value(item) ? item.value : null;
    }
 
    remove(key: string): Cache<T> {
-      delete this._items[key];
+      this._items.delete(key);
       return this;
    }
 
    clear(): Cache<T> {
-      this._items = {};
+      this._items.clear();
       return this;
    }
 

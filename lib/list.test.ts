@@ -1,11 +1,16 @@
+import '@toba/test';
+import { sayNumber } from '@toba/tools';
 import {
    removeItem,
    shuffle,
    addUnique,
+   includesAll,
    isEqualList,
-   listDifference
+   listDifference,
+   mapSet,
+   filterSet,
+   findInSet
 } from '../index';
-import { sayNumber } from '@toba/tools';
 
 test('removes items from arrays', () => {
    const a = () => 1;
@@ -69,4 +74,32 @@ test('shows array differences', () => {
       'five',
       'six'
    ]);
+});
+
+test('indicates if one list contains all members of another', () => {
+   const haystack = ['one', 'two', 'three'];
+   expect(includesAll(haystack, 'two')).toBe(true);
+   expect(includesAll(haystack, 'two', 'one')).toBe(true);
+   expect(includesAll(haystack, 'two', 'one', 'three')).toBe(true);
+   expect(includesAll(haystack, 'four', 'one', 'three')).toBe(false);
+});
+
+test('maps set values to an array', () => {
+   const s = new Set<string>(['one', 'two', 'three']);
+   expect(mapSet(s, i => i + 'x')).toEqual(['onex', 'twox', 'threex']);
+});
+
+test('filters sets', () => {
+   const s = new Set<string>(['one', 'two', 'three']);
+   const out = filterSet(s, i => i != 'three');
+
+   expect(out.has('one')).toBe(true);
+   expect(out.has('two')).toBe(true);
+   expect(out.has('three')).toBe(false);
+});
+
+test('finds first item in set matching predicate', () => {
+   const s = new Set<string>(['one', 'two', 'three']);
+   expect(findInSet(s, i => i === 'one')).toBe('one');
+   expect(findInSet(s, i => i === 'ten')).toBeUndefined();
 });

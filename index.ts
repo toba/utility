@@ -13,7 +13,11 @@ export {
    addUnique,
    shuffle,
    isEqualList,
-   listDifference
+   includesAll,
+   listDifference,
+   mapSet,
+   filterSet,
+   findInSet
 } from './lib/list';
 export {
    format,
@@ -52,7 +56,8 @@ export {
    Header,
    HttpStatus,
    MimeType,
-   Encoding
+   Encoding,
+   LinkRelation
 } from './lib/constants';
 export {
    sayNumber,

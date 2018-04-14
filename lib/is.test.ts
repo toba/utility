@@ -1,3 +1,4 @@
+import '@toba/test';
 import { is } from '../index';
 
 const u: string = undefined;

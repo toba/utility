@@ -59,6 +59,22 @@ export function addUnique<T>(list: T[], ...item: T[]): number {
 }
 
 /**
+ * Whether a list (haystack) contains all items (needles).
+ * @param hastack List to search
+ * @param needles Items that should all be in the list
+ */
+export function includesAll<T>(haystack: T[], ...needles: T[]): boolean {
+   if (haystack === null || needles === null) {
+      return false;
+   }
+   if (needles.length > haystack.length) {
+      return false;
+   }
+   // haystack must contain all needles if we can't find any not indexed there
+   return needles.find(n => haystack.indexOf(n) == -1) === undefined;
+}
+
+/**
  * Shallow comparison of two lists.
  */
 export function isEqualList<T>(list1: T[], list2: T[]): boolean {
@@ -86,4 +102,36 @@ export function listDifference<T>(list1: T[], list2: T[]): T[] {
    return list1
       .filter(i => list2.indexOf(i) == -1)
       .concat(list2.filter(i => list1.indexOf(i) == -1));
+}
+
+/**
+ * Map set items to an array.
+ */
+export function mapSet<T, U>(s: Set<T>, fn: (item: T) => U): U[] {
+   return Array.from(s).map(fn);
+}
+
+/**
+ * Filter set items to a subset of the same type.
+ */
+export function filterSet<T>(s: Set<T>, fn: (item: T) => boolean): Set<T> {
+   const out = new Set<T>();
+   s.forEach(v => {
+      if (fn(v)) {
+         out.add(v);
+      }
+   });
+   return out;
+}
+
+/**
+ * Finds a particular set item.
+ */
+export function findInSet<T>(s: Set<T>, fn: (item: T) => boolean): T {
+   for (const item of s) {
+      if (fn(item)) {
+         return item;
+      }
+   }
+   return undefined;
 }

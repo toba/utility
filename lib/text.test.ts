@@ -1,4 +1,12 @@
-import { printf, wrapText, titleCase, capitalize, slug, format } from '../index';
+import '@toba/test';
+import {
+   printf,
+   wrapText,
+   titleCase,
+   capitalize,
+   slug,
+   format
+} from '../index';
 
 const longText =
    'Meeting Melissa after work, our recruiter sent your resume to her tech headhunter connection.';
@@ -16,12 +24,16 @@ test('substitutes placeholders for values', () => {
 test('capitalizes words', () => {
    expect(titleCase('one two')).toBe('One Two');
    expect(titleCase('onetwo 22')).toBe('Onetwo 22');
-   expect(titleCase('BLM - BUREAU OF LAND MANAGEMENT')).toBe('BLM - Bureau of Land Management');
+   expect(titleCase('BLM - BUREAU OF LAND MANAGEMENT')).toBe(
+      'BLM - Bureau of Land Management'
+   );
    expect(titleCase('some road 12-34R')).toBe('Some Road 12-34R');
    expect(titleCase('the sentence')).toBe('The Sentence');
    expect(titleCase('went to the south')).toBe('Went to the South');
    expect(titleCase('i haven\'t showered')).toBe('I Haven\'t Showered');
-   expect(titleCase('IDAHO DEPARTMENT OF PARKS & RECREATION')).toBe('Idaho Department of Parks & Recreation');
+   expect(titleCase('IDAHO DEPARTMENT OF PARKS & RECREATION')).toBe(
+      'Idaho Department of Parks & Recreation'
+   );
    expect(titleCase('fan saddle south a')).toBe('Fan Saddle South A');
 });
 

@@ -1,16 +1,13 @@
+import '@toba/test';
 import {
    merge,
-   removeItem,
    inferMimeType,
    MimeType,
    byteSize,
    gzip,
-   unzip,
-   shuffle,
-   addUnique
+   unzip
 } from '../index';
 import { lipsum } from '@toba/test';
-import { sayNumber } from '@toba/tools';
 
 type TestThing = { [key: string]: string | string[] | TestThing };
 

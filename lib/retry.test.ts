@@ -1,3 +1,4 @@
+import '@toba/test';
 import { retry } from '../index';
 
 const success = 'success';

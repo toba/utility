@@ -1,3 +1,4 @@
+import '@toba/test';
 import { sayNumber, leadingZeros, parseNumber, maybeNumber } from '../index';
 
 test('adds leading zeros to reach total digit length', () => {

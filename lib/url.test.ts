@@ -1,3 +1,4 @@
+import '@toba/test';
 import { url } from '../index';
 
 test('extracts query string variables', () => {
