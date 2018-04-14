@@ -207,6 +207,8 @@ export class Cache<T> {
 export class CompressCache extends Cache<Buffer> {
    /**
     * Optional method to automatically load key value when not present in cache.
+    * This has the potential to create an infinite loop if there's also a cache
+    * policy that limits item count.
     */
    private _loader: (key: string) => Promise<string>;
 
