@@ -202,7 +202,7 @@ export class Cache<T> {
 }
 
 /**
- * Cache variant that only accepts text that it compresses.
+ * Cache variant that only accepts text that it then compresses.
  */
 export class CompressCache extends Cache<Buffer> {
    /**
