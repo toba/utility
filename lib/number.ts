@@ -86,3 +86,32 @@ export function parseNumber(text: string, not = NaN): number {
 export function maybeNumber(val: string): number | string {
    return re.numeric.test(val) ? parseFloat(val) : val;
 }
+
+/**
+ * Simplisitc currency formatting (USD only).
+ * @see https://stackoverflow.com/questions/149055/how-can-i-format-numbers-as-dollars-currency-string-in-javascript
+ */
+export const monetize = (d: number | string, includeDecimals = true) => {
+   if (!is.value(d)) {
+      return d;
+   }
+
+   if (typeof d == 'string') {
+      d = parseNumber(d);
+      // let caller decide how to handle NaN
+      if (isNaN(d)) {
+         return d;
+      }
+   }
+   const re = includeDecimals
+      ? /(\d)(?=(\d{3})+\.)/g
+      : /(\d)(?=(\d{3})+(,|$))/g;
+
+   return (
+      '$' +
+      d
+         .toFixed(includeDecimals ? 2 : 0)
+         .toString()
+         .replace(re, '$1,')
+   );
+};

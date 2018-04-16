@@ -63,6 +63,7 @@ export {
    sayNumber,
    leadingZeros,
    parseNumber,
-   maybeNumber
+   maybeNumber,
+   monetize
 } from './lib/number';
 export { EventEmitter } from './lib/emitter';

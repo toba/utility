@@ -1,5 +1,11 @@
 import '@toba/test';
-import { sayNumber, leadingZeros, parseNumber, maybeNumber } from '../index';
+import {
+   sayNumber,
+   leadingZeros,
+   parseNumber,
+   maybeNumber,
+   monetize
+} from '../index';
 
 test('adds leading zeros to reach total digit length', () => {
    expect(leadingZeros(2, 0)).toBe('2');
@@ -29,4 +35,13 @@ test('converts eligible strings to numbers', () => {
    expect(maybeNumber('-3.25')).toBe(-3.25);
    expect(maybeNumber('563')).toBe(563);
    expect(maybeNumber('asdfds')).toBe('asdfds');
+});
+
+test('formats numbers as currency', () => {
+   expect(monetize(1000)).toBe('$1,000.00');
+   expect(monetize(2000, false)).toBe('$2,000');
+   expect(monetize('3000')).toBe('$3,000.00');
+   expect(monetize(123456.22)).toBe('$123,456.22');
+   expect(monetize(1234567.234)).toBe('$1,234,567.23');
+   expect(monetize('no numbers')).toBe(NaN);
 });
