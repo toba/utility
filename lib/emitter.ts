@@ -1,32 +1,30 @@
-import { is, removeItem } from '../index';
-
 /**
  * Manage event subscribers.
  */
 export class EventEmitter<T extends number, E> {
-   listeners: { [key: number]: ((event: E) => void)[] };
+   listeners: Map<number, Set<(event: E) => void>>;
 
    constructor() {
-      this.listeners = {};
+      this.listeners = new Map();
    }
 
    /**
     * Whether a listener type is already defined.
     */
    private hasType(type: T): boolean {
-      return is.defined(this.listeners, type);
+      return this.listeners.has(type);
    }
 
    /**
     * Whether subscribers exist for an event type.
     */
    hasSubscribers(type: T): boolean {
-      return this.hasType(type) && this.listeners[type].length > 0;
+      return this.hasType(type) && this.listeners.get(type).size > 0;
    }
 
    emit(type: T, event?: E): boolean {
       if (this.hasType(type)) {
-         this.listeners[type].forEach(fn => {
+         this.listeners.get(type).forEach(fn => {
             fn(event);
          });
          return true;
@@ -36,9 +34,9 @@ export class EventEmitter<T extends number, E> {
 
    subscribe(type: T, fn: (event: E) => void): (event: E) => void {
       if (!this.hasType(type)) {
-         this.listeners[type] = [];
+         this.listeners.set(type, new Set());
       }
-      this.listeners[type].push(fn);
+      this.listeners.get(type).add(fn);
       return fn;
    }
 
@@ -50,7 +48,7 @@ export class EventEmitter<T extends number, E> {
     * Remove listener method.
     */
    unsubscribe(type: T, fn: (event: E) => void): boolean {
-      return this.hasType(type) ? removeItem(this.listeners[type], fn) : false;
+      return this.hasType(type) ? this.listeners.get(type).delete(fn) : false;
    }
 
    /**
@@ -66,11 +64,11 @@ export class EventEmitter<T extends number, E> {
     */
    unsubscribeAll(type: T = null): boolean {
       if (type == null) {
-         this.listeners = {};
+         this.listeners = new Map();
          return true;
       }
       if (this.hasType(type)) {
-         this.listeners[type] = [];
+         this.listeners.set(type, new Set());
          return true;
       }
       return false;

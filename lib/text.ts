@@ -21,8 +21,6 @@ const alwaysUpper = ['blm', 'fs', 'i'];
  * value can be substituted in more than one position. Example:
  *
  *    format('I like {0}, {1} and {0}', 'chocolate', 'peanut butter');
- *
- * Note the logger uses `printf` syntax instead.
  */
 export function format(
    text: string,
@@ -76,7 +74,7 @@ export const titleCase = (text: string) =>
            .replace(/\b[a-z]$/, match => match.toLocaleUpperCase());
 
 /**
- * http://stackoverflow.com/questions/617647/where-is-my-one-line-implementation-of-rot13-in-javascript-going-wrong
+ * @see http://stackoverflow.com/questions/617647/where-is-my-one-line-implementation-of-rot13-in-javascript-going-wrong
  */
 export const rot13 = (text: string) =>
    is.empty(text)
@@ -100,6 +98,9 @@ export const slug = (text: string) =>
            .replace('à', 'a')
            .replace(/[^\-a-z0-9]/g, '');
 
+/**
+ * Insert line breaks to keep text within a given length.
+ */
 export const wrapText = (
    text: string,
    lineLength = 80,

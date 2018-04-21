@@ -125,7 +125,7 @@ export function filterSet<T>(s: Set<T>, fn: (item: T) => boolean): Set<T> {
 }
 
 /**
- * Finds a particular set item.
+ * Find set item matching predicate.
  */
 export function findInSet<T>(s: Set<T>, fn: (item: T) => boolean): T {
    for (const item of s) {

@@ -5,7 +5,8 @@ export {
    gzip,
    unzip,
    byteSize,
-   inferMimeType
+   inferMimeType,
+   env
 } from './lib/utility';
 export {
    list,

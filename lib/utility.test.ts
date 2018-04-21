@@ -5,7 +5,8 @@ import {
    MimeType,
    byteSize,
    gzip,
-   unzip
+   unzip,
+   env
 } from '../index';
 import { lipsum } from '@toba/test';
 
@@ -147,4 +148,23 @@ test('zips and unzips strings', async () => {
    expect(byteSize(buffer)).toBeLessThan(300);
    const text = await unzip(buffer);
    expect(text).toBe(lipsum);
+});
+
+test('reads environmnent variables with option for alternate', () => {
+   const nope = 'probably-does-not-exist';
+   expect(env('PATH')).toBeDefined();
+   expect(env(nope, 'alternate')).toBe('alternate');
+
+   let v: string;
+   let e: Error;
+
+   try {
+      v = env(nope);
+   } catch (err) {
+      e = err;
+   }
+
+   expect(v).toBeUndefined();
+   expect(e).toBeDefined();
+   expect(e.message).toBe(`Environment value ${nope} does not exist`);
 });

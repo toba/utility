@@ -2,12 +2,16 @@ import { is } from './is';
 import { re } from './regex';
 
 /**
- * Pad integer with leading zeroes
+ * Pad integer with leading zeroes.
  */
 export function leadingZeros(d: number, count: number): string {
    return d.toString().padStart(count, '0');
 }
 
+/**
+ *
+ * @param capitalize Whether to capitalize the word
+ */
 export function sayNumber(n: number, capitalize = true): string {
    let word = n.toString();
    switch (n) {
@@ -76,15 +80,21 @@ export function sayNumber(n: number, capitalize = true): string {
 }
 
 /**
- * Remove non-numeric characters from string
+ * Remove non-numeric characters from string.
+ *
+ * @param {number} not Optional number to return if none found in text
  */
 export function parseNumber(text: string, not = NaN): number {
    text = (text ? text : '').replace(/[^\d\.]/g, '');
    return is.empty(text) ? not : parseFloat(text);
 }
 
-export function maybeNumber(val: string): number | string {
-   return re.numeric.test(val) ? parseFloat(val) : val;
+/**
+ * Return text parsed as number if it contains only numeric values otherwise
+ * return the text unchanged.
+ */
+export function maybeNumber(text: string): number | string {
+   return re.numeric.test(text) ? parseFloat(text) : text;
 }
 
 /**
@@ -96,7 +106,7 @@ export const monetize = (d: number | string, includeDecimals = true) => {
       return d;
    }
 
-   if (typeof d == 'string') {
+   if (is.text(d)) {
       d = parseNumber(d);
       // let caller decide how to handle NaN
       if (isNaN(d)) {
@@ -107,11 +117,5 @@ export const monetize = (d: number | string, includeDecimals = true) => {
       ? /(\d)(?=(\d{3})+\.)/g
       : /(\d)(?=(\d{3})+(,|$))/g;
 
-   return (
-      '$' +
-      d
-         .toFixed(includeDecimals ? 2 : 0)
-         .toString()
-         .replace(re, '$1,')
-   );
+   return '$' + d.toFixed(includeDecimals ? 2 : 0).replace(re, '$1,');
 };

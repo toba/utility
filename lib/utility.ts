@@ -50,7 +50,7 @@ export async function gzip(text: string) {
 /**
  * GZip decompress a string.
  */
-export async function unzip(value: Buffer) {
+export function unzip(value: Buffer): Promise<string> {
    return new Promise<string>((resolve, reject) => {
       compress.unzip(value, (err, buffer) => {
          if (is.value(err)) {
@@ -65,7 +65,7 @@ export async function unzip(value: Buffer) {
 /**
  * Only handling the very simple cases of strings and Buffers.
  *
- * https://stackoverflow.com/questions/1248302/how-to-get-the-size-of-a-javascript-object
+ * @see https://stackoverflow.com/questions/1248302/how-to-get-the-size-of-a-javascript-object
  */
 export function byteSize(obj: any): number {
    if (typeof obj === is.Type.String) {
@@ -99,7 +99,7 @@ export function eventCoord(
 /**
  * Generate random letter/number sequence.
  */
-export function randomID(size: number = 7) {
+export function randomID(size: number = 7): string {
    const chars = [];
    const possible =
       'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
@@ -156,4 +156,24 @@ export function inferMimeType(fileName: string): MimeType {
       default:
          return null;
    }
+}
+
+/**
+ * Return environment value. If the key doesn't exist then return the alternate
+ * value. If no alternate is given for a missing key then throw an error.
+ */
+export function env(key: string, alternate?: string): string {
+   if (!is.value(process)) {
+      throw new Error(
+         'Environment variables are not accessible in this context'
+      );
+   }
+   const value = process.env[key];
+   if (value === undefined) {
+      if (alternate !== undefined) {
+         return alternate;
+      }
+      throw new Error(`Environment value ${key} does not exist`);
+   }
+   return value;
 }

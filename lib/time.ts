@@ -53,7 +53,7 @@ export function hoursAndMinutes(hours: number): string {
  * Whether daylight savings applies to date. If no date given then response
  * applies to current date.
  *
- * http://javascript.about.com/library/bldst.htm
+ * @see http://javascript.about.com/library/bldst.htm
  */
 export function inDaylightSavings(date = new Date()): boolean {
    const jan = new Date(date.getFullYear(), 0, 1);
@@ -107,9 +107,9 @@ export function durationString(
    endOrRoundTo?: TimeUnit | Date,
    roundTo?: TimeUnit
 ): string {
-   if (typeof startOrMs == 'number') {
+   if (is.number(startOrMs)) {
       return durationStringFromNumber(startOrMs, endOrRoundTo as TimeUnit);
-   } else if (endOrRoundTo instanceof Date) {
+   } else if (is.date(endOrRoundTo)) {
       return durationStringFromDates(startOrMs, endOrRoundTo, roundTo);
    } else {
       return '';

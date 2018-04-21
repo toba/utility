@@ -119,7 +119,9 @@ export enum HttpStatus {
    Unavailabile = 503
 }
 
-// http://www.sitepoint.com/web-foundations/mime-types-complete-list/
+/**
+ * @see http://www.sitepoint.com/web-foundations/mime-types-complete-list/
+ */
 export enum MimeType {
    HTML = 'text/html',
    JSON = 'application/json',
@@ -142,7 +144,7 @@ export enum MimeType {
 /**
  * Space-separated list of `rel` values
  *
- * https://developer.mozilla.org/en-US/docs/Web/HTML/Link_types
+ * @see https://developer.mozilla.org/en-US/docs/Web/HTML/Link_types
  */
 export enum LinkRelation {
    /**
