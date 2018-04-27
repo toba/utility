@@ -27,7 +27,9 @@ export {
    rot13,
    capitalize,
    titleCase,
-   wrapText
+   wrapText,
+   encodeBase64,
+   decodeBase64
 } from './lib/text';
 export {
    Cache,
