@@ -15,50 +15,77 @@ export namespace is {
       Undefined = 'undefined'
    }
 
-   /** Whether variable is defined and not null. */
+   /**
+    * Whether variable is defined and not null.
+    */
    export function value<T>(x: any): x is T {
       return x !== undefined && x !== null;
    }
 
-   /** Whether named field is defined in the given object. */
+   /**
+    * Whether named field is defined in the given object.
+    */
    export const defined = <T extends Object, K extends keyof T>(
       obj: T,
       field: K
-   ) => value<T>(obj) && obj.hasOwnProperty(field.toString()); // typeof(obj[field]) !== type.UNDEFINED;
+   ) => value<T>(obj) && obj.hasOwnProperty(field); // typeof(obj[field]) !== type.UNDEFINED;
 
-   /** Whether value is null, undefined or an empty string. */
+   /**
+    * Whether value is null, undefined or an empty string.
+    */
    export const empty = (x: any) => !value(x) || x === '';
 
-   /** Whether value exists and is a type of number. */
+   /**
+    * Whether value exists and is a type of number.
+    */
    export function number(n: any): n is number {
       return value(n) && typeof n === Type.Number;
    }
 
-   /** Whether value is numeric even if its type is a string. */
+   /**
+    * Whether value is numeric even if its type is a string.
+    */
    export function numeric(n: any): n is string | number {
       return integer(n) || /^\d+$/.test(n);
    }
 
-   /** Whether value is an integer. */
+   /**
+    * Whether value is an integer.
+    */
    export function integer(n: any): n is string | number {
       return value(n) && parseInt(n as string) === n;
    }
 
    export const bigInt = (n: any) => integer(n) && (n < -32768 || n > 32767);
 
-   /** Whether value exists and is an array. */
-   export function array<T>(x: any): x is T[] {
-      return value<T[]>(x) && Array.isArray(x);
+   /**
+    * Whether value exists and is an array.
+    * @param withLength Optionally require array be a certain size
+    */
+   export function array<T>(x: any, withLength = 0): x is T[] {
+      if (value<T[]>(x) && Array.isArray(x)) {
+         return withLength == 0 || x.length == withLength;
+      }
+      return false;
    }
 
+   /**
+    * Whether value is a date.
+    */
    export function date(v: any): v is Date {
       return value(v) && v instanceof Date;
    }
 
+   /**
+    * Whether value is text.
+    */
    export function text(v: any): v is string {
       return typeof v === Type.String;
    }
 
+   /**
+    * Wehther value is a function.
+    */
    export function callable(v: any): v is Function {
       return value(v) && typeof v == Type.Function;
    }

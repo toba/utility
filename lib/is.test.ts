@@ -23,6 +23,12 @@ test('identifies arrays', () => {
    expect(is.array(null)).toBe(false);
 });
 
+test('identifies arrays with required length', () => {
+   expect(is.array([], 1)).toBe(false);
+   expect(is.array(['one'], 1)).toBe(true);
+   expect(is.array(['one', 'two', 'three'], 3)).toBe(true);
+});
+
 test('identifies functions', () => {
    const fn = () => false;
    expect(is.callable(fn)).toBe(true);
