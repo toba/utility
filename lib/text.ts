@@ -156,13 +156,14 @@ export const htmlEntity: Map<string, string> = new Map([
  */
 export function htmlEscape(html: string) {
    for (const [char, code] of htmlEntity) {
-      html.replace(new RegExp(char, 'g'), `&${code};`);
+      html = html.replace(new RegExp(char, 'g'), `&${code};`);
    }
    return html;
 }
 
 export function htmlUnescape(html: string) {
    for (const [char, code] of htmlEntity) {
-      html.replace(new RegExp(`&${code};`, 'g'), char);
+      html = html.replace(new RegExp(`&${code};`, 'g'), char);
    }
+   return html;
 }

@@ -14,11 +14,12 @@ import {
 import { htmlEntity } from './text';
 
 const code: { [key: string]: string } = {
-   lt: htmlEntity.get('<'),
-   gt: htmlEntity.get('>'),
-   slash: htmlEntity.get('/'),
-   and: htmlEntity.get('&'),
-   quote: htmlEntity.get('"')
+   lt: `&${htmlEntity.get('<')};`,
+   gt: `&${htmlEntity.get('>')};`,
+   slash: `&${htmlEntity.get('/')};`,
+   and: `&${htmlEntity.get('&')};`,
+   quote: `&${htmlEntity.get('"')};`,
+   singleQuote: `&${htmlEntity.get(`'`)};`
 };
 
 const longText =
@@ -86,7 +87,13 @@ test('base 64 decodes text', () => {
 });
 
 test('escapes HTML', () => {
-   expect(htmlEscape('<title>thing</title>')).toBe(
-      `${code.lt}title${code.gt}thing${code.lt}/title${code.gt}`
-   );
+   const html = '<title class=\'css\'>thing <i>italic</i> "quote"</title>';
+   const escaped = `${code.lt}title class=${code.singleQuote}css${
+      code.singleQuote
+   }${code.gt}thing ${code.lt}i${code.gt}italic${code.lt}${code.slash}i${
+      code.gt
+   } ${code.quote}quote${code.quote}${code.lt}${code.slash}title${code.gt}`;
+
+   expect(htmlEscape(html)).toBe(escaped);
+   expect(htmlUnescape(escaped)).toBe(html);
 });
