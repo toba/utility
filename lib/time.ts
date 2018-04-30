@@ -6,6 +6,7 @@ import { is } from './is';
  * Milliseconds per units of time.
  */
 export enum Time {
+   Millisecond = 1,
    /** Milliseconds in a second */
    Second = 1000,
    /** Milliseconds in a minute */
@@ -17,7 +18,11 @@ export enum Time {
    /** Milliseconds in a week */
    Week = Day * 7,
    /** Milliseconds in a year */
-   Year = Day * 365
+   Year = Day * 365,
+   /** Average milliseconds per quarter */
+   Quarter = Year / 4,
+   /** Average milliseconds per month */
+   Month = Year / 12
 }
 
 /**
