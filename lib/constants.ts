@@ -103,7 +103,16 @@ export const Header = {
    Referer: 'referer',
    ResponseTime: 'X-Response-Time',
    RequestedWith: 'X-Requested-With',
-   UserAgent: 'user-agent'
+   UserAgent: 'user-agent',
+   /**
+    * Determines how to match future request headers to decide whether a cached
+    * response can be used rather than requesting a fresh one from the origin
+    * server. Accepts a comma-separated list of header names to take into
+    * account when deciding whether or not a cached response can be used.
+    * @example Vary: <header-name>, <header-name>, ...
+    * @see https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Vary
+    */
+   Vary: 'Vary'
 };
 
 export enum HttpStatus {

@@ -29,7 +29,9 @@ export {
    titleCase,
    htmlEscape,
    htmlUnescape,
-   wrapText
+   wrapText,
+   encodeBase64,
+   decodeBase64
 } from './lib/text';
 export {
    Cache,

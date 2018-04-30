@@ -99,6 +99,21 @@ export const slug = (text: string) =>
            .replace(/[^\-a-z0-9]/g, '');
 
 /**
+ * Decode base-64 string.
+ * @see http://www.hacksparrow.com/base64-encoding-decoding-in-node-js.html
+ */
+export const decodeBase64 = (text: string) =>
+   new Buffer(text, 'base64').toString();
+
+/**
+ * Encode string to base-64.
+ * @see https://www.base64encode.org/
+ * @see http://www.hacksparrow.com/base64-encoding-decoding-in-node-js.html
+ */
+export const encodeBase64 = (text: string) =>
+   new Buffer(text).toString('base64');
+
+/**
  * Insert line breaks to keep text within a given length.
  */
 export const wrapText = (
