@@ -20,9 +20,9 @@ export enum Time {
    /** Milliseconds in a year */
    Year = Day * 365,
    /** Average milliseconds per quarter */
-   Quarter = Year / 4,
+   Quarter = Math.floor(Year / 4),
    /** Average milliseconds per month */
-   Month = Year / 12
+   Month = Math.floor(Year / 12)
 }
 
 /**
@@ -33,6 +33,8 @@ export enum TimeUnit {
    Minute = 'm',
    Hour = 'h',
    Day = 'd',
+   Month = 'M',
+   Quarter = 'q',
    Year = 'y'
 }
 

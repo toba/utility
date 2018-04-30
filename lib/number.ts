@@ -3,9 +3,10 @@ import { re } from './regex';
 
 /**
  * Pad integer with leading zeroes.
+ * @param targetLength Total length the resulting string should be
  */
-export function leadingZeros(d: number, count: number): string {
-   return d.toString().padStart(count, '0');
+export function leadingZeros(d: number, targetLength: number): string {
+   return d.toString().padStart(targetLength, '0');
 }
 
 /**
