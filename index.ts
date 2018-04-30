@@ -27,6 +27,8 @@ export {
    rot13,
    capitalize,
    titleCase,
+   htmlEscape,
+   htmlUnescape,
    wrapText
 } from './lib/text';
 export {

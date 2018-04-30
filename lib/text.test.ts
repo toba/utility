@@ -5,8 +5,19 @@ import {
    titleCase,
    capitalize,
    slug,
-   format
-} from '../index';
+   format,
+   htmlEscape,
+   htmlUnescape
+} from '../';
+import { htmlEntity } from './text';
+
+const code: { [key: string]: string } = {
+   lt: htmlEntity.get('<'),
+   gt: htmlEntity.get('>'),
+   slash: htmlEntity.get('/'),
+   and: htmlEntity.get('&'),
+   quote: htmlEntity.get('"')
+};
 
 const longText =
    'Meeting Melissa after work, our recruiter sent your resume to her tech headhunter connection.';
@@ -30,7 +41,7 @@ test('capitalizes words', () => {
    expect(titleCase('some road 12-34R')).toBe('Some Road 12-34R');
    expect(titleCase('the sentence')).toBe('The Sentence');
    expect(titleCase('went to the south')).toBe('Went to the South');
-   expect(titleCase('i haven\'t showered')).toBe('I Haven\'t Showered');
+   expect(titleCase("i haven't showered")).toBe("I Haven't Showered");
    expect(titleCase('IDAHO DEPARTMENT OF PARKS & RECREATION')).toBe(
       'Idaho Department of Parks & Recreation'
    );
@@ -42,7 +53,7 @@ it('converts words to URL slug', () => {
    expect(slug('Wiggle and    Sing')).toBe('wiggle-and-sing');
    expect(slug('Too---dashing')).toBe('too-dashing');
    expect(slug('powerful/oz')).toBe('powerful-oz');
-   expect(slug('three o\' clock')).toBe('three-o-clock');
+   expect(slug("three o' clock")).toBe('three-o-clock');
 });
 
 test('capitalizes first word', () => {
@@ -57,5 +68,11 @@ test('wraps text', () => {
    expect(wrapText('this thing')).toBe('this thing');
    expect(wrapText(longText, 40, '<br/>')).toBe(
       'Meeting Melissa after work, our<br/>recruiter sent your resume to her tech<br/>headhunter connection.'
+   );
+});
+
+test('escapes HTML', () => {
+   expect(htmlEscape('<title>thing</title>')).toBe(
+      `${code.lt}title${code.gt}thing${code.lt}/title${code.gt}`
    );
 });

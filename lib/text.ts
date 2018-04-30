@@ -126,3 +126,28 @@ export const wrapText = (
            return lines + word;
         }, '');
 };
+
+export const htmlEntity: Map<string, string> = new Map([
+   ['&', 'amp'],
+   ['"', 'quot'],
+   [`'`, '#39'],
+   ['<', 'lt'],
+   ['>', 'gt'],
+   ['/', '#x2F']
+]);
+
+/**
+ * @see https://www.owasp.org/index.php/XSS_(Cross_Site_Scripting)_Prevention_Cheat_Sheet#RULE_.231_-_HTML_Escape_Before_Inserting_Untrusted_Data_into_HTML_Element_Content
+ */
+export function htmlEscape(html: string) {
+   for (const [char, code] of htmlEntity) {
+      html.replace(new RegExp(char, 'g'), `&${code};`);
+   }
+   return html;
+}
+
+export function htmlUnescape(html: string) {
+   for (const [char, code] of htmlEntity) {
+      html.replace(new RegExp(`&${code};`, 'g'), char);
+   }
+}
