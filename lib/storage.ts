@@ -1,4 +1,4 @@
-import { Time } from '../index';
+import { Duration } from '../index';
 
 export interface Storage<T> {
    save(key: string, value: T, days?: number, includeSubdomain?: boolean): void;
@@ -34,7 +34,7 @@ export const cookie: Storage<string> = {
 
       if (days != 0) {
          const date = new Date();
-         date.setTime(date.getTime() + days * Time.Day);
+         date.setTime(date.getTime() + days * Duration.Day);
          expires = '; expires=' + date.toUTCString();
       }
       document.cookie = key + '=' + value + domain + expires + '; path=/';

@@ -5,7 +5,7 @@ import { is } from './is';
 /**
  * Milliseconds per units of time.
  */
-export enum Time {
+export enum Duration {
    Millisecond = 1,
    /** Milliseconds in a second */
    Second = 1000,
@@ -39,11 +39,11 @@ export enum TimeUnit {
 }
 
 const unitDuration: { [index: string]: number } = {
-   [TimeUnit.Second]: Time.Second,
-   [TimeUnit.Minute]: Time.Minute,
-   [TimeUnit.Hour]: Time.Hour,
-   [TimeUnit.Day]: Time.Day,
-   [TimeUnit.Year]: Time.Year
+   [TimeUnit.Second]: Duration.Second,
+   [TimeUnit.Minute]: Duration.Minute,
+   [TimeUnit.Hour]: Duration.Hour,
+   [TimeUnit.Day]: Duration.Day,
+   [TimeUnit.Year]: Duration.Year
 };
 
 /**

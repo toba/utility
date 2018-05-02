@@ -129,7 +129,7 @@
     call-me-maybe "^1.0.1"
     glob-to-regexp "^0.3.0"
 
-"@toba/build@^1.4.0":
+"@toba/build@^1.5.0":
   version "1.5.0"
   resolved "https://registry.yarnpkg.com/@toba/build/-/build-1.5.0.tgz#fe6af91a7879954be8a32dafa4cfa3f61e11b6a3"
   dependencies:
@@ -149,7 +149,7 @@
     flat "^4.0.0"
     logfmt "^1.2.0"
 
-"@toba/test@^1.12.0":
+"@toba/test@^1.13.0":
   version "1.13.4"
   resolved "https://registry.yarnpkg.com/@toba/test/-/test-1.13.4.tgz#465bcdd76c6444210036d9b688f05d3cf33a876d"
   dependencies:

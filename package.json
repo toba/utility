@@ -1,7 +1,7 @@
 {
    "name": "@toba/tools",
    "description": "Toba Tools",
-   "version": "2.3.2",
+   "version": "3.0.0",
    "private": false,
    "publishConfig": {
       "access": "public"
@@ -31,8 +31,8 @@
       "test": "jest"
    },
    "devDependencies": {
-      "@toba/build": "^1.4.0",
-      "@toba/test": "^1.12.0",
+      "@toba/build": "^1.5.0",
+      "@toba/test": "^1.13.0",
       "prettier": "^1.12.0",
       "typescript": "^2.8.0"
    },

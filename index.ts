@@ -45,7 +45,7 @@ export { url } from './lib/url';
 export { retry } from './lib/retry';
 export { session, cookie } from './lib/storage';
 export {
-   Time,
+   Duration,
    TimeUnit,
    hoursAndMinutes,
    timeString,
