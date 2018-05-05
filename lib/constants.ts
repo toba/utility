@@ -151,9 +151,12 @@ export enum MimeType {
 }
 
 /**
- * Space-separated list of `rel` values
+ * Space-separated list of `rel` values. The attribute specifies the
+ * relationship between the current document and the linked document. Only used
+ * if the href attribute is present.
  *
  * @see https://developer.mozilla.org/en-US/docs/Web/HTML/Link_types
+ * @see https://www.w3schools.com/tags/att_a_rel.asp
  */
 export enum LinkRelation {
    /**
@@ -369,7 +372,12 @@ export enum LinkRelation {
     * alternative style sheet; in that case the `title` attribute must be
     * present and not be the empty string.
     */
-   Stylesheet = 'stylesheet'
+   Stylesheet = 'stylesheet',
+
+   /**
+    * A tag (keyword) for the current document.
+    */
+   Tag = 'tag'
 }
 
 export enum Encoding {
