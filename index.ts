@@ -33,6 +33,7 @@ export {
    encodeBase64,
    decodeBase64
 } from './lib/text';
+export { median, boundary, Limits } from './lib/math';
 export {
    Cache,
    CompressCache,
