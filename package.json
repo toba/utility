@@ -1,7 +1,7 @@
 {
    "name": "@toba/tools",
    "description": "Toba Tools",
-   "version": "3.1.0",
+   "version": "3.1.1",
    "private": false,
    "publishConfig": {
       "access": "public"
@@ -34,8 +34,8 @@
    "devDependencies": {
       "@toba/build": "^1.5.0",
       "@toba/test": "^1.13.0",
-      "prettier": "^1.12.0",
-      "typescript": "^2.8.0"
+      "prettier": "^1.13.0",
+      "typescript": "^2.9.0"
    },
    "prettier": {
       "singleQuote": true,
