@@ -7,7 +7,7 @@ export {
    byteSize,
    inferMimeType,
    env,
-   mimeTypeCharSet
+   addCharSet
 } from './lib/utility';
 export {
    list,

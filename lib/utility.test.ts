@@ -7,7 +7,7 @@ import {
    gzip,
    unzip,
    env,
-   mimeTypeCharSet
+   addCharSet
 } from '../index';
 import { lipsum } from '@toba/test';
 
@@ -171,7 +171,5 @@ test('reads environmnent variables with option for alternate', () => {
 });
 
 test('returns MIME type with standard charset extension', () => {
-   expect(mimeTypeCharSet(MimeType.JSON)).toBe(
-      'application/json; charset=utf-8'
-   );
+   expect(addCharSet(MimeType.JSON)).toBe('application/json; charset=utf-8');
 });

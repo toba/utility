@@ -158,7 +158,7 @@ export function inferMimeType(fileName: string): MimeType {
    }
 }
 
-export const mimeTypeCharSet = (
+export const addCharSet = (
    type: MimeType,
    charSet: CharSet = CharSet.UTF8
 ): string => `${type}; charset=${charSet}`;
