@@ -1,5 +1,5 @@
 import * as compress from 'zlib';
-import { is, MimeType, Encoding } from '../index';
+import { is, MimeType, Encoding, CharSet } from '../index';
 
 type Hash = { [key: string]: any };
 
@@ -157,6 +157,11 @@ export function inferMimeType(fileName: string): MimeType {
          return null;
    }
 }
+
+export const mimeTypeCharSet = (
+   type: MimeType,
+   charSet: CharSet = CharSet.UTF8
+): string => `${type}; charset=${charSet}`;
 
 /**
  * Return environment value. If the key doesn't exist then return the alternate

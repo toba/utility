@@ -6,7 +6,8 @@ export {
    unzip,
    byteSize,
    inferMimeType,
-   env
+   env,
+   mimeTypeCharSet
 } from './lib/utility';
 export {
    list,
@@ -63,7 +64,8 @@ export {
    HttpStatus,
    MimeType,
    Encoding,
-   LinkRelation
+   LinkRelation,
+   CharSet
 } from './lib/constants';
 export {
    sayNumber,

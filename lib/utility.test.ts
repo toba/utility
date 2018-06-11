@@ -6,7 +6,8 @@ import {
    byteSize,
    gzip,
    unzip,
-   env
+   env,
+   mimeTypeCharSet
 } from '../index';
 import { lipsum } from '@toba/test';
 
@@ -167,4 +168,10 @@ test('reads environmnent variables with option for alternate', () => {
    expect(v).toBeUndefined();
    expect(e).toBeDefined();
    expect(e.message).toBe(`Environment value ${nope} does not exist`);
+});
+
+test('returns MIME type with standard charset extension', () => {
+   expect(mimeTypeCharSet(MimeType.JSON)).toBe(
+      'application/json; charset=utf-8'
+   );
 });

@@ -129,6 +129,15 @@ export enum HttpStatus {
 }
 
 /**
+ * @see https://tools.ietf.org/html/rfc7231#section-3.1.1.2
+ */
+export enum CharSet {
+   ASCII = 'US-ASCII',
+   UTF8 = 'utf-8',
+   ISO8859_1 = 'iso-8859-1'
+}
+
+/**
  * @see http://www.sitepoint.com/web-foundations/mime-types-complete-list/
  */
 export enum MimeType {
