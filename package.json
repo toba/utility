@@ -8,14 +8,16 @@
    },
    "main": "dist/index.js",
    "types:": "dist/index.d.ts",
-   "files": ["dist/**/*"],
+   "files": [
+      "dist/**/*"
+   ],
    "author": {
       "name": "Jason Abbott"
    },
    "license": "MIT",
    "scripts": {
       "prepublishOnly": "./node_modules/.bin/tsc",
-      "test": "jest"
+      "test": "jest --coverage"
    },
    "devDependencies": {
       "@toba/build": "^1.5.0",
