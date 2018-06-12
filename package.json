@@ -1,7 +1,7 @@
 {
    "name": "@toba/tools",
    "description": "Toba Tools",
-   "version": "3.2.1",
+   "version": "3.2.2",
    "private": false,
    "publishConfig": {
       "access": "public"
@@ -14,7 +14,7 @@
    },
    "license": "MIT",
    "scripts": {
-      "prepublishOnly": "tsc",
+      "prepublishOnly": "./node_modules/.bin/tsc",
       "test": "jest"
    },
    "devDependencies": {
