@@ -52,26 +52,26 @@ export const weekday = [
    'Saturday'
 ];
 
-enum AccessControlAllow {
+export enum AccessControlAllow {
    Credentials = 'Access-Control-Allow-Credentials',
    Headers = 'Access-Control-Allow-Headers',
    Methods = 'Access-Control-Allow-Methods',
    Origin = 'Access-Control-Allow-Origin'
 }
 
-enum AccessControlRequest {
+export enum AccessControlRequest {
    Headers = 'Access-Control-Request-Headers',
    Method = 'Access-Control-Request-Method'
 }
 
-enum Content {
+export enum Content {
    Disposition = 'Content-Disposition',
    Encoding = 'Content-Encoding',
    Length = 'Content-Length',
    Type = 'Content-Type'
 }
 
-enum Accept {
+export enum Accept {
    Encoding = 'accept-encoding',
    Language = 'accept-language'
 }

@@ -6,29 +6,15 @@
    "publishConfig": {
       "access": "public"
    },
-   "main": "index.ts",
-   "files": [
-      "index.ts",
-      "lib/cache.ts",
-      "lib/constants.ts",
-      "lib/emitter.ts",
-      "lib/is.ts",
-      "lib/list.ts",
-      "lib/math.ts",
-      "lib/number.ts",
-      "lib/regex.ts",
-      "lib/retry.ts",
-      "lib/storage.ts",
-      "lib/text.ts",
-      "lib/time.ts",
-      "lib/url.ts",
-      "lib/utility.ts"
-   ],
+   "main": "dist/index.js",
+   "types:": "dist/index.d.ts",
+   "files": ["dist/**/*"],
    "author": {
       "name": "Jason Abbott"
    },
    "license": "MIT",
    "scripts": {
+      "prepublishOnly": "tsc",
       "test": "jest"
    },
    "devDependencies": {
