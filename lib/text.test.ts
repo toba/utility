@@ -10,7 +10,7 @@ import {
    decodeBase64,
    htmlEscape,
    htmlUnescape
-} from '../';
+} from './';
 import { htmlEntity } from './text';
 
 const code: { [key: string]: string } = {

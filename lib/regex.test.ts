@@ -1,5 +1,5 @@
 import '@toba/test';
-import { re } from '../index';
+import { re } from './index';
 
 const text = `some
 text on more

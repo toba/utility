@@ -1,5 +1,5 @@
 import '@toba/test';
-import { median, boundary } from '../';
+import { median, boundary } from './';
 
 test('calculates median', () => {
    expect(median(1, 2, 3)).toBe(2);

@@ -1,4 +1,4 @@
-import { is, merge, EventEmitter, byteSize, gzip, unzip } from '../index';
+import { is, merge, EventEmitter, byteSize, gzip, unzip } from './index';
 
 export interface CacheItem<T> {
    key: string;

@@ -10,7 +10,7 @@ import {
    mapSet,
    filterSet,
    findInSet
-} from '../index';
+} from './index';
 
 test('removes items from arrays', () => {
    const a = () => 1;

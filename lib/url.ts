@@ -1,4 +1,4 @@
-import { is } from '../index';
+import { is } from './index';
 
 export namespace url {
    /**

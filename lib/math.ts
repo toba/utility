@@ -1,4 +1,4 @@
-import { is } from '../';
+import { is } from './';
 
 /**
  * Middle value or average of the two middle values among a list of numbers.

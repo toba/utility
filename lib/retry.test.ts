@@ -1,5 +1,5 @@
 import '@toba/test';
-import { retry } from '../index';
+import { retry } from './index';
 
 const success = 'success';
 const errors = ['error 1', 'error 2'];

@@ -1,5 +1,5 @@
 import '@toba/test';
-import { Cache, CompressCache, CacheEventType } from '../index';
+import { Cache, CompressCache, CacheEventType } from './index';
 import { totalSize, CacheItem } from './cache';
 import { lipsum, sleep } from '@toba/test';
 

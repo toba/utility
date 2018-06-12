@@ -1,4 +1,4 @@
-import { is } from '../';
+import { is } from './';
 
 /**
  * Combine parameters into a comma-delimited list.

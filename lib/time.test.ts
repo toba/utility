@@ -8,7 +8,7 @@ import {
    parseDuration,
    durationString,
    inDaylightSavings
-} from '../index';
+} from './index';
 
 test('display date as MMM d, YYYY', () => {
    // month value is zero-based

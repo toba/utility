@@ -8,7 +8,7 @@ import {
    unzip,
    env,
    addCharSet
-} from '../index';
+} from './index';
 import { lipsum } from '@toba/test';
 
 type TestThing = { [key: string]: string | string[] | TestThing };

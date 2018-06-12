@@ -5,7 +5,7 @@ import {
    parseNumber,
    maybeNumber,
    monetize
-} from '../index';
+} from './index';
 
 test('adds leading zeros to reach total digit length', () => {
    expect(leadingZeros(2, 0)).toBe('2');

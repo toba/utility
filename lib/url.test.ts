@@ -1,5 +1,5 @@
 import '@toba/test';
-import { url } from '../index';
+import { url } from './index';
 
 test('extracts query string variables', () => {
    let qs = url.variables('http://path.com/?var1=value1');

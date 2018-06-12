@@ -8,7 +8,7 @@ export {
    inferMimeType,
    env,
    addCharSet
-} from './lib/utility';
+} from './utility';
 export {
    list,
    removeItem,
@@ -20,7 +20,7 @@ export {
    mapSet,
    filterSet,
    findInSet
-} from './lib/list';
+} from './list';
 export {
    format,
    printf,
@@ -33,19 +33,19 @@ export {
    wrapText,
    encodeBase64,
    decodeBase64
-} from './lib/text';
-export { median, boundary, Limits } from './lib/math';
+} from './text';
+export { median, boundary, Limits } from './math';
 export {
    Cache,
    CompressCache,
    CachePolicy,
    EventType as CacheEventType
-} from './lib/cache';
-export { re } from './lib/regex';
-export { is } from './lib/is';
-export { url } from './lib/url';
-export { retry } from './lib/retry';
-export { session, cookie } from './lib/storage';
+} from './cache';
+export { re } from './regex';
+export { is } from './is';
+export { url } from './url';
+export { retry } from './retry';
+export { session, cookie } from './storage';
 export {
    Duration,
    TimeUnit,
@@ -55,7 +55,7 @@ export {
    parseDuration,
    durationString,
    inDaylightSavings
-} from './lib/time';
+} from './time';
 export {
    alphabet,
    month,
@@ -66,12 +66,12 @@ export {
    Encoding,
    LinkRelation,
    CharSet
-} from './lib/constants';
+} from './constants';
 export {
    sayNumber,
    leadingZeros,
    parseNumber,
    maybeNumber,
    monetize
-} from './lib/number';
-export { EventEmitter } from './lib/emitter';
+} from './number';
+export { EventEmitter } from './emitter';

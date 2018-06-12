@@ -1,5 +1,5 @@
 import '@toba/test';
-import { EventEmitter } from '../index';
+import { EventEmitter } from './index';
 
 const emitter = new EventEmitter<MockEvent, string>();
 const fn1 = jest.fn();

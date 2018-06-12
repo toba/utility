@@ -1,5 +1,5 @@
 import '@toba/test';
-import { session } from '../index';
+import { session } from './index';
 
 /**
  * Jest testing uses `jest-localstorage-mock`.

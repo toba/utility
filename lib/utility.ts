@@ -1,5 +1,5 @@
 import * as compress from 'zlib';
-import { is, MimeType, Encoding, CharSet } from '../index';
+import { is, MimeType, Encoding, CharSet } from './index';
 
 type Hash = { [key: string]: any };
 

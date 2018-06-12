@@ -1,7 +1,4 @@
-import { leadingZeros } from './number';
-import { month } from './constants';
-import { is } from './is';
-
+import { leadingZeros, month, is } from './index';
 /**
  * Milliseconds per units of time.
  */
