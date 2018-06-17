@@ -8,6 +8,20 @@ export function list(...items: (number | string)[]) {
 }
 
 /**
+ * Return scalar for variables that can be either discrete or an array.
+ *
+ * @param useLastIfList By default, the first element is returned if variable
+ * is an array. Set this `true` to instead return the last item.
+ */
+export function unlist<T>(list: T[] | T, useLastIfList = false): T {
+   if (is.array(list)) {
+      const index = useLastIfList ? list.length - 1 : 0;
+      return list[index];
+   }
+   return list;
+}
+
+/**
  * Shuffle an array into new array.
  *
  * http://sroucheray.org/blog/2009/11/array-sort-should-not-be-used-to-shuffle-an-array/

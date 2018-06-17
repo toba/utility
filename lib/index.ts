@@ -19,7 +19,8 @@ export {
    listDifference,
    mapSet,
    filterSet,
-   findInSet
+   findInSet,
+   unlist
 } from './list';
 export {
    format,

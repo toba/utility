@@ -9,7 +9,8 @@ import {
    listDifference,
    mapSet,
    filterSet,
-   findInSet
+   findInSet,
+   unlist
 } from './index';
 
 test('removes items from arrays', () => {
@@ -102,4 +103,10 @@ test('finds first item in set matching predicate', () => {
    const s = new Set<string>(['one', 'two', 'three']);
    expect(findInSet(s, i => i === 'one')).toBe('one');
    expect(findInSet(s, i => i === 'ten')).toBeUndefined();
+});
+
+test('converts arrays to single value', () => {
+   expect(unlist('two')).toBe('two');
+   expect(unlist([1, 2, 3, 4])).toBe(1);
+   expect(unlist([1, 2, 3, 4], true)).toBe(4);
 });
