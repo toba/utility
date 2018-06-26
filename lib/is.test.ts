@@ -38,6 +38,13 @@ test('identifies functions', () => {
    expect(is.callable(mockFn)).toBe(true);
 });
 
+test('identifies async functions', () => {
+   const fn = () => false;
+   expect(is.async(fn)).toBe(false);
+   const fn2 = async () => false;
+   expect(is.async(fn2)).toBe(true);
+});
+
 test('identifies dates', () => {
    const now = new Date();
    expect(is.date(now)).toBe(true);

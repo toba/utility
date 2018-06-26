@@ -84,9 +84,16 @@ export namespace is {
    }
 
    /**
-    * Wehther value is a function.
+    * Whether value is a function.
     */
    export function callable(v: any): v is Function {
       return value(v) && typeof v == Type.Function;
+   }
+
+   /**
+    * Whether value is an asynchronous function.
+    */
+   export function async(v: any): v is Function {
+      return is.callable(v) && v.constructor.name === 'AsyncFunction';
    }
 }
