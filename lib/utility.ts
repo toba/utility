@@ -18,7 +18,11 @@ export function merge<T extends object>(base: T, ...additions: any[]): T {
                const exists = is.defined(existing, key);
                if (is.value(v) || !exists) {
                   // only replace base value if addition is non-null
-                  if (Array.isArray(v) || typeof v != is.Type.Object) {
+                  if (
+                     Array.isArray(v) ||
+                     typeof v != is.Type.Object ||
+                     typeof existing[key] != is.Type.Object
+                  ) {
                      existing[key] = v;
                   } else {
                      existing[key] = merge(existing[key], v);

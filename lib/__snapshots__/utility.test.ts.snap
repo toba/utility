@@ -9,7 +9,7 @@ Object {
     "secret": "FLICKR_SECRET",
     "token": Object {
       "access": "FLICKR_ACCESS_TOKEN",
-      "request": Object {},
+      "request": null,
       "secret": "FLICKR_TOKEN_SECRET",
     },
   },
