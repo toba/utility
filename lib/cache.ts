@@ -228,8 +228,12 @@ export class CompressCache extends Cache<Buffer> {
       return super.add(key, zipped);
    }
 
+   getZip(key: string): Buffer {
+      return super.get(key);
+   }
+
    async getText(key: string): Promise<string> {
-      const buffer = super.get(key);
+      const buffer = this.getZip(key);
       if (buffer === null) {
          if (this._loader !== null) {
             const value = await this._loader(key);

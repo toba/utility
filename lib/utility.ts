@@ -39,7 +39,7 @@ export function merge<T extends object>(base: T, ...additions: any[]): T {
 /**
  * GZip compress a string.
  */
-export async function gzip(text: string) {
+export function gzip(text: string) {
    return new Promise<Buffer>((resolve, reject) => {
       compress.gzip(Buffer.from(text), (err, buffer) => {
          if (is.value(err)) {

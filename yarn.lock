@@ -64,9 +64,9 @@
     flat "^4.0.0"
     logfmt "^1.2.0"
 
-"@toba/test@^1.19.0":
-  version "1.19.0"
-  resolved "https://registry.yarnpkg.com/@toba/test/-/test-1.19.0.tgz#65e62810bf784000a54684cda52879442d360e4e"
+"@toba/test@^1.20.0":
+  version "1.20.0"
+  resolved "https://registry.yarnpkg.com/@toba/test/-/test-1.20.0.tgz#5385595e37fa6b15b834ff84aaf3ef495d47bb87"
   dependencies:
     "@toba/logger" "^1.0.4"
     "@toba/tools" "^3.2.0"
