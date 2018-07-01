@@ -9,6 +9,8 @@ export interface CacheItem<T> {
    size: number;
 }
 
+type CacheLoader = (key: string) => Promise<string>;
+
 /**
  * CachePolicy controls when items may be automatically evicted. Leave value
  * undefined or set to `-1` to disable a particular threshold.
@@ -210,14 +212,29 @@ export class CompressCache extends Cache<Buffer> {
     * This has the potential to create an infinite loop if there's also a cache
     * policy that limits item count.
     */
-   private _loader: (key: string) => Promise<string>;
 
+   private loader: CacheLoader;
+
+   constructor();
+   constructor(loader: CacheLoader);
+   constructor(policy: CachePolicy);
+   constructor(loader: CacheLoader, policy: CachePolicy);
    constructor(
-      loader: (key: string) => Promise<string> = null,
-      policy: CachePolicy = {}
+      loaderOrPolicy?: CachePolicy | CacheLoader,
+      policy?: CachePolicy
    ) {
+      let loader: CacheLoader = null;
+
+      if (is.callable(loaderOrPolicy)) {
+         loader = loaderOrPolicy;
+      } else if (is.value(loaderOrPolicy)) {
+         policy = loaderOrPolicy;
+      } else {
+         policy = {};
+      }
+
       super(policy);
-      this._loader = loader;
+      this.loader = loader;
    }
 
    async addText(key: string, value: string) {
@@ -228,6 +245,9 @@ export class CompressCache extends Cache<Buffer> {
       return super.add(key, zipped);
    }
 
+   /**
+    * GZip buffer.
+    */
    getZip(key: string): Buffer {
       return super.get(key);
    }
@@ -235,8 +255,8 @@ export class CompressCache extends Cache<Buffer> {
    async getText(key: string): Promise<string> {
       const buffer = this.getZip(key);
       if (buffer === null) {
-         if (this._loader !== null) {
-            const value = await this._loader(key);
+         if (this.loader !== null) {
+            const value = await this.loader(key);
             if (is.value<string>(value)) {
                this.addText(key, value);
             }
