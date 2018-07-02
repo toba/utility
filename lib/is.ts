@@ -97,6 +97,26 @@ export namespace is {
    }
 
    /**
+    * Whether value exists and is an object with keys and values, not any of the
+    * array variants.
+    * @param allowEmpty If `false` then objects without keys will be `false`
+    */
+   export function hash<T>(v: any, allowEmpty = true): v is T {
+      return (
+         is.value(v) &&
+         typeof v === is.Type.Object &&
+         !(Array.isArray(v) || ArrayBuffer.isView(v) || Buffer.isBuffer(v)) &&
+         (allowEmpty || Object.keys(v).length > 0)
+      );
+   }
+
+   /**
+    * Whether value exists and is an object with keys and values, not any of the
+    * array variants. An alias for `is.hash()`.
+    */
+   export const dictionary = hash;
+
+   /**
     * Whether value is a date.
     */
    export function date(v: any): v is Date {

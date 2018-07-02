@@ -39,6 +39,17 @@ test('identifies arrays with required length', () => {
    expect(is.array(['one', 'two', 'three'], 3)).toBe(true);
 });
 
+test('identifies objects that are not arrays', () => {
+   expect(is.hash(null)).toBe(false);
+   expect(is.hash([])).toBe(false);
+   expect(is.hash(Buffer.from('sdlkfjs'))).toBe(false);
+   expect(is.hash(new Uint8Array([1, 2, 3, 4]))).toBe(false);
+   expect(is.hash({ key: 'value' })).toBe(true);
+   expect(is.hash({ key: { nested: 'value' } })).toBe(true);
+   expect(is.hash({})).toBe(true);
+   expect(is.hash({}, false)).toBe(false);
+});
+
 test('identifies functions', () => {
    const fn = () => false;
    expect(is.callable(fn)).toBe(true);
