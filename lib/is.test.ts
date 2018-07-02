@@ -21,6 +21,16 @@ test('identifies arrays', () => {
    expect(is.array([])).toBe(true);
    expect(is.array(new Array())).toBe(true);
    expect(is.array(null)).toBe(false);
+   expect(is.array(new Uint8Array([1, 2, 3, 4]))).toBe(false);
+   expect(is.array(new Uint16Array([1, 2, 3, 4]))).toBe(false);
+});
+
+test('identifies typed array', () => {
+   expect(is.typedArray(u)).toBe(false);
+   expect(is.typedArray([])).toBe(false);
+   expect(is.typedArray(null)).toBe(false);
+   expect(is.typedArray(new Uint8Array([1, 2, 3, 4]))).toBe(true);
+   expect(is.typedArray(new Uint16Array([1, 2, 3, 4]))).toBe(true);
 });
 
 test('identifies arrays with required length', () => {
