@@ -1,3 +1,14 @@
+type TypedArray =
+   | Int8Array
+   | Uint8Array
+   | Uint8ClampedArray
+   | Int16Array
+   | Uint16Array
+   | Int32Array
+   | Uint32Array
+   | Float32Array
+   | Float64Array;
+
 /**
  * Identity checks.
  */
@@ -59,7 +70,8 @@ export namespace is {
    export const bigInt = (n: any) => integer(n) && (n < -32768 || n > 32767);
 
    /**
-    * Whether value exists and is an array.
+    * Whether value exists and is an array. This will return `false` for
+    * `TypedArrays` such as `Uint8Array`. For those use `is.typedArray()`.
     * @param withLength Optionally require array be a certain size
     */
    export function array<T>(x: any, withLength = 0): x is T[] {
@@ -68,6 +80,41 @@ export namespace is {
       }
       return false;
    }
+
+   /**
+    * Whether value exists and is a `TypedArray`. This will return `false` for
+    * untyped arrays such as `[]`. For those use `is.array()`.
+    * @param withByteLength Optionally require array have a specific byte count
+    */
+   export function typedArray<T extends TypedArray>(
+      x: any,
+      withByteLength = 0
+   ): x is T {
+      if (is.value(x) && ArrayBuffer.isView(x)) {
+         return withByteLength == 0 || x.byteLength == withByteLength;
+      }
+      return false;
+   }
+
+   /**
+    * Whether value exists and is an object with keys and values, not any of the
+    * array variants.
+    * @param allowEmpty If `false` then objects without keys will be `false`
+    */
+   export function hash<T>(v: any, allowEmpty = true): v is T {
+      return (
+         is.value(v) &&
+         typeof v === is.Type.Object &&
+         !(Array.isArray(v) || ArrayBuffer.isView(v) || Buffer.isBuffer(v)) &&
+         (allowEmpty || Object.keys(v).length > 0)
+      );
+   }
+
+   /**
+    * Whether value exists and is an object with keys and values, not any of the
+    * array variants. An alias for `is.hash()`.
+    */
+   export const dictionary = hash;
 
    /**
     * Whether value is a date.
