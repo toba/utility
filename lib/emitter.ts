@@ -1,5 +1,8 @@
 /**
  * Manage event subscribers.
+ *
+ * @param T Event type enumeration
+ * @param E Kind of event payload
  */
 export class EventEmitter<T extends number, E> {
    listeners: Map<number, Set<(event: E) => void>>;
@@ -22,6 +25,10 @@ export class EventEmitter<T extends number, E> {
       return this.hasType(type) && this.listeners.get(type).size > 0;
    }
 
+   /**
+    * Invoke all listeners with an optional payload that are subscribed to an
+    * event type.
+    */
    emit(type: T, event?: E): boolean {
       if (this.hasType(type)) {
          this.listeners.get(type).forEach(fn => {
@@ -32,6 +39,9 @@ export class EventEmitter<T extends number, E> {
       return false;
    }
 
+   /**
+    * Supply function that should be called when a type of event is emitted.
+    */
    subscribe(type: T, fn: (event: E) => void): (event: E) => void {
       if (!this.hasType(type)) {
          this.listeners.set(type, new Set());
@@ -40,9 +50,10 @@ export class EventEmitter<T extends number, E> {
       return fn;
    }
 
-   addEventListener(type: T, fn: (event: E) => void): (event: E) => void {
-      return this.subscribe(type, fn);
-   }
+   /**
+    * Alias for `subscribe`.
+    */
+   addEventListner = this.subscribe;
 
    /**
     * Remove listener method.
@@ -52,11 +63,9 @@ export class EventEmitter<T extends number, E> {
    }
 
    /**
-    * Remove listener method.
+    * Alias for `unsubscribe`.
     */
-   removeEventListener(type: T, fn: (event: E) => void): boolean {
-      return this.unsubscribe(type, fn);
-   }
+   removeEventListener = this.unsubscribe;
 
    /**
     * Remove all listeners to an event type or all listeners for all event types
@@ -75,10 +84,7 @@ export class EventEmitter<T extends number, E> {
    }
 
    /**
-    * Remove all listeners to an event type or all listeners for all event types
-    * if no type given.
+    * Alias for `unsubscribeAll`.
     */
-   removeAll(type: T = null): boolean {
-      return this.unsubscribeAll(type);
-   }
+   removeAll = this.unsubscribeAll;
 }
