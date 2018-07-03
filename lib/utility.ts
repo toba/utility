@@ -37,6 +37,32 @@ export function merge<T extends object>(base: T, ...additions: any[]): T {
 }
 
 /**
+ * Deep clone an object.
+ */
+export function clone<T extends Object | any[]>(thing: T): T {
+   if (is.array(thing)) {
+      return thing.map(v => clone(v)) as T;
+   }
+   const copy: { [key: string]: any } = {};
+
+   for (const i in thing) {
+      const value = thing[i];
+      if (value != null) {
+         if (is.array(value)) {
+            copy[i] = value.map(v => clone(v));
+         } else if (typeof value == is.Type.Object) {
+            copy[i] = clone(value);
+         } else {
+            copy[i] = value;
+         }
+      } else {
+         copy[i] = null;
+      }
+   }
+   return copy as T;
+}
+
+/**
  * GZip compress a string.
  */
 export function gzip(text: string) {

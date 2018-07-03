@@ -7,7 +7,8 @@ export {
    byteSize,
    inferMimeType,
    env,
-   addCharSet
+   addCharSet,
+   clone
 } from './utility';
 export {
    list,

@@ -393,5 +393,6 @@ export enum Encoding {
    Buffer = 'buffer',
    GZip = 'gzip',
    Hexadecimal = 'hex',
-   UTF8 = 'utf8'
+   UTF8 = 'utf8',
+   Base64 = 'base64'
 }

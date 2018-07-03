@@ -1,4 +1,4 @@
-import { is } from './is';
+import { is, Encoding } from './';
 
 const alwaysLower = [
    'a',
@@ -82,7 +82,7 @@ export const rot13 = (text: string) =>
       : text.replace(/[a-zA-Z]/g, chr => {
            const start = chr <= 'Z' ? 65 : 97;
            return String.fromCharCode(
-              start + (chr.charCodeAt(0) - start + 13) % 26
+              start + ((chr.charCodeAt(0) - start + 13) % 26)
            );
         });
 
@@ -105,7 +105,7 @@ export const slug = (text: string) =>
  * @see http://www.hacksparrow.com/base64-encoding-decoding-in-node-js.html
  */
 export const decodeBase64 = (text: string) =>
-   new Buffer(text, 'base64').toString();
+   Buffer.from(text, Encoding.Base64).toString();
 
 /**
  * Encode string to base-64.
@@ -113,7 +113,7 @@ export const decodeBase64 = (text: string) =>
  * @see http://www.hacksparrow.com/base64-encoding-decoding-in-node-js.html
  */
 export const encodeBase64 = (text: string) =>
-   new Buffer(text).toString('base64');
+   Buffer.from(text).toString(Encoding.Base64);
 
 /**
  * Insert line breaks to keep text within a given length.

@@ -7,7 +7,8 @@ import {
    gzip,
    unzip,
    env,
-   addCharSet
+   addCharSet,
+   clone
 } from './index';
 import { lipsum } from '@toba/test';
 
@@ -172,4 +173,33 @@ test('reads environmnent variables with option for alternate', () => {
 
 test('returns MIME type with standard charset extension', () => {
    expect(addCharSet(MimeType.JSON)).toBe('application/json; charset=utf-8');
+});
+
+test('clones objects', () => {
+   const thing = {
+      key1: 'value1',
+      key2: 'value2',
+      nested: {
+         key3: 'value3',
+         key4: 'value4'
+      },
+      list: [{ name: 'one' }, { name: 'two' }]
+   };
+   const thing2 = clone(thing);
+   expect(thing2).toHaveProperty('key1', 'value1');
+   expect(thing2).toHaveProperty('nested');
+   expect(thing2.nested).toHaveProperty('key3', 'value3');
+   expect(thing2.list).toBeInstanceOf(Array);
+
+   thing.nested.key3 = 'wooly';
+
+   expect(thing2.nested.key3).toBe('value3');
+});
+
+test('clones arrays', () => {
+   const thing = ['one', { value: 'two' }];
+   const thing2 = clone(thing);
+
+   expect(thing2).toBeInstanceOf(Array);
+   expect(thing2.length).toBe(2);
 });
