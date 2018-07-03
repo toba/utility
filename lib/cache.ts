@@ -227,6 +227,7 @@ export class CompressCache extends Cache<Buffer> {
     * until zip finishes then the buffer is emptied.
     */
    private zipBuffer: Map<string, string>;
+   private zipQueue: Map<string, ((zip: Buffer) => void)[]>;
 
    constructor();
    constructor(loader: CacheLoader);
@@ -249,41 +250,68 @@ export class CompressCache extends Cache<Buffer> {
       super(policy);
       this.loader = loader;
       this.zipBuffer = new Map();
+      this.zipQueue = new Map();
    }
 
    async addText(key: string, value: string) {
       if (is.empty(value)) {
          return;
       }
+      this.beginZip(key, value);
       const zipped = await gzip(value);
-      this.zipBuffer.delete(key);
+      this.endZip(key, zipped);
       return super.add(key, zipped);
+   }
+
+   private beginZip(key: string, value: string) {
+      this.zipBuffer.set(key, value);
+      this.zipQueue.set(key, []);
+   }
+
+   private endZip(key: string, zipped: Buffer) {
+      this.zipBuffer.delete(key);
+      const queue = this.zipQueue.get(key);
+      this.zipQueue.delete(key);
+      queue.forEach(fn => fn(zipped));
    }
 
    /**
     * GZip buffer.
     */
-   getZip(key: string): Buffer {
-      return super.get(key);
+   getZip(key: string): Promise<Buffer> {
+      if (this.contains(key)) {
+         // return existing value
+         return Promise.resolve<Buffer>(super.get(key));
+      } else if (this.zipQueue.has(key)) {
+         // wait for zipping to complete then resolve
+         return new Promise<Buffer>(resolve => {
+            this.zipQueue.get(key).push(resolve);
+         });
+      } else if (this.loader !== null) {
+         // wait for loader then zipping then resolve
+         return this.loader(key).then(text =>
+            // bypass zip queue by simply waiting for addText to finish
+            this.addText(key, text).then(() => super.get(key))
+         );
+      } else {
+         return Promise.resolve(null);
+      }
    }
 
    async getText(key: string): Promise<string> {
       if (this.zipBuffer.has(key)) {
          return this.zipBuffer.get(key);
       }
-      const buffer = this.getZip(key);
-      if (buffer === null) {
+      const bytes = await this.getZip(key);
+      if (bytes === null) {
          if (this.loader !== null) {
             const value = await this.loader(key);
-            this.zipBuffer.set(key, value);
-            if (is.value<string>(value)) {
-               this.addText(key, value);
-            }
+            this.addText(key, value);
             return value;
          } else {
             return null;
          }
       }
-      return unzip(buffer);
+      return unzip(bytes);
    }
 }

@@ -120,7 +120,7 @@ test('compresses and decompresses text values', async () => {
    expect(lipsum).toHaveLength(445);
    expect(compress.size).toBe(282);
 
-   const buff = compress.getZip('key1');
+   const buff = await compress.getZip('key1');
    expect(buff.length).toBe(282);
 
    const text = await compress.getText('key1');
