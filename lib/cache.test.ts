@@ -156,3 +156,11 @@ test('automatically loads cache misses', async () => {
    expect(match).toBe(value);
    expect(loader).toHaveBeenCalledTimes(2);
 });
+
+test('emits event for cache emiss', () => {
+   const listener = jest.fn();
+   cache.events.subscribe(CacheEventType.KeyNotFound, listener);
+   cache.get('not-a-thing');
+   expect(listener).toHaveBeenCalledTimes(1);
+   expect(listener).toHaveBeenCalledWith('not-a-thing');
+});

@@ -25,7 +25,9 @@ export interface CachePolicy {
 
 export enum EventType {
    /** Notify when items are removed from the cache (sends list of keys) */
-   ItemsEvicted
+   ItemsEvicted,
+   /** Notify when attempting to access a key not in the cache */
+   KeyNotFound
 }
 
 /**
@@ -180,8 +182,13 @@ export class Cache<T> {
    }
 
    get(key: string): T {
-      const item = this._items.get(key);
-      return is.value(item) ? item.value : null;
+      if (this._items.has(key)) {
+         const item = this._items.get(key);
+         return is.value(item) ? item.value : null;
+      } else {
+         this.events.emit(EventType.KeyNotFound, key);
+         return null;
+      }
    }
 
    remove(key: string): Cache<T> {
@@ -204,7 +211,7 @@ export class Cache<T> {
 }
 
 /**
- * Cache variant that only accepts text that it then compresses.
+ * Cache variant that only accepts text that it GZips internally.
  */
 export class CompressCache extends Cache<Buffer> {
    /**
