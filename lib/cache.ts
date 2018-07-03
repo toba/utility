@@ -219,8 +219,14 @@ export class CompressCache extends Cache<Buffer> {
     * This has the potential to create an infinite loop if there's also a cache
     * policy that limits item count.
     */
-
    private loader: CacheLoader;
+
+   /**
+    * Avoid race condition by holding text in a buffer mapped to its key while
+    * waiting for zipping to complete. Accessors will get the buffered text
+    * until zip finishes then the buffer is emptied.
+    */
+   private zipBuffer: Map<string, string>;
 
    constructor();
    constructor(loader: CacheLoader);
@@ -242,6 +248,7 @@ export class CompressCache extends Cache<Buffer> {
 
       super(policy);
       this.loader = loader;
+      this.zipBuffer = new Map();
    }
 
    async addText(key: string, value: string) {
@@ -249,6 +256,7 @@ export class CompressCache extends Cache<Buffer> {
          return;
       }
       const zipped = await gzip(value);
+      this.zipBuffer.delete(key);
       return super.add(key, zipped);
    }
 
@@ -260,10 +268,14 @@ export class CompressCache extends Cache<Buffer> {
    }
 
    async getText(key: string): Promise<string> {
+      if (this.zipBuffer.has(key)) {
+         return this.zipBuffer.get(key);
+      }
       const buffer = this.getZip(key);
       if (buffer === null) {
          if (this.loader !== null) {
             const value = await this.loader(key);
+            this.zipBuffer.set(key, value);
             if (is.value<string>(value)) {
                this.addText(key, value);
             }

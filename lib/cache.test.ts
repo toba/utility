@@ -157,10 +157,25 @@ test('automatically loads cache misses', async () => {
    expect(loader).toHaveBeenCalledTimes(2);
 });
 
-test('emits event for cache emiss', () => {
+test('emits event for cache miss', () => {
    const listener = jest.fn();
    cache.events.subscribe(CacheEventType.KeyNotFound, listener);
    cache.get('not-a-thing');
    expect(listener).toHaveBeenCalledTimes(1);
    expect(listener).toHaveBeenCalledWith('not-a-thing');
+});
+
+test('delays access while cache is populating', async () => {
+   const loader = jest.fn();
+   const key = 'some-key';
+   const value = 'some-value';
+   loader.mockReturnValue(Promise.resolve(value));
+
+   const testCache = new CompressCache(loader);
+   let match = await testCache.getText(key);
+   expect(match).toBe(value);
+   expect(loader).toHaveBeenCalledTimes(1);
+
+   match = await testCache.getText(key);
+   expect(loader).toHaveBeenCalledTimes(1);
 });
