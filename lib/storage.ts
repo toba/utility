@@ -1,4 +1,4 @@
-import { Duration } from './index';
+import { Duration } from '.';
 
 export interface Storage<T> {
    save(key: string, value: T, days?: number, includeSubdomain?: boolean): void;

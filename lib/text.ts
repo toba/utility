@@ -1,4 +1,4 @@
-import { is, Encoding } from './';
+import { is, Encoding } from './index';
 
 const alwaysLower = [
    'a',

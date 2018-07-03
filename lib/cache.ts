@@ -1,4 +1,4 @@
-import { is, merge, EventEmitter, byteSize, gzip, unzip } from './index';
+import { is, merge, EventEmitter, byteSize } from './index';
 
 export interface CacheItem<T> {
    key: string;
@@ -8,8 +8,6 @@ export interface CacheItem<T> {
    /** Byte size of value */
    size: number;
 }
-
-type CacheLoader = (key: string) => Promise<string>;
 
 /**
  * CachePolicy controls when items may be automatically evicted. Leave value
@@ -49,6 +47,9 @@ const defaultPolicy: CachePolicy = {
    maxBytes: 0
 };
 
+/**
+ * Cache items of type `T` in memory.
+ */
 export class Cache<T> {
    private _items: Map<string, CacheItem<T>>;
    private _policy: CachePolicy;
@@ -207,111 +208,5 @@ export class Cache<T> {
    updatePolicy(policy: CachePolicy): Cache<T> {
       this._policy = merge(defaultPolicy, policy);
       return this.schedulePrune();
-   }
-}
-
-/**
- * Cache variant that only accepts text that it GZips internally.
- */
-export class CompressCache extends Cache<Buffer> {
-   /**
-    * Optional method to automatically load key value when not present in cache.
-    * This has the potential to create an infinite loop if there's also a cache
-    * policy that limits item count.
-    */
-   private loader: CacheLoader;
-
-   /**
-    * Avoid race condition by holding text in a buffer mapped to its key while
-    * waiting for zipping to complete. Accessors will get the buffered text
-    * until zip finishes then the buffer is emptied.
-    */
-   private zipBuffer: Map<string, string>;
-   private zipQueue: Map<string, ((zip: Buffer) => void)[]>;
-
-   constructor();
-   constructor(loader: CacheLoader);
-   constructor(policy: CachePolicy);
-   constructor(loader: CacheLoader, policy: CachePolicy);
-   constructor(
-      loaderOrPolicy?: CachePolicy | CacheLoader,
-      policy?: CachePolicy
-   ) {
-      let loader: CacheLoader = null;
-
-      if (is.callable(loaderOrPolicy)) {
-         loader = loaderOrPolicy;
-      } else if (is.value(loaderOrPolicy)) {
-         policy = loaderOrPolicy;
-      } else {
-         policy = {};
-      }
-
-      super(policy);
-      this.loader = loader;
-      this.zipBuffer = new Map();
-      this.zipQueue = new Map();
-   }
-
-   async addText(key: string, value: string) {
-      if (is.empty(value)) {
-         return;
-      }
-      this.beginZip(key, value);
-      const zipped = await gzip(value);
-      this.endZip(key, zipped);
-      return super.add(key, zipped);
-   }
-
-   private beginZip(key: string, value: string) {
-      this.zipBuffer.set(key, value);
-      this.zipQueue.set(key, []);
-   }
-
-   private endZip(key: string, zipped: Buffer) {
-      this.zipBuffer.delete(key);
-      const queue = this.zipQueue.get(key);
-      this.zipQueue.delete(key);
-      queue.forEach(fn => fn(zipped));
-   }
-
-   /**
-    * GZip buffer.
-    */
-   getZip(key: string): Promise<Buffer> {
-      if (this.contains(key)) {
-         // return existing value
-         return Promise.resolve<Buffer>(super.get(key));
-      } else if (this.zipQueue.has(key)) {
-         // wait for zipping to complete then resolve
-         return new Promise<Buffer>(resolve => {
-            this.zipQueue.get(key).push(resolve);
-         });
-      } else if (this.loader !== null) {
-         // wait for loader then zipping then resolve
-         return this.loader(key).then(text =>
-            // bypass zip queue by simply waiting for addText to finish
-            this.addText(key, text).then(() => super.get(key))
-         );
-      } else {
-         return Promise.resolve(null);
-      }
-   }
-
-   async getText(key: string): Promise<string> {
-      if (this.zipBuffer.has(key)) {
-         return this.zipBuffer.get(key);
-      }
-      const bytes = await this.getZip(key);
-      if (bytes === null) {
-         if (this.loader !== null) {
-            const value = await this.loader(key);
-            this.addText(key, value);
-            return value;
-         } else {
-            return null;
-         }
-      }
-      return unzip(bytes);
    }
 }

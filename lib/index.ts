@@ -37,12 +37,8 @@ export {
    decodeBase64
 } from './text';
 export { median, boundary, Limits } from './math';
-export {
-   Cache,
-   CompressCache,
-   CachePolicy,
-   EventType as CacheEventType
-} from './cache';
+export { Cache, CachePolicy, EventType as CacheEventType } from './cache';
+export { CompressCache } from './compress-cache';
 export { re } from './regex';
 export { is } from './is';
 export { url } from './url';
@@ -77,3 +73,4 @@ export {
    monetize
 } from './number';
 export { EventEmitter } from './emitter';
+export { Queue } from './queue';
