@@ -1,4 +1,6 @@
 import { Cache, is, unzip, gzip, CachePolicy, Queue } from './index';
+import { EventType } from './cache';
+import { QueueEvent } from './queue';
 
 /**
  * Method to populate missing cache value.
@@ -42,6 +44,10 @@ export class CompressCache extends Cache<Buffer> {
       this.loader = loader;
       this.zipQueue = new Queue(gzip);
       this.loadQueue = new Queue(this.loader);
+      // the load queue executes whenever kay is not found in cache
+      this.loadQueue.events.subscribe(QueueEvent.OperationStart, key => {
+         this.events.emit(EventType.KeyNotFound, key);
+      });
    }
 
    clear(): this {
@@ -83,6 +89,7 @@ export class CompressCache extends Cache<Buffer> {
          // wait for loader then zipping
          return this.loadQueue.pipe(key).to(this.zipQueue);
       } else {
+         this.events.emit(EventType.KeyNotFound, key);
          return Promise.resolve(null);
       }
    }
@@ -99,7 +106,7 @@ export class CompressCache extends Cache<Buffer> {
       }
 
       // otherwise load cached bytes for text
-      const bytes = super.get(key);
+      const bytes = super.get(key, true);
 
       if (bytes === null) {
          // nothing in cache -- try to load
@@ -108,6 +115,7 @@ export class CompressCache extends Cache<Buffer> {
             this.addText(key, value);
             return value;
          } else {
+            this.events.emit(EventType.KeyNotFound, key);
             return null;
          }
       }

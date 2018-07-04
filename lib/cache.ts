@@ -182,12 +182,17 @@ export class Cache<T> {
       }
    }
 
-   get(key: string): T {
+   /**
+    * @param silent Supress events if `true`
+    */
+   get(key: string, silent = false): T {
       if (this._items.has(key)) {
          const item = this._items.get(key);
          return is.value(item) ? item.value : null;
       } else {
-         this.events.emit(EventType.KeyNotFound, key);
+         if (!silent) {
+            this.events.emit(EventType.KeyNotFound, key);
+         }
          return null;
       }
    }

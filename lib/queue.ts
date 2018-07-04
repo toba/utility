@@ -1,4 +1,4 @@
-import { is } from './index';
+import { is, EventEmitter } from './index';
 
 /**
  * Operation that returns value either for a string key or other parameter
@@ -11,6 +11,11 @@ interface QueueItem<T, V> {
    listeners: Set<(value: V) => void>;
    /** Original operation input. */
    input: T;
+}
+
+export enum QueueEvent {
+   OperationStart,
+   OperationEnd
 }
 
 /**
@@ -27,6 +32,7 @@ export class Queue<T, V> {
     */
    private op: Operation<T, V>;
    private items: Map<string, QueueItem<T, V>>;
+   events: EventEmitter<QueueEvent, string>;
 
    /**
     * @param operation Method that transforms input to output value
@@ -34,6 +40,7 @@ export class Queue<T, V> {
    constructor(operation: Operation<T, V>) {
       this.op = operation;
       this.items = new Map();
+      this.events = new EventEmitter();
    }
 
    /**
@@ -85,12 +92,15 @@ export class Queue<T, V> {
       const fn: Promise<V> =
          input === undefined ? this.op(key) : this.op(input);
 
+      this.events.emit(QueueEvent.OperationStart, key);
+
       return fn.then(value => {
          if (this.items.has(key)) {
             // notify listeners and delete from queue
             const item = this.items.get(key);
             item.listeners.forEach(fn => fn(value));
             this.items.delete(key);
+            this.events.emit(QueueEvent.OperationEnd, key);
          }
          return value;
       });

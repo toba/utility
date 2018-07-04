@@ -73,4 +73,4 @@ export {
    monetize
 } from './number';
 export { EventEmitter } from './emitter';
-export { Queue } from './queue';
+export { Queue, QueueEvent } from './queue';

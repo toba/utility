@@ -60,6 +60,7 @@ test('emits event for cache miss', () => {
 });
 
 test('delays access while cache is populating', async () => {
+   const listener = jest.fn();
    const loader = jest.fn();
    const key = 'some-key';
 
@@ -70,10 +71,15 @@ test('delays access while cache is populating', async () => {
    );
 
    const testCache = new CompressCache(loader);
+   testCache.events.subscribe(CacheEventType.KeyNotFound, listener);
+
    let match = await testCache.getText(key);
    expect(match).toBe(lipsum);
    expect(loader).toHaveBeenCalledTimes(1);
 
    match = await testCache.getText(key);
    expect(loader).toHaveBeenCalledTimes(1);
+
+   expect(listener).toHaveBeenCalledTimes(1);
+   expect(listener).toHaveBeenCalledWith(key);
 });

@@ -1,5 +1,5 @@
 import '@toba/test';
-import { Queue, sayNumber } from './index';
+import { Queue, sayNumber, QueueEvent } from './index';
 import { lipsum } from '@toba/test';
 
 test('queues several listeners for one operation', async () => {
@@ -80,4 +80,28 @@ test('supports queue chaining', async () => {
    // each operation should only be called once for the single key
    expect(op1).toHaveBeenCalledTimes(1);
    expect(op2).toHaveBeenCalledTimes(1);
+});
+
+test('emits operation events', async () => {
+   const key = 'whatever';
+   const value = 'nothing';
+   const onStart = jest.fn();
+   const onEnd = jest.fn();
+   const op = jest.fn(
+      () =>
+         new Promise(resolve => {
+            setTimeout(() => resolve(value), 100);
+         })
+   );
+
+   const queue = new Queue<string, string>(op);
+   queue.events.subscribe(QueueEvent.OperationStart, onStart);
+   queue.events.subscribe(QueueEvent.OperationEnd, onEnd);
+
+   const out = await queue.process(key);
+   expect(out).toBe(value);
+   expect(onStart).toHaveBeenCalledTimes(1);
+   expect(onEnd).toHaveBeenCalledTimes(1);
+   expect(onStart).toHaveBeenCalledWith(key);
+   expect(onEnd).toHaveBeenCalledWith(key);
 });
