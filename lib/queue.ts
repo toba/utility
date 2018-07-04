@@ -8,7 +8,9 @@ type Operation<T, V> = (input: T | string) => Promise<V>;
 
 interface QueueItem<T, V> {
    /** Functions to call with result when operation is complete. */
-   listeners: Set<(value: V) => void>;
+   resolvers: Set<(value: V) => void>;
+   /** Functions to call if operation fails. */
+   rejecters: Set<(err?: Error | string) => void>;
    /** Original operation input. */
    input: T;
 }
@@ -56,7 +58,9 @@ export class Queue<T, V> {
    cancel(key: string): this {
       if (this.items.has(key)) {
          const item = this.items.get(key);
-         item.listeners.clear();
+         item.resolvers.clear();
+         item.rejecters.forEach(fn => fn());
+         item.rejecters.clear();
          this.items.delete(key);
       }
       return this;
@@ -67,7 +71,9 @@ export class Queue<T, V> {
     */
    clear(): this {
       this.items.forEach(item => {
-         item.listeners.clear();
+         item.resolvers.clear();
+         item.rejecters.forEach(fn => fn());
+         item.rejecters.clear();
       });
       this.items.clear();
       return this;
@@ -80,12 +86,16 @@ export class Queue<T, V> {
       if (this.items.has(key)) {
          // add to existing queue to be notified when operation completes
          const item = this.items.get(key);
-         return new Promise<V>(resolve => item.listeners.add(resolve));
+         return new Promise<V>((resolve, reject) => {
+            item.resolvers.add(resolve);
+            item.rejecters.add(reject);
+         });
       }
       // create new queue and begin operation
       this.items.set(key, {
          input,
-         listeners: new Set()
+         resolvers: new Set(),
+         rejecters: new Set()
       });
 
       // pass key as operation argument if no input defined
@@ -94,16 +104,29 @@ export class Queue<T, V> {
 
       this.events.emit(QueueEvent.OperationStart, key);
 
-      return fn.then(value => {
-         if (this.items.has(key)) {
-            // notify listeners and delete from queue
-            const item = this.items.get(key);
-            item.listeners.forEach(fn => fn(value));
-            this.items.delete(key);
+      return fn
+         .then((value: V) => {
+            if (this.items.has(key)) {
+               // notify success listeners and delete from queue
+               const item = this.items.get(key);
+               item.resolvers.forEach(fn => fn(value));
+               item.rejecters.clear();
+               this.items.delete(key);
+            }
             this.events.emit(QueueEvent.OperationEnd, key);
-         }
-         return value;
-      });
+            return value;
+         })
+         .catch((err: any) => {
+            if (this.items.has(key)) {
+               // notify error listeners and delete from queue
+               const item = this.items.get(key);
+               item.rejecters.forEach(fn => fn(err));
+               item.resolvers.clear();
+               this.items.delete(key);
+            }
+            this.events.emit(QueueEvent.OperationEnd, key);
+            return Promise.reject(err);
+         });
    }
 
    get(key: string): QueueItem<T, V> {

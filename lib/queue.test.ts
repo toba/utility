@@ -105,3 +105,33 @@ test('emits operation events', async () => {
    expect(onStart).toHaveBeenCalledWith(key);
    expect(onEnd).toHaveBeenCalledWith(key);
 });
+
+test('cancels listeners if operation has errors', async () => {
+   const op = jest.fn();
+   const key = 'key';
+   const oops = 'error';
+   const queue = new Queue<string, string>(op);
+   let out: string[] = [];
+   let e: Error;
+
+   op.mockReturnValue(
+      new Promise((_resolve, reject) => {
+         setTimeout(() => reject(oops), 200);
+      })
+   );
+
+   try {
+      out = await Promise.all([
+         queue.process(key),
+         queue.process(key),
+         queue.process(key)
+      ]);
+   } catch (err) {
+      e = err;
+   }
+
+   expect(out).toHaveLength(0);
+   expect(e).toBe(oops);
+   expect(op).toHaveBeenCalledTimes(1);
+   expect(op).toHaveBeenCalledWith(key);
+});
