@@ -1,26 +1,39 @@
 import { is } from './index';
 
 /**
+ * Operation that returns value either for a string key or other parameter
+ * (currently limited to accepting a single parameter).
+ */
+type Operation<T, V> = (input: T | string) => Promise<V>;
+
+interface QueueItem<T, V> {
+   /** Functions to call with result when operation is complete. */
+   listeners: Set<(value: V) => void>;
+   /** Original operation input. */
+   input: T;
+}
+
+/**
  * Manage operations that take time to complete. If a key value is requested
- * while its operation is pending then `Promise` resolution will be made a
+ * while the operation is pending then `Promise` resolution will be made a
  * listener to be invoked when the operation completes.
  *
  * If the operation isn't already pending then the operation's own `Promise`
  * will be returned.
  */
-export class Queue<K, V> {
-   /** Operation that returns value for key. */
-   op: (key: K) => Promise<V>;
-   /** Methods to be notified when a key operation completes. */
-   listeners: Map<K, Set<(value: V) => void>>;
-   /** Keys to operations that are already running. */
-   pending: Set<K>;
-   waitsFor: Queue<K, V>;
+export class Queue<T, V> {
+   /**
+    * Operation that returns value either for a string key or other parameter.
+    */
+   private op: Operation<T, V>;
+   private items: Map<string, QueueItem<T, V>>;
 
-   constructor(operation: (key: K) => Promise<V>) {
+   /**
+    * @param operation Method that transforms input to output value
+    */
+   constructor(operation: Operation<T, V>) {
       this.op = operation;
-      this.listeners = new Map();
-      this.pending = new Set();
+      this.items = new Map();
    }
 
    /**
@@ -31,36 +44,77 @@ export class Queue<K, V> {
    }
 
    /**
-    * Enter queue for a key operation.
+    * Cancel operation for `key` and remove listeners.
     */
-   resolve(key: K): Promise<V> {
-      if (this.pending.has(key)) {
-         return new Promise<V>(resolve => this.listeners.get(key).add(resolve));
+   cancel(key: string): this {
+      if (this.items.has(key)) {
+         const item = this.items.get(key);
+         item.listeners.clear();
+         this.items.delete(key);
       }
-      this.pending.add(key);
-      this.listeners.set(key, new Set());
+      return this;
+   }
 
-      return this.op(key).then(value => {
-         if (this.listeners.has(key)) {
-            this.listeners.get(key).forEach(fn => fn(value));
-            this.listeners.delete(key);
+   /**
+    * Cancel all operations and remove listeners.
+    */
+   clear(): this {
+      this.items.forEach(item => {
+         item.listeners.clear();
+      });
+      this.items.clear();
+      return this;
+   }
+
+   /**
+    * Resolve queue operation.
+    */
+   process(key: string, input?: T): Promise<V> {
+      if (this.items.has(key)) {
+         // add to existing queue to be notified when operation completes
+         const item = this.items.get(key);
+         return new Promise<V>(resolve => item.listeners.add(resolve));
+      }
+      // create new queue and begin operation
+      this.items.set(key, {
+         input,
+         listeners: new Set()
+      });
+
+      // pass key as operation argument if no input defined
+      const fn: Promise<V> =
+         input === undefined ? this.op(key) : this.op(input);
+
+      return fn.then(value => {
+         if (this.items.has(key)) {
+            // notify listeners and delete from queue
+            const item = this.items.get(key);
+            item.listeners.forEach(fn => fn(value));
+            this.items.delete(key);
          }
-         this.pending.delete(key);
          return value;
       });
    }
 
-   pipe(key: K) {
+   get(key: string): QueueItem<T, V> {
+      return this.items.get(key);
+   }
+
+   /**
+    * Pipe output to another queue.
+    */
+   pipe(key: string, input?: T) {
       return {
-         to: <U>(queue: Queue<K, U>): Promise<U> => {
-            return this.resolve(key).then(_value => {
-               return queue.resolve(key);
-            });
-         }
+         /**
+          * Resolve current queue and pass its output to the input of another
+          * queue.
+          */
+         to: <U>(queue: Queue<V, U>): Promise<U> =>
+            this.process(key, input).then(value => queue.process(key, value))
       };
    }
 
-   has(key: K): boolean {
-      return this.pending.has(key);
+   has(key: string): boolean {
+      return this.items.has(key);
    }
 }

@@ -15,7 +15,9 @@ export class CompressCache extends Cache<Buffer> {
     * policy that limits item count.
     */
    private loader: CacheLoader<string>;
+   /** Queue operation that GZips text. */
    private zipQueue: Queue<string, Buffer>;
+   /** Queue operation that loads text if a `loader` is defined. */
    private loadQueue: Queue<string, string>;
 
    constructor();
@@ -42,6 +44,20 @@ export class CompressCache extends Cache<Buffer> {
       this.loadQueue = new Queue(this.loader);
    }
 
+   clear(): this {
+      super.clear();
+      this.zipQueue.clear();
+      this.loadQueue.clear();
+      return this;
+   }
+
+   remove(key: string): this {
+      super.remove(key);
+      this.zipQueue.cancel(key);
+      this.loadQueue.cancel(key);
+      return this;
+   }
+
    /**
     * Add text value to cache and return its compressed bytes.
     */
@@ -49,7 +65,7 @@ export class CompressCache extends Cache<Buffer> {
       if (is.empty(value)) {
          return;
       }
-      const zipped = await this.zipQueue.resolve(key);
+      const zipped = await this.zipQueue.process(key, value);
       return super.add(key, zipped);
    }
 
@@ -62,14 +78,9 @@ export class CompressCache extends Cache<Buffer> {
          return Promise.resolve<Buffer>(super.get(key));
       } else if (this.zipQueue.has(key)) {
          // wait for zipping to complete then resolve
-         return this.zipQueue.resolve(key);
-         // const queue = this.zipQueue.get(key);
-         // return new Promise<Buffer>(resolve => {
-         //    queue.listeners.push(resolve);
-         // });
+         return this.zipQueue.process(key);
       } else if (this.loadQueue.ready) {
          // wait for loader then zipping
-         //return this.loader(key).then(text => this.addText(key, text));
          return this.loadQueue.pipe(key).to(this.zipQueue);
       } else {
          return Promise.resolve(null);
@@ -78,24 +89,29 @@ export class CompressCache extends Cache<Buffer> {
 
    async getText(key: string): Promise<string> {
       if (this.zipQueue.has(key)) {
-         // text is being compressed and hasn't been cached yet -- return queue
-         //return this.zipQueue.get(key);
+         // return zip queue input which is the plain text we want
+         return this.zipQueue.get(key).input;
       }
 
       if (this.loadQueue.has(key)) {
-         return this.loadQueue.resolve(key);
+         // if key is in load queue then text isn't ready yet -- enter queue
+         return this.loadQueue.process(key);
       }
 
+      // otherwise load cached bytes for text
       const bytes = super.get(key);
+
       if (bytes === null) {
-         if (this.loader !== null) {
-            const value = await this.loader(key);
+         // nothing in cache -- try to load
+         if (this.loadQueue.ready) {
+            const value = await this.loadQueue.process(key);
             this.addText(key, value);
             return value;
          } else {
             return null;
          }
       }
+      // if compressed bytes are in cache then unzip them
       return unzip(bytes);
    }
 }
