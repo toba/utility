@@ -8,7 +8,11 @@ import { QueueEvent } from './queue';
 type CacheLoader<T> = (key: string) => Promise<T>;
 
 /**
- * Cache variant that only accepts text that it GZips internally.
+ * Cache variant that only accepts text that it GZips internally. It may also
+ * be constructed with a method to automatically load or reload missing values.
+ *
+ * Because loading and zipping are asynchronous, events and a queue are used to
+ * manage responses and state.
  */
 export class CompressCache extends Cache<Buffer> {
    /**
