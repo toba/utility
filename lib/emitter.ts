@@ -53,7 +53,7 @@ export class EventEmitter<T extends number, E> {
    /**
     * Alias for `subscribe`.
     */
-   addEventListner = this.subscribe;
+   addEventListener = this.subscribe;
 
    /**
     * Remove listener method.

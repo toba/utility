@@ -53,13 +53,13 @@ test('add different listener types', () => {
 test('remove listeners from emitter', () => {
    emitter.subscribe(MockEvent.OneEvent, fn1);
    emitter.subscribe(MockEvent.OneEvent, fn2);
-   emitter.subscribe(MockEvent.TwoEvent, fn3);
+   emitter.addEventListener(MockEvent.TwoEvent, fn3);
 
    emitter.emit(MockEvent.OneEvent, 'first');
 
    expect(fn2).toHaveBeenCalledTimes(1);
    expect(emitter.unsubscribe(MockEvent.OneEvent, fn2)).toBe(true);
-   expect(emitter.unsubscribe(MockEvent.OneEvent, fn3)).toBe(false);
+   expect(emitter.removeEventListener(MockEvent.OneEvent, fn3)).toBe(false);
 
    emitter.emit(MockEvent.OneEvent, 'second');
    expect(fn2).toHaveBeenCalledTimes(1);
