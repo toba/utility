@@ -97,6 +97,12 @@ export const Header = {
    ForwardedFor: 'x-forwarded-for',
    Host: 'host',
    HttpMethod: 'X-HTTP-Method-Override',
+   /**
+    * Protocol before interception by a device such as a load balancer,
+    * abbreviated `XFP`.
+    * @see https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-Forwarded-Proto
+    */
+   ForwardedProtocol: 'X-Forwarded-Proto',
    LastModified: 'Last-Modified',
    Origin: 'origin',
    PRAGMA: 'pragma',
