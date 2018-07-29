@@ -63,7 +63,8 @@ export {
    MimeType,
    Encoding,
    LinkRelation,
-   CharSet
+   CharSet,
+   Sort
 } from './constants';
 export {
    sayNumber,
