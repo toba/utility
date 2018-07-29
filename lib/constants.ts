@@ -57,9 +57,7 @@ export enum Sort {
    NewestFirst,
    OldestFirst,
    Alphabetical,
-   ReverseAlphabetical,
-   Chronological,
-   ReverseChronological
+   ReverseAlphabetical
 }
 
 export enum AccessControlAllow {
