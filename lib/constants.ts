@@ -52,6 +52,16 @@ export const weekday = [
    'Saturday'
 ];
 
+export enum Sort {
+   Unknown,
+   NewestFirst,
+   OldestFirst,
+   Alphabetical,
+   ReverseAlphabetical,
+   Chronological,
+   ReverseChronological
+}
+
 export enum AccessControlAllow {
    Credentials = 'Access-Control-Allow-Credentials',
    Headers = 'Access-Control-Allow-Headers',
