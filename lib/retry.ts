@@ -1,4 +1,4 @@
-import { is } from './';
+import { is, sayNumber } from './';
 
 /**
  * Retry a `Promise` function until it resolves or number of retry times is
@@ -35,8 +35,12 @@ function retryLoop<T>(
    fn()
       .then(res => resolve(res))
       .catch(err => {
-         errors.push(err.toString());
-
+         const msg: string = is.defined(err, 'stack')
+            ? err.stack
+            : err.toString();
+         if (!errors.includes(msg)) {
+            errors.push(msg);
+         }
          if (count < times) {
             setTimeout(() => {
                retryLoop(
@@ -51,7 +55,12 @@ function retryLoop<T>(
                );
             }, delay);
          } else {
-            const prefix = is.empty(errorPrefix) ? '' : errorPrefix + ':\n';
+            const prefix =
+               'Failed after ' +
+               sayNumber(times, false) +
+               ' retries' +
+               (is.empty(errorPrefix) ? '' : '. ' + errorPrefix) +
+               ':\n';
             reject(prefix + errors.join('\n'));
          }
       });

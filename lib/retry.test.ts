@@ -30,7 +30,9 @@ test('fails if max tries exceeded', () => {
    expect.assertions(2);
 
    return retry(failTwice, 2, 10, prefix).catch(err => {
-      expect(err).toEqual(prefix + ':\n' + errors);
+      expect(err).toEqual(
+         'Failed after two retries. ' + prefix + ':\n' + errors
+      );
       expect(failTwice).toHaveBeenCalledTimes(2);
    });
 });
