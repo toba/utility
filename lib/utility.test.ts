@@ -12,21 +12,25 @@ import {
 } from './index';
 import { lipsum } from '@toba/test';
 
-type TestThing = { [key: string]: string | string[] | TestThing };
+type TestThing = { [key: string]: string | string[] | TestThing | Function };
 
 test('merges objects', () => {
+   const baseFn = () => 3;
    const base: TestThing = {
       key1: 'value1',
       key2: 'value2',
       key5: [],
-      key6: null
+      key6: null,
+      key7: baseFn
    };
+   const addFn = () => 5;
    const add1: TestThing = { key1: null, key3: 'value3' };
    const add2: TestThing = {
       key1: 'newValue1',
       key4: 'value4',
       key5: ['one', 'two'],
-      key6: 'newValue6'
+      key6: 'newValue6',
+      key7: addFn
    };
 
    expect(merge(base, add1)).toEqual({
@@ -34,7 +38,8 @@ test('merges objects', () => {
       key2: 'value2',
       key3: 'value3',
       key5: [],
-      key6: null
+      key6: null,
+      key7: baseFn
    });
 
    expect(merge(base, add1, add2)).toEqual({
@@ -43,7 +48,8 @@ test('merges objects', () => {
       key3: 'value3',
       key4: 'value4',
       key5: ['one', 'two'],
-      key6: 'newValue6'
+      key6: 'newValue6',
+      key7: addFn
    });
 });
 
