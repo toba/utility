@@ -19,8 +19,8 @@ test('merges objects', () => {
    const base: TestThing = {
       key1: 'value1',
       key2: 'value2',
-      key5: [],
-      key6: null,
+      key5: [] as string[],
+      key6: null as string,
       key7: baseFn
    };
    const addFn = () => 5;
@@ -88,18 +88,18 @@ test('merges nested objects', () => {
 
 test('merges configurations', () => {
    const defaultConfig = {
-      userID: null,
-      appID: null,
+      userID: null as string,
+      appID: null as string,
       useCache: true,
       maxCacheSize: 200,
-      featureSets: [],
-      excludeSets: [],
-      excludeTags: [],
+      featureSets: [] as string[],
+      excludeSets: [] as string[],
+      excludeTags: [] as string[],
       searchPhotoSizes: ['url_l'],
       setPhotoSizes: ['url_l'],
       maxRetries: 3,
       retryDelay: 500,
-      auth: null
+      auth: null as any
    };
 
    const givenConfig = {
@@ -122,7 +122,7 @@ test('merges configurations', () => {
          token: {
             access: 'FLICKR_ACCESS_TOKEN',
             secret: 'FLICKR_TOKEN_SECRET',
-            request: null
+            request: null as string
          }
       }
    };

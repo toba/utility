@@ -53,7 +53,7 @@ const defaultPolicy: CachePolicy = {
 export class Cache<T> {
    private _items: Map<string, CacheItem<T>>;
    private _policy: CachePolicy;
-   private _evictTimer: number;
+   private _evictTimer: NodeJS.Timer;
    /**
     * Whether stored item types can have their byte size measured.
     */
@@ -64,7 +64,6 @@ export class Cache<T> {
    constructor(policy: CachePolicy = {}) {
       this._items = new Map();
       this._policy = merge(defaultPolicy, policy);
-      this._evictTimer = 0;
       this.events = new EventEmitter();
    }
 
@@ -117,7 +116,7 @@ export class Cache<T> {
     * Asynchronous check for evictable items.
     */
    private schedulePrune(): Cache<T> {
-      if (this._evictTimer > 0) {
+      if (this._evictTimer) {
          clearTimeout(this._evictTimer);
       }
       this._evictTimer = setTimeout(this.prune.bind(this), 10);
