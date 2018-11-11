@@ -152,9 +152,9 @@
   integrity sha512-shAmDyaQC4H92APFoIaVDHCx5bStIocgvbwQyxPRrbUY20V1EYTbSDchWbuwlMG3V17cprZhA6+78JfB+3DTPw==
 
 "@toba/build@^1.7.0":
-  version "1.8.1"
-  resolved "https://registry.yarnpkg.com/@toba/build/-/build-1.8.1.tgz#0d07b2907d6a21c2a025cfe75873079d6c0b93ac"
-  integrity sha512-3o4lwXNz5D1J+ZpJz8LbqhqJ0bMHVx9GXsRthw+xMyrU6mKo0Ueztq2SDkBSWHNwk5L34jCZ0vv+M+5HJgou4w==
+  version "1.8.3"
+  resolved "https://registry.yarnpkg.com/@toba/build/-/build-1.8.3.tgz#cf3ab7976893b1926229bf7095d47fe5733706af"
+  integrity sha512-RZVk3YmB+k5JGb6xpLIQnk54+rH6f6He5AyGImGbMdxXmGVPkIGY+l95llxeUIZSyh441KrWwNkBg6TdEvfPqA==
   dependencies:
     stylelint "^9.6.0"
     stylelint-config-standard "^18.2.0"
@@ -184,9 +184,9 @@
     ts-jest "^23.1.0"
 
 "@toba/tools@^3.12.0", "@toba/tools@^3.8.0":
-  version "3.15.2"
-  resolved "https://registry.yarnpkg.com/@toba/tools/-/tools-3.15.2.tgz#87bed1ca8eb64ff361ca64b024feae6336379433"
-  integrity sha512-Z/ubVxCS7pgil1pC8TNkCYg71PX30hYW4gSJhBstUVMTZkzPywh86q7x31wIAEbRWH5gVMOAc6GBqqHLcHkm5Q==
+  version "3.15.4"
+  resolved "https://registry.yarnpkg.com/@toba/tools/-/tools-3.15.4.tgz#b8b4ee6249a000e41345965f04d1ae834ca6960c"
+  integrity sha512-5Pohx2mhUXl2vvMsA8bLq4CkEociM4GldnBqhiw+LdSkYc2BVx/1/bikbC1PWO/BGhAJg+GwnD2VYgi7moaUFA==
 
 "@types/jest@^23.3.0":
   version "23.3.9"
