@@ -45,11 +45,11 @@ export class CompressCache extends Cache<Buffer> {
       }
 
       super(policy);
+
       this.loader = loader;
       this.zipQueue = new Queue(gzip);
-      if (is.callable(this.loader)) {
-         this.loadQueue = new Queue(this.loader);
-      }
+
+      this.loadQueue = new Queue(this.loader);
       // the load queue executes whenever kay is not found in cache
       this.loadQueue.events.subscribe(QueueEvent.OperationStart, key => {
          this.events.emit(EventType.KeyNotFound, key);
