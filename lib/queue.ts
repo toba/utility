@@ -32,14 +32,14 @@ export class Queue<T, V> {
    /**
     * Operation that returns value either for a string key or other parameter.
     */
-   private op?: Operation<T, V>;
+   private op: Operation<T, V> | null;
    private items: Map<string, QueueItem<T, V>>;
    events: EventEmitter<QueueEvent, string>;
 
    /**
     * @param operation Method that transforms input to output value
     */
-   constructor(operation?: Operation<T, V>) {
+   constructor(operation: Operation<T, V> | null) {
       this.op = operation;
       this.items = new Map();
       this.events = new EventEmitter();
@@ -100,7 +100,7 @@ export class Queue<T, V> {
 
       // pass key as operation argument if no input defined
       const fn: Promise<V | undefined> =
-         this.op === undefined
+         this.op === null
             ? Promise.resolve(undefined)
             : input === undefined
             ? this.op(key)
