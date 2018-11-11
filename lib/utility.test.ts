@@ -163,7 +163,7 @@ test('reads environmnent variables with option for alternate', () => {
    expect(env('PATH')).toBeDefined();
    expect(env(nope, 'alternate')).toBe('alternate');
 
-   let v: string;
+   let v: string | undefined;
    let e: Error;
 
    try {

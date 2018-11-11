@@ -131,7 +131,7 @@ export function eventCoord(
  * Generate random letter/number sequence.
  */
 export function randomID(size: number = 7): string {
-   const chars = [];
+   const chars: string[] = [];
    const possible =
       'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
    const length = possible.length;
