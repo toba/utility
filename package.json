@@ -1,16 +1,16 @@
 {
    "name": "@toba/tools",
    "description": "Toba Tools",
-   "version": "3.15.3",
+   "version": "3.15.4",
    "private": false,
    "publishConfig": {
       "access": "public"
    },
-   "main": "lib/js/index.js",
-   "types:": "lib/js/index.d.ts",
+   "main": "lib/index.ts",
+   "types:": "js/index.d.ts",
    "files": [
       "lib/**/!(*.test).ts",
-      "lib/js"
+      "js"
    ],
    "author": {
       "name": "Jason Abbott"
