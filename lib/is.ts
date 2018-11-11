@@ -36,7 +36,10 @@ export namespace is {
    /**
     * Whether named field is defined in the given object.
     */
-   export const defined = <T extends Object, K extends keyof T>(
+   export const defined = <
+      T extends Object | null | undefined,
+      K extends keyof T
+   >(
       obj: T,
       field: K
    ) => value<T>(obj) && obj.hasOwnProperty(field); // typeof(obj[field]) !== type.UNDEFINED;

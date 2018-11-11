@@ -211,7 +211,7 @@ export class Cache<T> {
    /**
     * Apply new cache policy and prune accordingly.
     */
-   updatePolicy(policy: CachePolicy): Cache<T> {
+   updatePolicy(policy: Partial<CachePolicy>): Cache<T> {
       this._policy = merge(defaultPolicy, policy);
       return this.schedulePrune();
    }

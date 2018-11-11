@@ -1,7 +1,7 @@
 import '@toba/test';
 import { is } from './index';
 
-const u: string = undefined;
+const u: string | undefined = undefined;
 
 test('identifies undefined variables', () => {
    expect(is.value(u)).toBe(false);
