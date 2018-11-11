@@ -184,9 +184,9 @@
     ts-jest "^23.1.0"
 
 "@toba/tools@^3.12.0", "@toba/tools@^3.8.0":
-  version "3.15.5"
-  resolved "https://registry.yarnpkg.com/@toba/tools/-/tools-3.15.5.tgz#223c63238d2e57655679d5d71f84a95263b89b5d"
-  integrity sha512-sNfNg0NkM+HWQiT4Xxr5vbwxqWuPoxFFhNgHBTdspheQf4TvpofMUIvw1Ig/1oMc3Nq7PQvmxS3hIvBeAWqaZw==
+  version "3.15.6"
+  resolved "https://registry.yarnpkg.com/@toba/tools/-/tools-3.15.6.tgz#ecd6f0499e4a28536f786a5a04333ed3844ec24b"
+  integrity sha512-A0Urg6DrPfnPxMoG06cV6SmczsHDzBozM2N6lqERhGXJjr/UWqNcwXXdiv1ztTBhKT6bu0c35YvqnmOdEd9RVQ==
 
 "@types/jest@^23.3.0":
   version "23.3.9"
