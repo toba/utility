@@ -26,7 +26,10 @@ export interface Limits {
  *
  * @see http://sphweb.bumc.bu.edu/otlt/MPH-Modules/BS/BS704_SummarizingData/BS704_SummarizingData7.html
  */
-export const boundary = (values: number[], distance: number = 3): Limits => {
+export const boundary = (
+   values: number[],
+   distance: number = 3
+): Limits | null => {
    if (!is.array(values) || values.length === 0) {
       return null;
    }

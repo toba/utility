@@ -12,7 +12,7 @@ interface QueueItem<T, V> {
    /** Functions to call if operation fails. */
    rejecters: Set<(err?: Error | string) => void>;
    /** Original operation input. */
-   input: T;
+   input: T | undefined;
 }
 
 export enum QueueEvent {
@@ -57,7 +57,7 @@ export class Queue<T, V> {
     */
    cancel(key: string): this {
       if (this.items.has(key)) {
-         const item = this.items.get(key);
+         const item = this.items.get(key)!;
          item.resolvers.clear();
          item.rejecters.forEach(fn => fn());
          item.rejecters.clear();
@@ -85,7 +85,7 @@ export class Queue<T, V> {
    process(key: string, input?: T): Promise<V> {
       if (this.items.has(key)) {
          // add to existing queue to be notified when operation completes
-         const item = this.items.get(key);
+         const item = this.items.get(key)!;
          return new Promise<V>((resolve, reject) => {
             item.resolvers.add(resolve);
             item.rejecters.add(reject);
@@ -108,7 +108,7 @@ export class Queue<T, V> {
          .then((value: V) => {
             if (this.items.has(key)) {
                // notify success listeners and delete from queue
-               const item = this.items.get(key);
+               const item = this.items.get(key)!;
                item.resolvers.forEach(fn => fn(value));
                item.rejecters.clear();
                this.items.delete(key);
@@ -119,7 +119,7 @@ export class Queue<T, V> {
          .catch((err: any) => {
             if (this.items.has(key)) {
                // notify error listeners and delete from queue
-               const item = this.items.get(key);
+               const item = this.items.get(key)!;
                item.rejecters.forEach(fn => fn(err));
                item.resolvers.clear();
                this.items.delete(key);
@@ -129,7 +129,7 @@ export class Queue<T, V> {
          });
    }
 
-   get(key: string): QueueItem<T, V> {
+   get(key: string): QueueItem<T, V> | undefined {
       return this.items.get(key);
    }
 

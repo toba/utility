@@ -120,7 +120,10 @@ export function durationString(
    }
 }
 
-const durationStringFromNumber = (ms: number, roundTo: TimeUnit = null) => {
+const durationStringFromNumber = (
+   ms: number,
+   roundTo: TimeUnit | null = null
+) => {
    let d = '';
 
    const units = [
@@ -151,7 +154,7 @@ const durationStringFromNumber = (ms: number, roundTo: TimeUnit = null) => {
    return d;
 };
 
-const durationStringFromDates = (start: Date, end: Date, roundTo: TimeUnit) =>
+const durationStringFromDates = (start: Date, end: Date, roundTo?: TimeUnit) =>
    is.empty(start) || is.empty(end)
       ? ''
       : durationStringFromNumber(end.getTime() - start.getTime(), roundTo);
@@ -164,7 +167,7 @@ export const parseDuration = (d: string): number => {
       return 0;
    }
    const matches = d.match(/\d+[ydmhs]/g);
-   if (is.empty(matches)) {
+   if (matches === null) {
       return 0;
    }
 

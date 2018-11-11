@@ -26,7 +26,7 @@ export function unlist<T>(list: T[] | T, useLastIfList = false): T {
  *
  * http://sroucheray.org/blog/2009/11/array-sort-should-not-be-used-to-shuffle-an-array/
  */
-export function shuffle<T>(source: T[]): T[] {
+export function shuffle<T>(source: T[]): T[] | null {
    if (!is.array(source) || source.length === 0) {
       return null;
    }
@@ -141,7 +141,7 @@ export function filterSet<T>(s: Set<T>, fn: (item: T) => boolean): Set<T> {
 /**
  * Find set item matching predicate.
  */
-export function findInSet<T>(s: Set<T>, fn: (item: T) => boolean): T {
+export function findInSet<T>(s: Set<T>, fn: (item: T) => boolean): T | undefined {
    for (const item of s) {
       if (fn(item)) {
          return item;

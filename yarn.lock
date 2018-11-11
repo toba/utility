@@ -146,15 +146,15 @@
     call-me-maybe "^1.0.1"
     glob-to-regexp "^0.3.0"
 
-"@nodelib/fs.stat@^1.0.1":
+"@nodelib/fs.stat@^1.1.2":
   version "1.1.3"
   resolved "https://registry.yarnpkg.com/@nodelib/fs.stat/-/fs.stat-1.1.3.tgz#2b5a3ab3f918cca48a8c754c08168e3f03eba61b"
   integrity sha512-shAmDyaQC4H92APFoIaVDHCx5bStIocgvbwQyxPRrbUY20V1EYTbSDchWbuwlMG3V17cprZhA6+78JfB+3DTPw==
 
 "@toba/build@^1.7.0":
-  version "1.8.3"
-  resolved "https://registry.yarnpkg.com/@toba/build/-/build-1.8.3.tgz#cf3ab7976893b1926229bf7095d47fe5733706af"
-  integrity sha512-RZVk3YmB+k5JGb6xpLIQnk54+rH6f6He5AyGImGbMdxXmGVPkIGY+l95llxeUIZSyh441KrWwNkBg6TdEvfPqA==
+  version "1.8.4"
+  resolved "https://registry.yarnpkg.com/@toba/build/-/build-1.8.4.tgz#cbbeee84c641d8982e117624cc66b16c78d58ed6"
+  integrity sha512-YAnrRQwfDMtimFH9iJE+sbObIsO0181fy3bU1xxahuG0NzGHrt2knxo2NSrj/tdvqwTTj20Y0ARSgc6dN7WUYA==
   dependencies:
     stylelint "^9.6.0"
     stylelint-config-standard "^18.2.0"
@@ -170,10 +170,10 @@
   dependencies:
     "@toba/tools" "^3.8.0"
 
-"@toba/test@^1.21.2":
-  version "1.21.3"
-  resolved "https://registry.yarnpkg.com/@toba/test/-/test-1.21.3.tgz#e9f860d33ce8343779cd5a6b66dec280610df698"
-  integrity sha512-WlOtX79dXap0UVlZPt3mVMn+ZYiEYviRAe2GJ3+fhC5kojo/ldf7WdDUkYSgP1huetICwlXPVReiVscutJHSvA==
+"@toba/test@^2.0.0":
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/@toba/test/-/test-2.0.1.tgz#f930cc1cb8ed0b102a7299226076f47020d7d620"
+  integrity sha512-Aa2gI4l447ZRIoNv61grcmcPhD89TJcTtdlB2+V1oq1+sRu1K2Q5T8HawrwIflXUEiyTuKHjg1Tax72B54sh3A==
   dependencies:
     "@toba/logger" "^1.1.0"
     "@toba/tools" "^3.12.0"
@@ -184,9 +184,9 @@
     ts-jest "^23.1.0"
 
 "@toba/tools@^3.12.0", "@toba/tools@^3.8.0":
-  version "3.15.4"
-  resolved "https://registry.yarnpkg.com/@toba/tools/-/tools-3.15.4.tgz#b8b4ee6249a000e41345965f04d1ae834ca6960c"
-  integrity sha512-5Pohx2mhUXl2vvMsA8bLq4CkEociM4GldnBqhiw+LdSkYc2BVx/1/bikbC1PWO/BGhAJg+GwnD2VYgi7moaUFA==
+  version "3.15.5"
+  resolved "https://registry.yarnpkg.com/@toba/tools/-/tools-3.15.5.tgz#223c63238d2e57655679d5d71f84a95263b89b5d"
+  integrity sha512-sNfNg0NkM+HWQiT4Xxr5vbwxqWuPoxFFhNgHBTdspheQf4TvpofMUIvw1Ig/1oMc3Nq7PQvmxS3hIvBeAWqaZw==
 
 "@types/jest@^23.3.0":
   version "23.3.9"
@@ -1408,15 +1408,15 @@ fast-deep-equal@^2.0.1:
   integrity sha1-ewUhjd+WZ79/Nwv3/bLLFf3Qqkk=
 
 fast-glob@^2.0.2:
-  version "2.2.3"
-  resolved "https://registry.yarnpkg.com/fast-glob/-/fast-glob-2.2.3.tgz#d09d378e9ef6b0076a0fa1ba7519d9d4d9699c28"
-  integrity sha512-NiX+JXjnx43RzvVFwRWfPKo4U+1BrK5pJPsHQdKMlLoFHrrGktXglQhHliSihWAq+m1z6fHk3uwGHrtRbS9vLA==
+  version "2.2.4"
+  resolved "https://registry.yarnpkg.com/fast-glob/-/fast-glob-2.2.4.tgz#e54f4b66d378040e0e4d6a68ec36bbc5b04363c0"
+  integrity sha512-FjK2nCGI/McyzgNtTESqaWP3trPvHyRyoyY70hxjc3oKPNmDe8taohLZpoVKoUjW85tbU5txaYUZCNtVzygl1g==
   dependencies:
     "@mrmlnc/readdir-enhanced" "^2.2.1"
-    "@nodelib/fs.stat" "^1.0.1"
+    "@nodelib/fs.stat" "^1.1.2"
     glob-parent "^3.1.0"
     is-glob "^4.0.0"
-    merge2 "^1.2.1"
+    merge2 "^1.2.3"
     micromatch "^3.1.10"
 
 fast-json-stable-stringify@2.x, fast-json-stable-stringify@^2.0.0:
@@ -3020,7 +3020,7 @@ merge-stream@^1.0.1:
   dependencies:
     readable-stream "^2.0.1"
 
-merge2@^1.2.1:
+merge2@^1.2.3:
   version "1.2.3"
   resolved "https://registry.yarnpkg.com/merge2/-/merge2-1.2.3.tgz#7ee99dbd69bb6481689253f018488a1b902b0ed5"
   integrity sha512-gdUU1Fwj5ep4kplwcmftruWofEFt6lfpkkr3h860CXbAB9c3hGb55EOL2ali0Td5oebvW0E1+3Sr+Ur7XfKpRA==

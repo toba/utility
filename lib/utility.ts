@@ -145,7 +145,7 @@ export function randomID(size: number = 7): string {
 /**
  * Infer MIME type from file extension.
  */
-export function inferMimeType(fileName: string): MimeType {
+export function inferMimeType(fileName: string): MimeType | null {
    if (!fileName.includes('.')) {
       return null;
    }

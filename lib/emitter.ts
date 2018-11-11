@@ -5,7 +5,7 @@
  * @param E Kind of event payload
  */
 export class EventEmitter<T extends number, E> {
-   listeners: Map<number, Set<(event: E) => void>>;
+   listeners: Map<number, Set<(event: E | undefined) => void>>;
 
    constructor() {
       this.listeners = new Map();
@@ -22,7 +22,7 @@ export class EventEmitter<T extends number, E> {
     * Whether subscribers exist for an event type.
     */
    hasSubscribers(type: T): boolean {
-      return this.hasType(type) && this.listeners.get(type).size > 0;
+      return this.hasType(type) && this.listeners.get(type)!.size > 0;
    }
 
    /**
@@ -31,7 +31,7 @@ export class EventEmitter<T extends number, E> {
     */
    emit(type: T, event?: E): boolean {
       if (this.hasType(type)) {
-         this.listeners.get(type).forEach(fn => {
+         this.listeners.get(type)!.forEach(fn => {
             fn(event);
          });
          return true;
@@ -46,7 +46,7 @@ export class EventEmitter<T extends number, E> {
       if (!this.hasType(type)) {
          this.listeners.set(type, new Set());
       }
-      this.listeners.get(type).add(fn);
+      this.listeners.get(type)!.add(fn);
       return fn;
    }
 
@@ -59,7 +59,7 @@ export class EventEmitter<T extends number, E> {
     * Remove listener method.
     */
    unsubscribe(type: T, fn: (event: E) => void): boolean {
-      return this.hasType(type) ? this.listeners.get(type).delete(fn) : false;
+      return this.hasType(type) ? this.listeners.get(type)!.delete(fn) : false;
    }
 
    /**
@@ -71,7 +71,7 @@ export class EventEmitter<T extends number, E> {
     * Remove all listeners to an event type or all listeners for all event types
     * if no type given.
     */
-   unsubscribeAll(type: T = null): boolean {
+   unsubscribeAll(type: T | null = null): boolean {
       if (type == null) {
          this.listeners = new Map();
          return true;

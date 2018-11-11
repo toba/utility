@@ -15,10 +15,10 @@ export interface CacheItem<T> {
  */
 export interface CachePolicy {
    /** Maximum items before earliest is removed from cache. */
-   maxItems?: number;
+   maxItems: number;
    /** Maximum age in milliseconds before item is removed from cache. */
-   maxAge?: number;
-   maxBytes?: number;
+   maxAge: number;
+   maxBytes: number;
 }
 
 export enum EventType {
@@ -61,7 +61,7 @@ export class Cache<T> {
 
    events: EventEmitter<EventType, any>;
 
-   constructor(policy: CachePolicy = {}) {
+   constructor(policy: Partial<CachePolicy> = {}) {
       this._items = new Map();
       this._policy = merge(defaultPolicy, policy);
       this.events = new EventEmitter();
@@ -166,8 +166,10 @@ export class Cache<T> {
 
             while (remainingSize > this._policy.maxBytes) {
                const item = sorted.shift();
-               remainingSize -= item.size;
-               remove.push(item.key);
+               if (item !== undefined) {
+                  remainingSize -= item.size;
+                  remove.push(item.key);
+               }
             }
          }
 
@@ -184,7 +186,7 @@ export class Cache<T> {
    /**
     * @param silent Supress events if `true`
     */
-   get(key: string, silent = false): T {
+   get(key: string, silent = false): T | null {
       if (this._items.has(key)) {
          const item = this._items.get(key);
          return is.value(item) ? item.value : null;

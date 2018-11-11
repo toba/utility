@@ -20,7 +20,7 @@ export class CompressCache extends Cache<Buffer> {
     * This has the potential to create an infinite loop if there's also a cache
     * policy that limits item count.
     */
-   private loader: CacheLoader<string>;
+   private loader: CacheLoader<string> | null;
    /** Queue operation that GZips text. */
    private zipQueue: Queue<string, Buffer>;
    /** Queue operation that loads text if a `loader` is defined. */
@@ -32,9 +32,9 @@ export class CompressCache extends Cache<Buffer> {
    constructor(loader: CacheLoader<string>, policy: CachePolicy);
    constructor(
       loaderOrPolicy?: CachePolicy | CacheLoader<string>,
-      policy?: CachePolicy
+      policy?: Partial<CachePolicy>
    ) {
-      let loader: CacheLoader<string> = null;
+      let loader: CacheLoader<string> | null = null;
 
       if (is.callable(loaderOrPolicy)) {
          loader = loaderOrPolicy;
@@ -47,7 +47,9 @@ export class CompressCache extends Cache<Buffer> {
       super(policy);
       this.loader = loader;
       this.zipQueue = new Queue(gzip);
-      this.loadQueue = new Queue(this.loader);
+      if (is.callable(this.loader)) {
+         this.loadQueue = new Queue(this.loader);
+      }
       // the load queue executes whenever kay is not found in cache
       this.loadQueue.events.subscribe(QueueEvent.OperationStart, key => {
          this.events.emit(EventType.KeyNotFound, key);
@@ -82,10 +84,10 @@ export class CompressCache extends Cache<Buffer> {
    /**
     * Get the GZip bytes (`Buffer`) for cached text.
     */
-   getZip(key: string): Promise<Buffer> {
+   getZip(key: string): Promise<Buffer | null> {
       if (this.contains(key)) {
          // return existing value
-         return Promise.resolve<Buffer>(super.get(key));
+         return Promise.resolve<Buffer>(super.get(key)!);
       } else if (this.zipQueue.has(key)) {
          // wait for zipping to complete then resolve
          return this.zipQueue.process(key);
@@ -98,10 +100,11 @@ export class CompressCache extends Cache<Buffer> {
       }
    }
 
-   async getText(key: string): Promise<string> {
+   async getText(key: string): Promise<string | null> {
       if (this.zipQueue.has(key)) {
          // return zip queue input which is the plain text we want
-         return this.zipQueue.get(key).input;
+         const value = this.zipQueue.get(key)!.input;
+         return value === undefined ? null : value;
       }
 
       if (this.loadQueue.has(key)) {

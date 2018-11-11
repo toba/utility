@@ -3,7 +3,7 @@ import { Duration } from '.';
 export interface Storage<T> {
    save(key: string, value: T, days?: number, includeSubdomain?: boolean): void;
    remove(key: string): void;
-   item(key: string): T;
+   item(key: string): T | null;
 }
 
 export const session: Storage<any> = {
@@ -40,7 +40,7 @@ export const cookie: Storage<string> = {
       document.cookie = key + '=' + value + domain + expires + '; path=/';
    },
 
-   item(key: string): string {
+   item(key: string): string | null {
       const nameEQ = key + '=';
       const pairs = document.cookie.split(';');
 

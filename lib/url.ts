@@ -4,7 +4,7 @@ export namespace url {
    /**
     * Querystring key-value pairs.
     */
-   export function variables(path: string): Map<string, string> {
+   export function variables(path: string): Map<string, string> | null {
       if (is.empty(path) || !path.includes('?')) {
          return null;
       }
