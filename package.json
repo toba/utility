@@ -1,15 +1,16 @@
 {
    "name": "@toba/tools",
    "description": "Toba Tools",
-   "version": "3.15.2",
+   "version": "3.15.3",
    "private": false,
    "publishConfig": {
       "access": "public"
    },
-   "main": "dist/index.js",
-   "types:": "dist/index.d.ts",
+   "main": "lib/js/index.js",
+   "types:": "lib/js/index.d.ts",
    "files": [
-      "dist/**/*"
+      "lib/**/!(*.test).ts",
+      "lib/js"
    ],
    "author": {
       "name": "Jason Abbott"
@@ -21,7 +22,7 @@
    },
    "devDependencies": {
       "@toba/build": "^1.7.0",
-      "@toba/test": "^1.20.0",
+      "@toba/test": "^1.21.2",
       "prettier": "^1.14.0",
       "typescript": "^3.0.0"
    },
@@ -36,5 +37,8 @@
    "bugs": {
       "url": "https://github.com/toba/tools/issues"
    },
-   "dependencies": {}
+   "dependencies": {},
+   "installConfig": {
+      "pnp": false
+   }
 }
