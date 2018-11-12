@@ -21,7 +21,7 @@
       "test": "jest --coverage"
    },
    "devDependencies": {
-      "@toba/build": "^1.7.0",
+      "@toba/build": "^2.0.0",
       "@toba/test": "^2.0.0",
       "prettier": "^1.14.0",
       "typescript": "^3.0.0"
