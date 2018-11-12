@@ -94,8 +94,8 @@ export function parseNumber(text: string, not = NaN): number {
  * Return text parsed as number if it contains only numeric values otherwise
  * return the text unchanged.
  */
-export function maybeNumber(text: string): number | string {
-   return re.numeric.test(text) ? parseFloat(text) : text;
+export function maybeNumber(text: string | null): number | string | null {
+   return text !== null && re.numeric.test(text) ? parseFloat(text) : text;
 }
 
 /**

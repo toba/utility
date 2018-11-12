@@ -35,6 +35,7 @@ test('converts eligible strings to numbers', () => {
    expect(maybeNumber('-3.25')).toBe(-3.25);
    expect(maybeNumber('563')).toBe(563);
    expect(maybeNumber('asdfds')).toBe('asdfds');
+   expect(maybeNumber(null)).toBeNull();
 });
 
 test('formats numbers as currency', () => {
