@@ -33,10 +33,22 @@ Object {
   "maxRetries": 3,
   "retryDelay": 500,
   "searchPhotoSizes": Array [
-    "url_l",
+    Object {
+      "0": "u",
+      "1": "r",
+      "2": "l",
+      "3": "_",
+      "4": "l",
+    },
   ],
   "setPhotoSizes": Array [
-    "url_l",
+    Object {
+      "0": "u",
+      "1": "r",
+      "2": "l",
+      "3": "_",
+      "4": "l",
+    },
   ],
   "useCache": false,
   "userID": "60950751@N04",

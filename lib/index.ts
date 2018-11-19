@@ -1,5 +1,6 @@
 export {
    merge,
+   mergeAll,
    eventCoord,
    randomID,
    gzip,

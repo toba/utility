@@ -111,6 +111,19 @@ export namespace is {
    }
 
    /**
+    * Whether value is an object.
+    * @param v
+    * @param strict Whether to preclude arrays and subclasses (only allow plain objects)
+    */
+   export function object<T>(v: any, strict = false): v is T {
+      return (
+         is.value(v) &&
+         typeof v === is.Type.Object &&
+         (!strict || (!Array.isArray(v) && v.constructor.name === 'Object'))
+      );
+   }
+
+   /**
     * Whether value exists and is an object with keys and values, not any of the
     * array variants. An alias for `is.hash()`.
     */

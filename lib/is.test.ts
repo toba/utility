@@ -72,6 +72,19 @@ test('identifies dates', () => {
    expect(is.date(u)).toBe(false);
 });
 
+test('identifies objects', () => {
+   expect(is.object(null)).toBe(false);
+   expect(is.object('nope')).toBe(false);
+   expect(is.object(23)).toBe(false);
+   expect(is.object({})).toBe(true);
+   expect(is.object(new Date())).toBe(true);
+   expect(is.object([])).toBe(true);
+   expect(is.object(() => {})).toBe(false);
+   // strict check is only true for plain objects
+   expect(is.object(new Date(), true)).toBe(false);
+   expect(is.object([], true)).toBe(false);
+});
+
 test('identifies text', () => {
    expect(is.text('hello')).toBe(true);
    expect(is.text(u)).toBe(false);

@@ -8,34 +8,46 @@ type Hash = { [key: string]: any };
  * additions are not null or undefined. Arrays will not be merged but will be
  * treated as values meaning additions supersede the base.
  */
-export function merge<T extends object>(base: T, ...additions: any[]): T {
-   return additions.reduce(
-      (existing, add: Hash) => {
-         //for (const key of Reflect.ownKeys(add)) {
-         if (is.value<Hash>(add)) {
-            for (const key of Object.keys(add)) {
-               const v: any = add[key];
-               const exists = is.value(existing[key]);
-               if (is.value(v) || !exists) {
-                  // only replace base value if addition is non-null
-                  if (
-                     !exists ||
-                     Array.isArray(v) ||
-                     typeof v != is.Type.Object ||
-                     typeof existing[key] != is.Type.Object
-                  ) {
-                     existing[key] = v;
-                  } else {
-                     existing[key] = merge(existing[key], v);
-                  }
+export function merge<T extends Object>(base: T, ...additions: any[]): T {
+   return additions.reduce((existing, add: Hash) => {
+      //for (const key of Reflect.ownKeys(add)) {
+      if (is.value<Hash>(add)) {
+         for (const key of Object.keys(add)) {
+            const v: any = add[key];
+            const exists = is.value(existing[key]);
+            if (is.value(v) || !exists) {
+               // only replace base value if addition is non-null
+               if (
+                  !exists ||
+                  Array.isArray(v) ||
+                  typeof v != is.Type.Object ||
+                  typeof existing[key] != is.Type.Object
+               ) {
+                  existing[key] = v;
+               } else {
+                  existing[key] = merge(existing[key], v);
                }
             }
          }
-         return existing;
-      },
-      Object.assign({}, base) as any
-   );
+      }
+      return existing;
+   }, clone(base));
 }
+
+/**
+ * Merge additions into base object, allowing `null` or `undefined` to replace
+ * existing values.
+ */
+export const mergeAll = <T extends Object>(base: T, ...additions: any[]) =>
+   additions
+      .filter(add => is.object(add))
+      .reduce((existing, add) => {
+         for (const key of Object.keys(add)) {
+            const v = add[key];
+            existing[key] = is.object(v, true) ? mergeAll(existing[key], v) : v;
+         }
+         return existing;
+      }, clone(base));
 
 /**
  * Deep clone an object.

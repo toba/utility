@@ -1,6 +1,7 @@
 import '@toba/test';
 import {
    merge,
+   mergeAll,
    inferMimeType,
    MimeType,
    byteSize,
@@ -13,6 +14,82 @@ import {
 import { lipsum } from '@toba/test';
 
 type TestThing = { [key: string]: string | string[] | TestThing | Function };
+
+/**
+ * Functionality expected of both `merge` and `mergeAll`.
+ */
+function commonMergeTests(fn: <T>(base: T, ...additions: any[]) => T) {
+   test('merges different keys into one object', () => {
+      expect(fn({ one: 1 }, { two: 2, three: 3 })).toEqual({
+         one: 1,
+         two: 2,
+         three: 3
+      });
+   });
+
+   test('merges many objects', () => {
+      expect(fn({ one: 1 }, { two: 2 }, { three: 3 })).toEqual({
+         one: 1,
+         two: 2,
+         three: 3
+      });
+   });
+
+   test('handles undefined objects', () => {
+      expect(fn({ one: 1 }, null, { two: 2 }, undefined, { three: 3 })).toEqual(
+         {
+            one: 1,
+            two: 2,
+            three: 3
+         }
+      );
+   });
+
+   test('overwrites existing keys', () => {
+      expect(fn({ one: 1, two: 2 }, { one: 11, three: 3 })).toEqual({
+         one: 11,
+         two: 2,
+         three: 3
+      });
+   });
+
+   test('deep merges objects', () => {
+      expect(fn({ o: { one: 1 } }, { o: { two: 2 } })).toEqual({
+         o: {
+            one: 1,
+            two: 2
+         }
+      });
+   });
+
+   test('overwrites scalar arrays', () => {
+      expect(
+         fn(
+            { countFalse: true, exclude: [], only: [] },
+            { countFalse: false, only: ['one', 'child.two'] }
+         )
+      ).toEqual({
+         countFalse: false,
+         exclude: [],
+         only: ['one', 'child.two']
+      });
+   });
+
+   test('replaces booleans', () => {
+      expect(fn({ bool: true }, { bool: false })).toEqual({
+         bool: false
+      });
+
+      expect(fn({ bool: false }, { bool: true })).toEqual({
+         bool: true
+      });
+
+      expect(fn({ bool: true }, { one: null }, { bool: false })).toEqual({
+         one: null,
+         bool: false
+      });
+   });
+}
 
 test('merges objects', () => {
    const baseFn = () => 3;
@@ -86,6 +163,9 @@ test('merges nested objects', () => {
    });
 });
 
+commonMergeTests(merge);
+commonMergeTests(mergeAll);
+
 test('merges configurations', () => {
    const defaultConfig = {
       userID: null as string,
@@ -128,6 +208,13 @@ test('merges configurations', () => {
    };
 
    expect(merge(defaultConfig, givenConfig)).toMatchSnapshot();
+});
+
+test('replaces all values even if new value is null or undefined', () => {
+   expect(mergeAll({ one: 1, two: 2 }, { one: null, two: undefined })).toEqual({
+      one: null,
+      two: undefined
+   });
 });
 
 test('infers Mime type from file name', () => {
