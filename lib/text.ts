@@ -22,15 +22,13 @@ const alwaysUpper = ['blm', 'fs', 'i'];
  *
  *    format('I like {0}, {1} and {0}', 'chocolate', 'peanut butter');
  */
-export function format(
+export const format = (
    text: string,
    ...insertions: (string | number)[]
-): string {
-   for (let i = 0; i < insertions.length; i++) {
-      text = text.replace('{' + i + '}', insertions[i] as string);
-   }
-   return text;
-}
+): string =>
+   text.replace(/{(\d)}/g, (_, match: string) =>
+      insertions[Number(match)].toString()
+   );
 
 /**
  * Replace dollar-sign variables with substitutions.
