@@ -110,3 +110,13 @@ test('identifies members', () => {
    //expect(is.defined(thing, Type.Two)).toBe(true);
    //expect(is.defined(u, Type.Two)).toBe(false);
 });
+
+test('verifies member types', () => {
+   const thing = {
+      first: 2,
+      2: 4
+   };
+
+   expect(is.defined(thing, 'first', is.number)).toBe(true);
+   expect(is.defined(thing, 'first', is.date)).toBe(false);
+});

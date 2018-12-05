@@ -35,11 +35,13 @@ export namespace is {
 
    /**
     * Whether named field is defined in the given object.
+    * @param checker Method to execute against field value
     */
    export const defined = <T extends Object, K extends keyof T>(
       obj: T | null | undefined,
-      field: K
-   ) => value<T>(obj) && obj.hasOwnProperty(field); // typeof(obj[field]) !== type.UNDEFINED;
+      field: K,
+      checker: (v: any) => boolean = v => true
+   ) => value<T>(obj) && obj.hasOwnProperty(field) && checker(obj[field]); // typeof(obj[field]) !== type.UNDEFINED;
 
    /**
     * Whether value is null, undefined or an empty string.
