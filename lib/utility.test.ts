@@ -287,6 +287,9 @@ test('clones objects', () => {
    thing.nested.key3 = 'wooly';
 
    expect(thing2.nested.key3).toBe('value3');
+
+   expect(clone(undefined)).toBeUndefined();
+   expect(clone(null)).toBeNull();
 });
 
 test('clones arrays', () => {
