@@ -51,21 +51,24 @@ export const mergeAll = <T extends Object>(base: T, ...additions: any[]) =>
 
 /**
  * Deep clone an object.
- * @param {boolean} [strict=true] If true then null or undefined is returned
+ * @param strict If true then null or undefined is returned
  * as such, otherwise an empty object may be returned.
  */
-export function clone<T extends Object | any[]>(thing: T, strict = true): T {
-   if (is.array(thing)) {
+export function clone<T extends Object | any[] | null | undefined>(
+   thing: T,
+   strict = true
+): T {
+   if (is.array<any>(thing)) {
       return thing.map(v => clone(v)) as T;
    }
-   if (!is.value(thing)) {
+   if (!is.value<Object>(thing)) {
       return strict ? thing : ({} as T);
    }
 
    const copy: { [key: string]: any } = {};
 
    for (const i in thing) {
-      const value = thing[i];
+      const value: any = (thing as any)[i];
       if (value != null) {
          if (is.array(value)) {
             copy[i] = value.map(v => clone(v));
