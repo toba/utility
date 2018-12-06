@@ -29,9 +29,7 @@ export namespace is {
    /**
     * Whether variable is defined and not null.
     */
-   export function value<T>(x: any): x is T {
-      return x !== undefined && x !== null;
-   }
+   export const value = <T>(x: any): x is T => x !== undefined && x !== null;
 
    /**
     * Whether named field is defined in the given object.
@@ -46,30 +44,29 @@ export namespace is {
    /**
     * Whether value is null, undefined or an empty string.
     */
-   export const empty = (x: any) => !value(x) || x === '';
+   export const empty = (x: any): x is null | undefined =>
+      !value(x) || x === '';
 
    /**
     * Whether value exists and is a type of number.
     */
-   export function number(n: any): n is number {
-      return value(n) && typeof n === Type.Number;
-   }
+   export const number = (n: any): n is number =>
+      value(n) && typeof n === Type.Number;
 
    /**
     * Whether value is numeric even if its type is a string.
     */
-   export function numeric(n: any): n is string | number {
-      return integer(n) || /^\d+$/.test(n);
-   }
+   export const numeric = (n: any): n is string | number =>
+      integer(n) || /^\d+$/.test(n);
 
    /**
     * Whether value is an integer.
     */
-   export function integer(n: any): n is string | number {
-      return value(n) && parseInt(n as string) === n;
-   }
+   export const integer = (n: any): n is string | number =>
+      value(n) && parseInt(n as string) === n;
 
-   export const bigInt = (n: any) => integer(n) && (n < -32768 || n > 32767);
+   export const bigInt = (n: any): n is number =>
+      integer(n) && (n < -32768 || n > 32767);
 
    /**
     * Whether value exists and is an array. This will return `false` for
@@ -114,16 +111,12 @@ export namespace is {
 
    /**
     * Whether value is an object.
-    * @param v
     * @param strict Whether to preclude arrays and subclasses (only allow plain objects)
     */
-   export function object<T>(v: any, strict = false): v is T {
-      return (
-         is.value(v) &&
-         typeof v === is.Type.Object &&
-         (!strict || (!Array.isArray(v) && v.constructor.name === 'Object'))
-      );
-   }
+   export const object = <T>(v: any, strict = false): v is T =>
+      is.value(v) &&
+      typeof v === is.Type.Object &&
+      (!strict || (!array(v) && v.constructor.name === 'Object'));
 
    /**
     * Whether value exists and is an object with keys and values, not any of the
@@ -134,28 +127,22 @@ export namespace is {
    /**
     * Whether value is a date.
     */
-   export function date(v: any): v is Date {
-      return value(v) && v instanceof Date;
-   }
+   export const date = (v: any): v is Date => value(v) && v instanceof Date;
 
    /**
     * Whether value is text.
     */
-   export function text(v: any): v is string {
-      return typeof v === Type.String;
-   }
+   export const text = (v: any): v is string => typeof v === Type.String;
 
    /**
     * Whether value is a function.
     */
-   export function callable(v: any): v is Function {
-      return value(v) && typeof v == Type.Function;
-   }
+   export const callable = (v: any): v is Function =>
+      value(v) && typeof v == Type.Function;
 
    /**
     * Whether value is an asynchronous function.
     */
-   export function async(v: any): v is Function {
-      return is.callable(v) && v.constructor.name === 'AsyncFunction';
-   }
+   export const async = (v: any): v is Function =>
+      is.callable(v) && v.constructor.name === 'AsyncFunction';
 }
