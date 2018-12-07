@@ -34,9 +34,9 @@ function retryLoop<T>(
 ): void {
    fn()
       .then(res => resolve(res))
-      .catch(err => {
+      .catch((err: Error) => {
          const msg: string = is.defined(err, 'stack')
-            ? err.stack
+            ? err.stack!
             : err.toString();
          if (!errors.includes(msg)) {
             errors.push(msg);

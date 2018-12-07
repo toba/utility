@@ -39,8 +39,7 @@ export namespace is {
       obj: T | null | undefined,
       field: K,
       checker: (v: any) => boolean = v => true
-   ): obj is T =>
-      value<T>(obj) && obj.hasOwnProperty(field) && checker(obj[field]); // typeof(obj[field]) !== type.UNDEFINED;
+   ) => value<T>(obj) && obj.hasOwnProperty(field) && checker(obj[field]); // typeof(obj[field]) !== type.UNDEFINED;
 
    /**
     * Whether value is null, undefined or an empty string.
