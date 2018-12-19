@@ -9,11 +9,41 @@
 
 # Toba Tools
 
-```
-yarn add @toba/tools --dev
+📖 [Using a TypeScript module](https://toba.github.io/about/usage)
+
+-  [Identity](#identity)
+-  [Caching](#caching)
+
+### Identity
+
+```ts
+import { is } from '@toba/tools';
 ```
 
-ℹ️ [Using a TypeScript module](https://toba.github.io/about/usage)
+Identity checks evaluate whether a variable is of a given type. All return `true` or `false`. Where possible, they implement TypeScript [type guards](https://www.typescriptlang.org/docs/handbook/advanced-types.html#user-defined-type-guards) so the value is thereafter recognized as a particular type.
+
+#### value
+```ts
+is.value(x));
+```
+Whether a value is not `undefined` and not `null`.
+
+The parameter is generic so the variable may thereafter be recognized as that type. For example, if `is.value<string>(var)` evaluates `true` then TypeScript will also know to treat `var` as a `string`.
+
+#### empty
+```ts
+is.empty(var);
+```
+
+
+#### defined
+```ts
+is.defined(obj, field);
+```
+
+### Caching
+
+stuff
 
 ## License
 
