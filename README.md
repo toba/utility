@@ -24,22 +24,24 @@ Identity checks evaluate whether a variable is of a given type. All return `true
 
 #### value
 ```ts
-is.value(x));
+is.value(x);
 ```
-Whether a value is not `undefined` and not `null`.
+Whether `x` is not `undefined` and not `null`.
 
 The parameter is generic so the variable may thereafter be recognized as that type. For example, if `is.value<string>(var)` evaluates `true` then TypeScript will also know to treat `var` as a `string`.
 
 #### empty
 ```ts
-is.empty(var);
+is.empty(x);
 ```
-
+Whether `x` is `undefined`, `null` or an empty string (`""`).
 
 #### defined
 ```ts
-is.defined(obj, field);
+is.defined(x, name);
 ```
+Whether `name` is a property of the object `x`. 
+
 
 ### Caching
 
