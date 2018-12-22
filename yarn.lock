@@ -152,9 +152,9 @@
   integrity sha512-shAmDyaQC4H92APFoIaVDHCx5bStIocgvbwQyxPRrbUY20V1EYTbSDchWbuwlMG3V17cprZhA6+78JfB+3DTPw==
 
 "@toba/develop@^2.0.0":
-  version "2.1.4"
-  resolved "https://registry.yarnpkg.com/@toba/develop/-/develop-2.1.4.tgz#89af10e538a00a929253eee4950d36d0b27e105c"
-  integrity sha512-CTwyVT4EnhNa1mMxZOq5xKqUcCeG3s5qbD1KAdR2dg9RVQw9gDQNVrg7YppH+zEDQ0Z3lP1hT65ypP6Zajmxbg==
+  version "2.1.5"
+  resolved "https://registry.yarnpkg.com/@toba/develop/-/develop-2.1.5.tgz#450f234646084d52c6bf2a0d61e5954f13455191"
+  integrity sha512-hbVcHmjezs4DMZJRanJshV/ut/JuTXU11QTbR4WXe1wXXUg7OA2LzzrqRHGjxPsvaJzY0bmqBaSycqCIj3EmHQ==
   dependencies:
     prettier "^1.15.0"
     stylelint "^9.9.0"

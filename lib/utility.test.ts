@@ -13,7 +13,9 @@ import {
 } from './index';
 import { lipsum } from '@toba/test';
 
-type TestThing = { [key: string]: string | string[] | TestThing | Function };
+type TestThing = {
+   [key: string]: string | string[] | TestThing | Function | null;
+};
 
 /**
  * Functionality expected of both `merge` and `mergeAll`.
@@ -97,7 +99,7 @@ test('merges objects', () => {
       key1: 'value1',
       key2: 'value2',
       key5: [] as string[],
-      key6: null as string,
+      key6: null,
       key7: baseFn
    };
    const addFn = () => 5;
@@ -168,8 +170,8 @@ commonMergeTests(mergeAll);
 
 test('merges configurations', () => {
    const defaultConfig = {
-      userID: null as string,
-      appID: null as string,
+      userID: null,
+      appID: null,
       useCache: true,
       maxCacheSize: 200,
       featureSets: [] as string[],
@@ -202,7 +204,7 @@ test('merges configurations', () => {
          token: {
             access: 'FLICKR_ACCESS_TOKEN',
             secret: 'FLICKR_TOKEN_SECRET',
-            request: null as string
+            request: null
          }
       }
    };
@@ -251,7 +253,7 @@ test('reads environmnent variables with option for alternate', () => {
    expect(env(nope, 'alternate')).toBe('alternate');
 
    let v: string | undefined;
-   let e: Error;
+   let e: Error | undefined = undefined;
 
    try {
       v = env(nope);
@@ -261,7 +263,7 @@ test('reads environmnent variables with option for alternate', () => {
 
    expect(v).toBeUndefined();
    expect(e).toBeDefined();
-   expect(e.message).toBe(`Environment value ${nope} does not exist`);
+   expect(e!.message).toBe(`Environment value ${nope} does not exist`);
 });
 
 test('returns MIME type with standard charset extension', () => {

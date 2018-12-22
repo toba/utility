@@ -31,11 +31,13 @@ test('builds duration string from milliseconds', () => {
    expect(durationString(Duration.Day)).toBe('1d');
    expect(durationString(Duration.Day * -1)).toBe('1d');
    expect(durationString(Duration.Day + Duration.Hour * 4)).toBe('1d4h');
-   expect(durationString(Duration.Hour * 2 + Duration.Minute * 20)).toBe('2h20m');
-   // rounding
-   expect(durationString(Duration.Hour * 2 + Duration.Minute * 20, TimeUnit.Hour)).toBe(
-      '2h'
+   expect(durationString(Duration.Hour * 2 + Duration.Minute * 20)).toBe(
+      '2h20m'
    );
+   // rounding
+   expect(
+      durationString(Duration.Hour * 2 + Duration.Minute * 20, TimeUnit.Hour)
+   ).toBe('2h');
    expect(
       durationString(
          Duration.Hour * 4 + Duration.Minute * 20 + Duration.Second * 45,
@@ -54,7 +56,6 @@ test('builds duration string from date range', () => {
 });
 
 test('parse duration string', () => {
-   expect(parseDuration(null)).toBe(0);
    expect(parseDuration('12')).toBe(0);
    expect(parseDuration('2' + TimeUnit.Hour)).toBe(2 * Duration.Hour);
    expect(parseDuration('4' + TimeUnit.Day + '2' + TimeUnit.Hour)).toBe(

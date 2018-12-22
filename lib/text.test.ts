@@ -67,7 +67,6 @@ test('capitalizes first word', () => {
 test('wraps text', () => {
    expect(wrapText('this thing', -2)).toBe('this thing');
    expect(wrapText('this thing', 5)).toBe('this\nthing');
-   expect(wrapText('this thing', 5, null)).toBe('this thing');
    expect(wrapText('this thing', 5, '<br/>')).toBe('this<br/>thing');
    expect(wrapText('this thing')).toBe('this thing');
    expect(wrapText(longText, 40, '<br/>')).toBe(
