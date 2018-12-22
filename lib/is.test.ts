@@ -120,3 +120,10 @@ test('verifies member types', () => {
    expect(is.defined(thing, 'first', is.number)).toBe(true);
    expect(is.defined(thing, 'first', is.date)).toBe(false);
 });
+
+test('identifies booleans', () => {
+   expect(is.boolean(3)).toBe(false);
+   expect(is.boolean(new Date())).toBe(false);
+   expect(is.boolean(true)).toBe(true);
+   expect(is.boolean(false)).toBe(true);
+});

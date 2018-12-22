@@ -145,4 +145,10 @@ export namespace is {
     */
    export const async = (v: any): v is Function =>
       is.callable(v) && v.constructor.name === 'AsyncFunction';
+
+   /**
+    * Whether value is a boolean.
+    */
+   export const boolean = (v: any): v is boolean =>
+      value(v) && typeof v == Type.Boolean;
 }
