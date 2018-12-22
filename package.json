@@ -1,7 +1,7 @@
 {
    "name": "@toba/tools",
    "description": "Toba Tools",
-   "version": "4.2.5",
+   "version": "4.2.6",
    "private": false,
    "publishConfig": {
       "access": "public"
@@ -21,7 +21,7 @@
       "test": "jest --coverage"
    },
    "devDependencies": {
-      "@toba/build": "^2.0.0",
+      "@toba/develop": "^2.0.0",
       "@toba/test": "^2.0.0"
    },
    "prettier": {
