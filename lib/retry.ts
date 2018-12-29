@@ -1,4 +1,4 @@
-import { is, sayNumber } from './';
+import { is, sayNumber } from './index';
 
 /**
  * Retry a `Promise` function until it resolves or number of retry times is

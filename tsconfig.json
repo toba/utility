@@ -1,3 +1,7 @@
 {
-   "extends": "./node_modules/@toba/develop/ts/lib-config"
+   "extends": "./node_modules/@toba/develop/ts/config",
+   "compilerOptions": {
+      "module": "esnext",
+      "outDir": "./js"
+   }
 }
