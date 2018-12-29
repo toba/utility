@@ -1,16 +1,15 @@
 {
    "name": "@toba/tools",
    "description": "Toba Tools",
-   "version": "4.4.0",
+   "version": "5.0.0",
    "private": false,
    "publishConfig": {
       "access": "public"
    },
-   "main": "lib/index.ts",
-   "types:": "js/index.d.ts",
+   "main": "dist/index.js",
+   "types": "dist/index.d.ts",
    "files": [
-      "lib/**/!(*.test).ts",
-      "js"
+      "dist"
    ],
    "author": {
       "name": "Jason Abbott"
@@ -21,12 +20,8 @@
       "test": "jest --coverage"
    },
    "devDependencies": {
-      "@toba/develop": "^2.0.0",
+      "@toba/develop": "^3.0.0",
       "@toba/test": "^2.0.0"
-   },
-   "prettier": {
-      "singleQuote": true,
-      "tabWidth": 3
    },
    "repository": {
       "type": "git",

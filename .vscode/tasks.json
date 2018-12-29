@@ -11,6 +11,10 @@
       },
       {
          "label": "Build",
+         "presentation": {
+            "showReuseMessage": false,
+            "clear": true
+         },
          "command": "./node_modules/.bin/tsc",
          "type": "shell",
          "group": "build",
@@ -18,6 +22,10 @@
       },
       {
          "label": "Publish",
+         "presentation": {
+            "showReuseMessage": false,
+            "clear": true
+         },
          "command": "npm",
          "args": ["publish"],
          "type": "shell",

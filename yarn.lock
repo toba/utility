@@ -151,10 +151,10 @@
   resolved "https://registry.yarnpkg.com/@nodelib/fs.stat/-/fs.stat-1.1.3.tgz#2b5a3ab3f918cca48a8c754c08168e3f03eba61b"
   integrity sha512-shAmDyaQC4H92APFoIaVDHCx5bStIocgvbwQyxPRrbUY20V1EYTbSDchWbuwlMG3V17cprZhA6+78JfB+3DTPw==
 
-"@toba/develop@^2.0.0":
-  version "2.1.5"
-  resolved "https://registry.yarnpkg.com/@toba/develop/-/develop-2.1.5.tgz#450f234646084d52c6bf2a0d61e5954f13455191"
-  integrity sha512-hbVcHmjezs4DMZJRanJshV/ut/JuTXU11QTbR4WXe1wXXUg7OA2LzzrqRHGjxPsvaJzY0bmqBaSycqCIj3EmHQ==
+"@toba/develop@^3.0.0":
+  version "3.1.1"
+  resolved "https://registry.yarnpkg.com/@toba/develop/-/develop-3.1.1.tgz#6b9e4e6a7896e66ba7402a4da376c6b7b648de38"
+  integrity sha512-Warv/BsB4nMLt10l54XRT0bZMb9tHoYfyqZFMf7TPOSYA+nd82xV6JZeSj0B4dYYiXjtvQu/uin07Zngrzxjqg==
   dependencies:
     prettier "^1.15.0"
     stylelint "^9.9.0"
@@ -173,21 +173,22 @@
     "@toba/tools" "^4.0.0"
 
 "@toba/test@^2.0.0":
-  version "2.0.5"
-  resolved "https://registry.yarnpkg.com/@toba/test/-/test-2.0.5.tgz#2f7183fbe2d724b1c08afccc245b9a4a2d436909"
-  integrity sha512-yyTGd1BLajxDzj6jXnYMxiD0O0+zXeS7LXE38BZkxIRo/2kDYeRZi05kk4LPfDxMuCb4VQrhicvg6xM2vJzBCw==
+  version "2.2.1"
+  resolved "https://registry.yarnpkg.com/@toba/test/-/test-2.2.1.tgz#51ce141c22189f08508b9953bd18f1389df18d3b"
+  integrity sha512-RSVXoXfTMymVsEOStqcYsW6yKqhnzD/V12kiGqzT/wsjuuTIRTSXOYw4V32EsatrBsXC685tXAl4d19Ikv63iA==
   dependencies:
     "@toba/logger" "^2.0.4"
     "@toba/tools" "^4.0.0"
     "@types/jest" "^23.3.0"
     "@types/node" "^10.5.0"
     jest "^23.5.0"
+    jest-date-mock "^1.0.6"
     ts-jest "^23.10.4"
 
 "@toba/tools@^4.0.0":
-  version "4.2.5"
-  resolved "https://registry.yarnpkg.com/@toba/tools/-/tools-4.2.5.tgz#487a420dcc9555a8fba8e17ae08764a2f8a9eef8"
-  integrity sha512-RiA3H77C9LmomKxsfwQP33/EkBrLRxNdUrjTyXVYvFmjyX5PXD35l+3bbV8CW9ftE4HX6jjZ0aBi7aQakM0n6A==
+  version "4.4.1"
+  resolved "https://registry.yarnpkg.com/@toba/tools/-/tools-4.4.1.tgz#85a888b9d7ab7ee882c727e2b10b6be88f70b118"
+  integrity sha512-MLg6WzM7iOl+C7Nr6BD1SZMoucz5vIWNatqcQlN+BQi4gKj9MSMfXG4B8RW/HEfDbxRRCYh9CwZat8fResI4WQ==
 
 "@types/jest@^23.3.0":
   version "23.3.10"
@@ -752,9 +753,9 @@ camelcase@^4.1.0:
   integrity sha1-1UVjW+HjPFQmScaRc+Xeas+uNN0=
 
 caniuse-lite@^1.0.30000921:
-  version "1.0.30000923"
-  resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30000923.tgz#148f9bda508024b5ce957b463ae2e8302b451bb2"
-  integrity sha512-j5ur7eeluOFjjPUkydtXP4KFAsmH3XaQNch5tvWSO+dLHYt5PE+VgJZLWtbVOodfWij6m6zas28T4gB/cLYq1w==
+  version "1.0.30000925"
+  resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30000925.tgz#f1a3b9aae2a83071b1eccfa39959d72440409b08"
+  integrity sha512-zcYupoUxtW46rOikuDF7vfL9N1Qe9ZuUBTz3n3q8fFsoJIs/h9UN6Vg/0QpjsmvImXw9mVc3g+ZBfqvUz/iALA==
 
 capture-exit@^1.2.0:
   version "1.2.0"
@@ -963,10 +964,10 @@ cross-spawn@^5.0.1:
     shebang-command "^1.2.0"
     which "^1.2.9"
 
-cssesc@^1.0.1:
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/cssesc/-/cssesc-1.0.1.tgz#ef7bd8d0229ed6a3a7051ff7771265fe7330e0a8"
-  integrity sha512-S2hzrpWvE6G/rW7i7IxJfWBYn27QWfOIncUW++8Rbo1VB5zsJDSVPcnI+Q8z7rhxT6/yZeLOCja4cZnghJrNGA==
+cssesc@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/cssesc/-/cssesc-2.0.0.tgz#3b13bd1bb1cb36e1bcb5a4dcd27f54c5dcb35703"
+  integrity sha512-MsCAG1z9lPdoO/IUMLSBWBSVxVtJ1395VGIQ+Fc2gNdkQ1hNDnQdw3YhA71WJCBW1vdwA0cAnk/DnW6bqoEUYg==
 
 cssom@0.3.x, "cssom@>= 0.3.2 < 0.4.0":
   version "0.3.4"
@@ -2391,6 +2392,11 @@ jest-config@^23.6.0:
     micromatch "^2.3.11"
     pretty-format "^23.6.0"
 
+jest-date-mock@^1.0.6:
+  version "1.0.6"
+  resolved "https://registry.yarnpkg.com/jest-date-mock/-/jest-date-mock-1.0.6.tgz#7ea405d1fa68f86bb727d12e47b9c5e6760066a6"
+  integrity sha512-wnLgDaK3i2md/cQ1wKx/+/78PieO4nkGen8avEmHd4dt1NGGxeuW8/oLAF5qsatQBXdn08pxpqRtUoDvTTLdRg==
+
 jest-diff@^23.6.0:
   version "23.6.0"
   resolved "https://registry.yarnpkg.com/jest-diff/-/jest-diff-23.6.0.tgz#1500f3f16e850bb3d71233408089be099f610c7d"
@@ -3626,12 +3632,12 @@ postcss-selector-parser@^3.1.0:
     indexes-of "^1.0.1"
     uniq "^1.0.1"
 
-postcss-selector-parser@^4.0.0:
-  version "4.0.0"
-  resolved "https://registry.yarnpkg.com/postcss-selector-parser/-/postcss-selector-parser-4.0.0.tgz#50c6570f40579036d8e63f23e6c0626fe5743527"
-  integrity sha512-5h+MvEjnzu1qy6MabjuoPatsGAjjDV9B24e7Cktjl+ClNtjVjmvAXjOFQr1u7RlWULKNGYaYVE4s+DIIQ4bOGA==
+postcss-selector-parser@^5.0.0:
+  version "5.0.0"
+  resolved "https://registry.yarnpkg.com/postcss-selector-parser/-/postcss-selector-parser-5.0.0.tgz#249044356697b33b64f1a8f7c80922dddee7195c"
+  integrity sha512-w+zLE5Jhg6Liz8+rQOWEAwtwkyqpfnmsinXjXg6cY7YIONZZtgvE0v2O0uhQBs0peNomOJwWRKt6JBfTdTd3OQ==
   dependencies:
-    cssesc "^1.0.1"
+    cssesc "^2.0.0"
     indexes-of "^1.0.1"
     uniq "^1.0.1"
 
@@ -3797,9 +3803,9 @@ readable-stream@^2.0.1, readable-stream@^2.0.6:
     util-deprecate "~1.0.1"
 
 readable-stream@^3.0.6:
-  version "3.1.0"
-  resolved "https://registry.yarnpkg.com/readable-stream/-/readable-stream-3.1.0.tgz#19c2e9c1ce43507c53f6eefbcf1ee3d4aaa786f5"
-  integrity sha512-vpydAvIJvPODZNagCPuHG87O9JNPtvFEtjHHRVwNVsVVRBqemvPJkc2SYbxJsiZXawJdtZNmkmnsPuE3IgsG0A==
+  version "3.1.1"
+  resolved "https://registry.yarnpkg.com/readable-stream/-/readable-stream-3.1.1.tgz#ed6bbc6c5ba58b090039ff18ce670515795aeb06"
+  integrity sha512-DkN66hPyqDhnIQ6Jcsvx9bFjhw214O4poMBcIMgPVpQvNy9a0e0Uhg5SqySyDKAmUlwt8LonTBz1ezOnM8pUdA==
   dependencies:
     inherits "^2.0.3"
     string_decoder "^1.1.1"
@@ -4407,14 +4413,14 @@ stylelint-config-standard@^18.2.0:
     stylelint-config-recommended "^2.1.0"
 
 stylelint-scss@^3.4.0:
-  version "3.4.3"
-  resolved "https://registry.yarnpkg.com/stylelint-scss/-/stylelint-scss-3.4.3.tgz#9427ad4d5f29c3bb90252a45df5a91824228d5b3"
-  integrity sha512-+D8sq5obF2ffrMQ53tcJkgNRUvjJwf239WKiibVXSKZQizczEiETHuT5sBLTXNZQ10KWD5jdpt7fKnruj5SgXA==
+  version "3.4.4"
+  resolved "https://registry.yarnpkg.com/stylelint-scss/-/stylelint-scss-3.4.4.tgz#29e724e5e6c21f1c61fd90ad14f91533c2cf28f4"
+  integrity sha512-GquwsRegF2gsVRePaUN93cYf9aJDygr03X/QRiwk9O5lOe7QZHlM4Vzrb8JAu+pZ0xodPRpN6W259yA6ApM3WA==
   dependencies:
     lodash "^4.17.11"
     postcss-media-query-parser "^0.2.3"
     postcss-resolve-nested-selector "^0.1.1"
-    postcss-selector-parser "^4.0.0"
+    postcss-selector-parser "^5.0.0"
     postcss-value-parser "^3.3.1"
 
 stylelint@^9.9.0:
