@@ -6,8 +6,6 @@ import {
    capitalize,
    slug,
    format,
-   encodeBase64,
-   decodeBase64,
    htmlEscape,
    htmlUnescape
 } from './';

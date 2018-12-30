@@ -112,7 +112,7 @@ test('cancels listeners if operation has errors', async () => {
    const oops = 'error';
    const queue = new Queue<string, string>(op);
    let out: string[] = [];
-   let e: Error;
+   let e: Error = undefined;
 
    op.mockReturnValue(
       new Promise((_resolve, reject) => {

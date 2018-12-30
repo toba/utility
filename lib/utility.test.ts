@@ -4,10 +4,6 @@ import {
    mergeAll,
    inferMimeType,
    MimeType,
-   byteSize,
-   gzip,
-   unzip,
-   env,
    addCharSet,
    clone
 } from './index';

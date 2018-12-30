@@ -1,4 +1,4 @@
-import { is, MimeType, Encoding, CharSet } from './index';
+import { is, MimeType, CharSet } from './index';
 
 type Hash = { [key: string]: any };
 
