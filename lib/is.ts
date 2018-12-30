@@ -104,7 +104,7 @@ export namespace is {
       return (
          is.value(v) &&
          typeof v === is.Type.Object &&
-         !(Array.isArray(v) || ArrayBuffer.isView(v) || Buffer.isBuffer(v)) &&
+         !(Array.isArray(v) || ArrayBuffer.isView(v)) &&
          (allowEmpty || Object.keys(v).length > 0)
       );
    }

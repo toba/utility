@@ -3,11 +3,7 @@ export {
    mergeAll,
    eventCoord,
    randomID,
-   gzip,
-   unzip,
-   byteSize,
    inferMimeType,
-   env,
    addCharSet,
    clone
 } from './utility';
@@ -33,13 +29,9 @@ export {
    titleCase,
    htmlEscape,
    htmlUnescape,
-   wrapText,
-   encodeBase64,
-   decodeBase64
+   wrapText
 } from './text';
 export { median, boundary, Limits } from './math';
-export { Cache, CachePolicy, EventType as CacheEventType } from './cache';
-export { CompressCache } from './compress-cache';
 export { re } from './regex';
 export { is } from './is';
 export { url } from './url';
