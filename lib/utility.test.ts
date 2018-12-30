@@ -7,7 +7,6 @@ import {
    addCharSet,
    clone
 } from './index';
-import { lipsum } from '@toba/test';
 
 type TestThing = {
    [key: string]: string | string[] | TestThing | Function | null;

@@ -8,7 +8,7 @@ import {
    format,
    htmlEscape,
    htmlUnescape
-} from './';
+} from './index';
 import { htmlEntity } from './text';
 
 const code: { [key: string]: string } = {

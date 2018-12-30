@@ -1,5 +1,4 @@
 import '@toba/test';
-import { sayNumber } from '@toba/tools';
 import {
    removeItem,
    shuffle,
@@ -10,7 +9,8 @@ import {
    mapSet,
    filterSet,
    findInSet,
-   unlist
+   unlist,
+   sayNumber
 } from './index';
 
 test('removes items from arrays', () => {

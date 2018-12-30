@@ -4,6 +4,10 @@
       {
          "label": "Test",
          "command": "./node_modules/.bin/jest",
+         "presentation": {
+            "showReuseMessage": false,
+            "clear": true
+         },
          "args": ["--verbose"],
          "type": "shell",
          "group": "test",
