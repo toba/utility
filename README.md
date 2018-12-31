@@ -49,7 +49,7 @@ stuff
 
 ## License
 
-Copyright &copy; 2018 Jason Abbott
+Copyright &copy; 2019 Jason Abbott
 
 This software is licensed under the MIT license. See the [LICENSE](./LICENSE) file
 accompanying this software for terms of use.

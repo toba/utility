@@ -152,9 +152,9 @@
   integrity sha512-shAmDyaQC4H92APFoIaVDHCx5bStIocgvbwQyxPRrbUY20V1EYTbSDchWbuwlMG3V17cprZhA6+78JfB+3DTPw==
 
 "@toba/develop@^4.0.0":
-  version "4.0.3"
-  resolved "https://registry.yarnpkg.com/@toba/develop/-/develop-4.0.3.tgz#5851de381990a43450e75c22e670c819fc6fa7cc"
-  integrity sha512-Hiona8UJPDCG0+0AgOVUoXhCgfq96HQG29kCD0TTURwk+gkaGPUJgqldpmhk+oc5h5Sz5sDfefBsjMCRM4e/Ug==
+  version "4.1.3"
+  resolved "https://registry.yarnpkg.com/@toba/develop/-/develop-4.1.3.tgz#4f80e5bbd846a17a66dff074b4d690ce8af16003"
+  integrity sha512-Zu1READ06vUdaaFLfAu3VD8ycjn7ov1FG5Qh3Z+5AJwx8z18KLr5PMS2XsCjOMXvG3zV1zWWsiTIS7hF1VKPuA==
   dependencies:
     "@types/prettier" "^1.15.2"
     prettier "^1.15.0"
@@ -166,10 +166,10 @@
     tslint-consistent-codestyle "^1.14.0"
     typescript "^3.2.0"
 
-"@toba/test@^2.0.0":
-  version "2.3.3"
-  resolved "https://registry.yarnpkg.com/@toba/test/-/test-2.3.3.tgz#0738bca99b245cb9915b8144eb6a65e018520e81"
-  integrity sha512-S/iD2xXke/W9p1kM99x0FG1aX594BKUZEDjReOWykBfZiBAQCob5DbOIo7P/RIzdmJJNGzxyXJiLxVa9QXWeAA==
+"@toba/test@^3.0.0":
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/@toba/test/-/test-3.0.0.tgz#d8db59e12848bd65fcf03f3e41fe097858f0ec0e"
+  integrity sha512-RSXBW5WEKvO2upcBBHAJC4jmoMjLOuSO1TVj99l5MAc1ApB6YEDWIm0aDTOoRdRO+s3HOfhEGbGT2XDoO+Hg/Q==
   dependencies:
     "@toba/tools" "^5.0.0"
     "@types/jest" "^23.3.0"
@@ -178,14 +178,14 @@
     ts-jest "^23.10.4"
 
 "@toba/tools@^5.0.0":
-  version "5.1.1"
-  resolved "https://registry.yarnpkg.com/@toba/tools/-/tools-5.1.1.tgz#2635af815ee4c6f240ec34a3cffc2f20897a0bf1"
-  integrity sha512-I0O0ZDmgclPWUfbdlQ3be+gMZFRkvNYQetVYOysKtQi7YWXrdZN+21XRHYEKzXWhpHYuKDx6pc12qlV3uBB3iA==
+  version "5.1.2"
+  resolved "https://registry.yarnpkg.com/@toba/tools/-/tools-5.1.2.tgz#a4796d1473f214d842ebac8741017eac521b3659"
+  integrity sha512-cF0qqX3cBYCimLyy78xKJe/jG5GB7E9uAEYxeoec3bNW8vJUAj6BHgud0l9B3zO2aUVigMoJs7ftp2JvJhsP0w==
 
 "@types/jest@^23.3.0":
-  version "23.3.10"
-  resolved "https://registry.yarnpkg.com/@types/jest/-/jest-23.3.10.tgz#4897974cc317bf99d4fe6af1efa15957fa9c94de"
-  integrity sha512-DC8xTuW/6TYgvEg3HEXS7cu9OijFqprVDXXiOcdOKZCU/5PJNLZU37VVvmZHdtMiGOa8wAA/We+JzbdxFzQTRQ==
+  version "23.3.11"
+  resolved "https://registry.yarnpkg.com/@types/jest/-/jest-23.3.11.tgz#d3a936ae753d9e484965f5cbd19027c2b8af2551"
+  integrity sha512-eroF85PoG87XjCwzxey7yBsQNkIY/TV5myKKSG/022A0FW25afdu/uub6JDMS5eT68zBBt82S+w/MFOTjeLM3Q==
 
 "@types/prettier@^1.15.2":
   version "1.15.2"
@@ -4692,9 +4692,9 @@ tsutils@^2.27.2, tsutils@^2.29.0:
     tslib "^1.8.1"
 
 tsutils@^3.1.0:
-  version "3.5.2"
-  resolved "https://registry.yarnpkg.com/tsutils/-/tsutils-3.5.2.tgz#6fd3c2d5a731e83bb21b070a173ec0faf3a8f6d3"
-  integrity sha512-qIlklNuI/1Dzfm+G+kJV5gg3gimZIX5haYtIVQe7qGyKd7eu8T1t1DY6pz4Sc2CGXAj9s1izycctm9Zfl9sRuQ==
+  version "3.6.0"
+  resolved "https://registry.yarnpkg.com/tsutils/-/tsutils-3.6.0.tgz#33fc3ddb74abf5bba10789acd03eee6ea96c839c"
+  integrity sha512-hCG3lZz+uRmmiC4brr/kY6Yuypnl20PNe8t49DO4OUGlbxWkxYHF63EeG2XPSd0JcKiWmp9p55yQyrkxqSS5Dg==
   dependencies:
     tslib "^1.8.1"
 
