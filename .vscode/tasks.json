@@ -16,7 +16,6 @@
       {
          "label": "Build",
          "presentation": {
-            "showReuseMessage": false,
             "clear": true
          },
          "command": "./node_modules/.bin/tsc",
@@ -27,7 +26,6 @@
       {
          "label": "Publish",
          "presentation": {
-            "showReuseMessage": false,
             "clear": true
          },
          "command": "npm",
