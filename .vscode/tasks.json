@@ -19,6 +19,7 @@
             "clear": true
          },
          "command": "./node_modules/.bin/tsc",
+         "args": ["--project", "tsconfig.build.json"],
          "type": "shell",
          "group": "build",
          "problemMatcher": ["$tsc"]
