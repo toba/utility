@@ -13,7 +13,8 @@
       "dist"
    ],
    "author": {
-      "name": "Jason Abbott"
+      "name": "Jason Abbott",
+      "url": "http://github.com/toba"
    },
    "license": "MIT",
    "scripts": {
