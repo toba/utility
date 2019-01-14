@@ -166,9 +166,9 @@
     typescript "^3.2.0"
 
 "@toba/test@^3.0.0":
-  version "3.1.0"
-  resolved "https://registry.yarnpkg.com/@toba/test/-/test-3.1.0.tgz#ccbb984e81273eea6d2bea2cfd98ddc9aa20bca2"
-  integrity sha512-YJd71wjJdA1QPT0EIZm+Y40yRM25l8hnPzH08+xFjoXysJoOutKC5jTyfckiRYJ4592HIdV6zls/PtjdgybdgQ==
+  version "3.1.1"
+  resolved "https://registry.yarnpkg.com/@toba/test/-/test-3.1.1.tgz#01c86d96489f02e523d6359180d3b11602b437eb"
+  integrity sha512-O0be/xp0AiGMbP/yinpxqW2FAd4L/g0sWVDBahfYqqql9S6Sul3/oeAmoMPrVSkRm/ElhiN9qvlqDKQWIxfQeQ==
   dependencies:
     "@toba/tools" "^5.0.0"
     "@types/jest" "^23.3.0"
