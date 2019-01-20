@@ -1,6 +1,6 @@
 export {
-   merge,
-   mergeAll,
+   mergeValues as merge,
+   merge as mergeAll,
    eventCoord,
    randomID,
    inferMimeType,

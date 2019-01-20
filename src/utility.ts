@@ -7,7 +7,7 @@ type Hash = { [key: string]: any };
  * additions are not null or undefined. Arrays will not be merged but will be
  * treated as values meaning additions supersede the base.
  */
-export function merge<T extends Object>(base: T, ...additions: any[]): T {
+export function mergeValues<T extends Object>(base: T, ...additions: any[]): T {
    return additions.reduce((existing, add: Hash) => {
       //for (const key of Reflect.ownKeys(add)) {
       if (is.value<Hash>(add)) {
@@ -24,7 +24,7 @@ export function merge<T extends Object>(base: T, ...additions: any[]): T {
                ) {
                   existing[key] = v;
                } else {
-                  existing[key] = merge(existing[key], v);
+                  existing[key] = mergeValues(existing[key], v);
                }
             }
          }
@@ -37,13 +37,13 @@ export function merge<T extends Object>(base: T, ...additions: any[]): T {
  * Merge additions into base object, allowing `null` or `undefined` to replace
  * existing values.
  */
-export const mergeAll = <T extends Object>(base: T, ...additions: any[]) =>
+export const merge = <T extends Object>(base: T, ...additions: any[]) =>
    additions
       .filter(add => is.object(add))
       .reduce((existing, add) => {
          for (const key of Object.keys(add)) {
             const v = add[key];
-            existing[key] = is.object(v, true) ? mergeAll(existing[key], v) : v;
+            existing[key] = is.object(v, true) ? merge(existing[key], v) : v;
          }
          return existing;
       }, clone(base));
