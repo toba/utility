@@ -2,6 +2,18 @@ import { is, MimeType, CharSet } from './index';
 
 type Hash = { [key: string]: any };
 
+export function mergeValues<T extends Object, U>(base: T, additions: U): T & U;
+export function mergeValues<T extends Object, U, V>(
+   base: T,
+   add1: U,
+   add2: V
+): T & U & V;
+export function mergeValues<T extends Object, U, V, W>(
+   base: T,
+   add1: U,
+   add2: V,
+   add3: W
+): T & U & V & W;
 /**
  * Merge additions into a base object, only replacing base values if the
  * additions are not null or undefined. Arrays will not be merged but will be
@@ -33,12 +45,24 @@ export function mergeValues<T extends Object>(base: T, ...additions: any[]): T {
    }, clone(base));
 }
 
+export function merge<T extends Object, U>(base: T, add1: U): T & U;
+export function merge<T extends Object, U, V>(
+   base: T,
+   add1: U,
+   add2: V
+): T & U & V;
+export function merge<T extends Object, U, V, W>(
+   base: T,
+   add1: U,
+   add2: V,
+   add3: W
+): T & U & V & W;
 /**
  * Merge additions into base object, allowing `null` or `undefined` to replace
  * existing values.
  */
-export const merge = <T extends Object>(base: T, ...additions: any[]) =>
-   additions
+export function merge<T extends Object>(base: T, ...additions: any[]) {
+   return additions
       .filter(add => is.object(add))
       .reduce((existing, add) => {
          for (const key of Object.keys(add)) {
@@ -47,6 +71,7 @@ export const merge = <T extends Object>(base: T, ...additions: any[]) =>
          }
          return existing;
       }, clone(base));
+}
 
 /**
  * Deep clone an object.
