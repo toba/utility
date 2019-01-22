@@ -151,4 +151,10 @@ export namespace is {
     */
    export const boolean = (v: any): v is boolean =>
       value(v) && typeof v == Type.Boolean;
+
+   /**
+    * Whether object is a promise.
+    */
+   export const promise = <T>(v: any): v is Promise<T> =>
+      is.value<any>(v) && is.callable(v.then);
 }

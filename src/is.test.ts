@@ -126,3 +126,9 @@ test('identifies booleans', () => {
    expect(is.boolean(true)).toBe(true);
    expect(is.boolean(false)).toBe(true);
 });
+
+test('identifies promises', () => {
+   expect(is.promise(2)).toBe(false);
+   expect(is.promise(new Date())).toBe(false);
+   expect(is.promise(Promise.resolve(2))).toBe(true);
+});
