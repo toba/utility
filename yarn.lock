@@ -9,7 +9,7 @@
   dependencies:
     "@babel/highlight" "^7.0.0"
 
-"@babel/core@>=7.1.0", "@babel/core@^7.1.0":
+"@babel/core@>=7.1.0", "@babel/core@^7.1.0", "@babel/core@^7.2.2":
   version "7.2.2"
   resolved "https://registry.yarnpkg.com/@babel/core/-/core-7.2.2.tgz#07adba6dde27bb5ad8d8672f15fde3e08184a687"
   integrity sha512-59vB0RWt09cAct5EIe58+NzGP4TFSD3Bz//2/ELy3ZeTeKF6VTD1AXlH8BGGbCX0PuobZBsIzO7IAI9PH67eKw==
@@ -681,10 +681,11 @@
     typescript "^3.2.0"
 
 "@toba/test@^3.0.0":
-  version "3.5.3"
-  resolved "https://registry.yarnpkg.com/@toba/test/-/test-3.5.3.tgz#c172280660c891e18acb79ca37df47d0a324f828"
-  integrity sha512-za6XYLe2Vh+6Rm3oltrMU2WRm3TUZt6iQ2och4Roxv6goPgEVGUZbxkqGo5b0JhMKOfyEk8pf9s/EADXEIbZWw==
+  version "3.6.1"
+  resolved "https://registry.yarnpkg.com/@toba/test/-/test-3.6.1.tgz#57b48a7ea575053c54bb4b2ec0cf441dbbe1a1cd"
+  integrity sha512-vWhrno1mPRnlwp4pTivON9tWZkNeCSc1efFfLNiv/OoFldwpZcBC7ufMXHbRrNocOsk/1KrBsPb7A1nvp0Zkew==
   dependencies:
+    "@babel/core" "^7.2.2"
     "@babel/plugin-proposal-class-properties" "^7.3.0"
     "@babel/preset-env" "^7.3.1"
     "@babel/preset-typescript" "^7.1.0"
@@ -695,9 +696,9 @@
     jest-date-mock "^1.0.6"
 
 "@toba/tools@^6.0.0":
-  version "6.1.0"
-  resolved "https://registry.yarnpkg.com/@toba/tools/-/tools-6.1.0.tgz#da58cdd371d13b838a7005b055d56f120c813f79"
-  integrity sha512-UfQ2MglHinGQxirtFSoeXrItROVS3v97tcyG4dkzOc6OV/9h7rfREao8KPCIpCXwGpocXn38wkcZkeDRqv4AlA==
+  version "6.1.1"
+  resolved "https://registry.yarnpkg.com/@toba/tools/-/tools-6.1.1.tgz#3c9a5cee3d55c2b28488355c1d776fac315157e2"
+  integrity sha512-Yj/+z6kArHsyNwojmVImDqdDpV4VcATktQI7R1DLqk/EWQjX/eqRSwUi3g+lJcaomX1oOXIGrWgX0Mhp/e2gOQ==
 
 "@types/jest@^23.3.0":
   version "23.3.13"
