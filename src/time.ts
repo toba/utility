@@ -17,9 +17,9 @@ export enum Duration {
    /** Milliseconds in a year */
    Year = Day * 365,
    /** Average milliseconds per quarter */
-   Quarter = Math.floor(Year / 4),
+   Quarter = Math.floor(Duration.Year / 4),
    /** Average milliseconds per month */
-   Month = Math.floor(Year / 12)
+   Month = Math.floor(Duration.Year / 12)
 }
 
 /**
