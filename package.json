@@ -1,16 +1,16 @@
 {
    "name": "@toba/tools",
    "description": "Toba Tools",
-   "version": "6.2.0",
+   "version": "6.2.2",
    "private": false,
    "publishConfig": {
       "access": "public"
    },
    "sideEffects": false,
-   "main": "dist/index.js",
-   "types": "dist/index.d.ts",
+   "main": "es6/index.js",
+   "types": "es6/index.d.ts",
    "files": [
-      "dist",
+      "es6",
       "cjs"
    ],
    "author": {
@@ -25,7 +25,7 @@
       "test": "jest --coverage"
    },
    "devDependencies": {
-      "@toba/develop": "^5.0.0",
+      "@toba/develop": "^6.0.0",
       "@toba/test": "^3.0.0"
    },
    "repository": {
