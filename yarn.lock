@@ -693,9 +693,9 @@
     typescript "^3.3.1"
 
 "@toba/test@^3.0.0":
-  version "3.7.3"
-  resolved "https://registry.yarnpkg.com/@toba/test/-/test-3.7.3.tgz#600c5e9d724b6264749e0a14f1a7efdcb029a96f"
-  integrity sha512-rupNU8Ewsi6RRhwr948HtKqs8+XOHUYRMnH8dRWlOulH9uXv0oV2U2bV/JCvIBdIHxBYMEElRS0oIjOl6wMnRA==
+  version "3.7.4"
+  resolved "https://registry.yarnpkg.com/@toba/test/-/test-3.7.4.tgz#b55aea560756d60dfecf7a4b39aa50e9d1aff940"
+  integrity sha512-IxsA0FDCMl2yotTzRi+gL9N4FTtzBM4uZNU6Lh7NhEcDzSNWpEl9vz5p1L7i3SF81BAGoJH+O01OhQTuTx4TOw==
   dependencies:
     "@babel/core" "^7.2.2"
     "@babel/plugin-proposal-class-properties" "^7.3.0"
@@ -711,9 +711,9 @@
     jest-date-mock "^1.0.6"
 
 "@toba/tools@^6.0.0":
-  version "6.2.1"
-  resolved "https://registry.yarnpkg.com/@toba/tools/-/tools-6.2.1.tgz#092f1bd558ab82fb64c7ad4235ed5aed0a07604f"
-  integrity sha512-CXPbLv7Q1csnE2jrR4B1Miy64BFfg18YdTXVcXssmBKg2VKMQGaeddAboDcfhmArsZ/KKHbUro/mYJGdYSxsCg==
+  version "6.2.2"
+  resolved "https://registry.yarnpkg.com/@toba/tools/-/tools-6.2.2.tgz#8940deda1d187d62335b9a13f7c9aff14b00d7fa"
+  integrity sha512-uu8gbgVcALetquH0p3C2cYlJgyE8LK8thz8VW4WIiJUOw4jwfuCiGOrMEL3H6NjRO3yrGWWMbaem+CCwQLXfnQ==
 
 "@types/jest@^23.3.0":
   version "23.3.14"
