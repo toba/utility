@@ -25,6 +25,17 @@
          "problemMatcher": ["$tsc"]
       },
       {
+         "label": "Build CommonJS",
+         "presentation": {
+            "clear": true
+         },
+         "command": "./node_modules/.bin/tsc",
+         "args": ["--project", "tsconfig.json"],
+         "type": "shell",
+         "group": "build",
+         "problemMatcher": ["$tsc"]
+      },
+      {
          "label": "Publish",
          "presentation": {
             "clear": true
