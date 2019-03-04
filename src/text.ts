@@ -93,7 +93,7 @@ export const slug = (text: string) =>
       : text
            .toLowerCase()
            .replace('à', 'a')
-           .replace(/[\s\/-]+/g, '-')
+           .replace(/[_\s\/-]+/g, '-')
            .replace(/-&-/g, '-and-')
            .replace(/[^\-a-z0-9]/g, '')
            .replace(/-{2,}/g, '-');
