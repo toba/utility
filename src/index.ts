@@ -21,6 +21,7 @@ export {
    unlist
 } from './list';
 export {
+   camelize,
    format,
    printf,
    slug,

@@ -1,5 +1,6 @@
 import '@toba/test';
 import {
+   camelize,
    printf,
    wrapText,
    titleCase,
@@ -10,6 +11,7 @@ import {
    htmlUnescape
 } from './index';
 import { htmlEntity } from './text';
+import { stringify } from 'querystring';
 
 const code: { [key: string]: string } = {
    lt: `&${htmlEntity.get('<')};`,
@@ -83,4 +85,17 @@ test('escapes HTML', () => {
 
    expect(htmlEscape(html)).toBe(escaped);
    expect(htmlUnescape(escaped)).toBe(html);
+});
+
+test('converts text to camelCase', () => {
+   const match = new Map<string, string>([
+      ['snake-case', 'snakeCase'],
+      ['Snake-CASE', 'snakeCase'],
+      ['snake_case-two', 'snakeCaseTwo'],
+      ['space snake', 'spaceSnake']
+   ]);
+
+   match.forEach((camel, before) => {
+      expect(camelize(before)).toBe(camel);
+   });
 });

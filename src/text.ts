@@ -55,9 +55,8 @@ export const titleCase = (text: string) =>
            // only lowercase actual words, not addresses with numbers
            .replace(
               /(^|\s)([a-zA-z]+('[a-zA-Z]{1,2})?)(\b|$)/g,
-              (_match, before, word, _apostrophe, _after, _index) => {
-                 return before + word.toLocaleLowerCase();
-              }
+              (_match, before, word, _apostrophe, _after, _index) =>
+                 before + word.toLocaleLowerCase()
            )
            .replace(/\b[a-z]+('[a-z]{1,2})?/g, (match, _apostrophe, index) => {
               let word = match;
@@ -70,6 +69,16 @@ export const titleCase = (text: string) =>
            })
            // lone trailing letter is probably a label
            .replace(/\b[a-z]$/, match => match.toLocaleUpperCase());
+
+/**
+ * Convert text with spaces or dashes to camelCase.
+ */
+export const camelize = (text: string) =>
+   is.empty(text)
+      ? ''
+      : text
+           .toLowerCase()
+           .replace(/[\s_\-](.)/g, (_match, letter) => letter.toUpperCase());
 
 /**
  * @see http://stackoverflow.com/questions/617647/where-is-my-one-line-implementation-of-rot13-in-javascript-going-wrong
