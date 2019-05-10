@@ -11,7 +11,6 @@ import {
    htmlUnescape
 } from './index';
 import { htmlEntity } from './text';
-import { stringify } from 'querystring';
 
 const code: { [key: string]: string } = {
    lt: `&${htmlEntity.get('<')};`,

@@ -1,14 +1,14 @@
 {
    "name": "@toba/tools",
    "description": "Toba Tools",
-   "version": "6.5.0",
+   "version": "6.5.1",
    "private": false,
    "publishConfig": {
       "access": "public"
    },
    "sideEffects": false,
-   "main": "es6/index.js",
-   "types": "es6/index.d.ts",
+   "main": "esm/index.js",
+   "types": "esm/index.d.ts",
    "files": [
       "esm",
       "cjs"
@@ -19,9 +19,9 @@
    },
    "license": "MIT",
    "scripts": {
-      "build:es6": "./node_modules/.bin/tsc --project tsconfig.build.json",
+      "build:esm": "./node_modules/.bin/tsc --project tsconfig.build.json",
       "build:cjs": "./node_modules/.bin/tsc --project tsconfig.json",
-      "prepublishOnly": "npm run build:es6 & npm run build:cjs",
+      "prepublishOnly": "npm run build:esm & npm run build:cjs",
       "test": "jest --coverage"
    },
    "devDependencies": {
