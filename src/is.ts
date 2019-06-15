@@ -31,7 +31,7 @@ const value = <T>(x: any): x is T => x !== undefined && x !== null;
  * Whether named field is defined in the given object.
  * @param checker Method to execute against field value
  */
-const defined = <T extends Object, K extends keyof T>(
+const defined = <T extends object, K extends keyof T>(
    obj: T | null | undefined,
    field: K,
    checker: (v: any) => boolean = v => true
@@ -48,15 +48,15 @@ const empty = (x: any): x is null | undefined => !value(x) || x === '';
 const number = (n: any): n is number => value(n) && typeof n === Type.Number;
 
 /**
- * Whether value is numeric even if its type is a string.
- */
-const numeric = (n: any): n is string | number => integer(n) || /^\d+$/.test(n);
-
-/**
  * Whether value is an integer.
  */
 const integer = (n: any): n is string | number =>
    value(n) && parseInt(n as string) === n;
+
+/**
+ * Whether value is numeric even if its type is a string.
+ */
+const numeric = (n: any): n is string | number => integer(n) || /^\d+$/.test(n);
 
 const bigInt = (n: any): n is number => integer(n) && (n < -32768 || n > 32767);
 
@@ -78,7 +78,7 @@ function array<T>(x: any, withLength = 0): x is T[] {
  * @param withByteLength Optionally require array have a specific byte count
  */
 function typedArray<T extends TypedArray>(x: any, withByteLength = 0): x is T {
-   if (is.value(x) && ArrayBuffer.isView(x)) {
+   if (value(x) && ArrayBuffer.isView(x)) {
       return withByteLength == 0 || x.byteLength == withByteLength;
    }
    return false;
@@ -89,10 +89,10 @@ function typedArray<T extends TypedArray>(x: any, withByteLength = 0): x is T {
  * array variants.
  * @param allowEmpty If `false` then objects without keys will be `false`
  */
-function hash<T>(v: any, allowEmpty = true): v is T {
+function hash<T extends object>(v: object, allowEmpty = true): v is T {
    return (
       value(v) &&
-      typeof v === is.Type.Object &&
+      typeof v === Type.Object &&
       !(Array.isArray(v) || ArrayBuffer.isView(v)) &&
       (allowEmpty || Object.keys(v).length > 0)
    );
@@ -102,9 +102,9 @@ function hash<T>(v: any, allowEmpty = true): v is T {
  * Whether value is an object.
  * @param strict Whether to preclude arrays and subclasses (only allow plain objects)
  */
-const object = <T>(v: any, strict = false): v is T =>
-   is.value(v) &&
-   typeof v === is.Type.Object &&
+const object = <T extends object>(v: object, strict = false): v is T =>
+   value(v) &&
+   typeof v === Type.Object &&
    (!strict || (!array(v) && v.constructor.name === 'Object'));
 
 /**

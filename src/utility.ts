@@ -1,14 +1,51 @@
 import { is, MimeType, CharSet } from './index';
 
-type Hash = { [key: string]: any };
+interface Hash {
+   [key: string]: any;
+}
 
-export function mergeValues<T extends Object, U>(base: T, additions: U): T & U;
-export function mergeValues<T extends Object, U, V>(
+/**
+ * Deep clone an object.
+ * @param strict If true then null or undefined is returned
+ * as such, otherwise an empty object may be returned.
+ */
+export function clone<T extends object | any[] | null | undefined>(
+   thing: T,
+   strict = true
+): T {
+   if (is.array<any>(thing)) {
+      return thing.map(v => clone(v)) as T;
+   }
+   if (!is.value<object>(thing)) {
+      return strict ? thing : ({} as T);
+   }
+
+   const copy: { [key: string]: any } = {};
+
+   for (const i in thing) {
+      const value: any = (thing as any)[i];
+      if (value != null) {
+         if (is.array<any>(value)) {
+            copy[i] = value.map(v => clone(v));
+         } else if (typeof value == is.Type.Object) {
+            copy[i] = clone(value);
+         } else {
+            copy[i] = value;
+         }
+      } else {
+         copy[i] = null;
+      }
+   }
+   return copy as T;
+}
+
+export function mergeValues<T extends object, U>(base: T, additions: U): T & U;
+export function mergeValues<T extends object, U, V>(
    base: T,
    add1: U,
    add2: V
 ): T & U & V;
-export function mergeValues<T extends Object, U, V, W>(
+export function mergeValues<T extends object, U, V, W>(
    base: T,
    add1: U,
    add2: V,
@@ -19,7 +56,7 @@ export function mergeValues<T extends Object, U, V, W>(
  * additions are not null or undefined. Arrays will not be merged but will be
  * treated as values meaning additions supersede the base.
  */
-export function mergeValues<T extends Object>(base: T, ...additions: any[]): T {
+export function mergeValues<T extends object>(base: T, ...additions: any[]): T {
    return additions.reduce((existing, add: Hash) => {
       //for (const key of Reflect.ownKeys(add)) {
       if (is.value<Hash>(add)) {
@@ -45,13 +82,13 @@ export function mergeValues<T extends Object>(base: T, ...additions: any[]): T {
    }, clone(base));
 }
 
-export function merge<T extends Object, U>(base: T, add1: U): T & U;
-export function merge<T extends Object, U, V>(
+export function merge<T extends object, U>(base: T, add1: U): T & U;
+export function merge<T extends object, U, V>(
    base: T,
    add1: U,
    add2: V
 ): T & U & V;
-export function merge<T extends Object, U, V, W>(
+export function merge<T extends object, U, V, W>(
    base: T,
    add1: U,
    add2: V,
@@ -61,7 +98,7 @@ export function merge<T extends Object, U, V, W>(
  * Merge additions into base object, allowing `null` or `undefined` to replace
  * existing values.
  */
-export function merge<T extends Object>(base: T, ...additions: any[]) {
+export function merge<T extends object>(base: T, ...additions: any[]) {
    return additions
       .filter(add => is.object(add))
       .reduce((existing, add) => {
@@ -71,41 +108,6 @@ export function merge<T extends Object>(base: T, ...additions: any[]) {
          }
          return existing;
       }, clone(base));
-}
-
-/**
- * Deep clone an object.
- * @param strict If true then null or undefined is returned
- * as such, otherwise an empty object may be returned.
- */
-export function clone<T extends Object | any[] | null | undefined>(
-   thing: T,
-   strict = true
-): T {
-   if (is.array<any>(thing)) {
-      return thing.map(v => clone(v)) as T;
-   }
-   if (!is.value<Object>(thing)) {
-      return strict ? thing : ({} as T);
-   }
-
-   const copy: { [key: string]: any } = {};
-
-   for (const i in thing) {
-      const value: any = (thing as any)[i];
-      if (value != null) {
-         if (is.array(value)) {
-            copy[i] = value.map(v => clone(v));
-         } else if (typeof value == is.Type.Object) {
-            copy[i] = clone(value);
-         } else {
-            copy[i] = value;
-         }
-      } else {
-         copy[i] = null;
-      }
-   }
-   return copy as T;
 }
 
 /**
