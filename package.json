@@ -25,8 +25,8 @@
       "test": "jest --coverage"
    },
    "devDependencies": {
-      "@toba/develop": "^6.0.0",
-      "@toba/test": "^3.0.0"
+      "@toba/develop": "^6.4.3",
+      "@toba/test": "^3.7.6"
    },
    "repository": {
       "type": "git",

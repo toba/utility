@@ -100,6 +100,7 @@ export const slug = (text: string) =>
    is.empty(text)
       ? null
       : text
+           .replace(/([a-z])([A-Z])/g, '$1-$2')
            .toLowerCase()
            .replace('à', 'a')
            .replace(/[_\s\/-]+/g, '-')

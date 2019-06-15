@@ -58,6 +58,7 @@ it('converts words to URL slug', () => {
    expect(slug(`three o' clock`)).toBe('three-o-clock');
    expect(slug('here & there')).toBe('here-and-there');
    expect(slug('one_two_Three-48px')).toBe('one-two-three-48px');
+   expect(slug('camelCase')).toBe('camel-case');
 });
 
 test('capitalizes first word', () => {
