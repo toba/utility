@@ -82,12 +82,24 @@ export function mergeValues<T extends object>(base: T, ...additions: any[]): T {
    }, clone(base));
 }
 
+/**
+ * Merge additions into base object, allowing `null` or `undefined` to replace
+ * existing values (simple approach).
+ */
 export function merge<T extends object, U>(base: T, add1: U): T & U;
+/**
+ * Merge additions into base object, allowing `null` or `undefined` to replace
+ * existing values (simple approach).
+ */
 export function merge<T extends object, U, V>(
    base: T,
    add1: U,
    add2: V
 ): T & U & V;
+/**
+ * Merge additions into base object, allowing `null` or `undefined` to replace
+ * existing values (simple approach).
+ */
 export function merge<T extends object, U, V, W>(
    base: T,
    add1: U,
@@ -96,7 +108,7 @@ export function merge<T extends object, U, V, W>(
 ): T & U & V & W;
 /**
  * Merge additions into base object, allowing `null` or `undefined` to replace
- * existing values.
+ * existing values (simple approach).
  */
 export function merge<T extends object>(base: T, ...additions: any[]) {
    return additions
