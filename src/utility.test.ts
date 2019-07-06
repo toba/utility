@@ -86,6 +86,21 @@ function commonMergeTests(fn: <T>(base: T, ...additions: any[]) => T) {
          bool: false
       });
    });
+
+   test('allows rest argument destructuring', () => {
+      const additions = [
+         { one: 1, two: 2 },
+         { one: 11, three: 3 },
+         { five: 5, six: 6 }
+      ];
+      expect(fn({ one: null }, ...additions)).toEqual({
+         one: 11,
+         two: 2,
+         three: 3,
+         five: 5,
+         six: 6
+      });
+   });
 }
 
 test('merges objects', () => {

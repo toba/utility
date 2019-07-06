@@ -51,11 +51,17 @@ export function mergeValues<T extends object, U, V, W>(
    add2: V,
    add3: W
 ): T & U & V & W;
+
 /**
  * Merge additions into a base object, only replacing base values if the
  * additions are not null or undefined. Arrays will not be merged but will be
  * treated as values meaning additions supersede the base.
  */
+export function mergeValues<T extends object>(
+   base: T,
+   ...additions: any[]
+): any;
+
 export function mergeValues<T extends object>(base: T, ...additions: any[]): T {
    return additions.reduce((existing, add: Hash) => {
       //for (const key of Reflect.ownKeys(add)) {
@@ -87,6 +93,7 @@ export function mergeValues<T extends object>(base: T, ...additions: any[]): T {
  * existing values (simple approach).
  */
 export function merge<T extends object, U>(base: T, add1: U): T & U;
+
 /**
  * Merge additions into base object, allowing `null` or `undefined` to replace
  * existing values (simple approach).
@@ -96,6 +103,7 @@ export function merge<T extends object, U, V>(
    add1: U,
    add2: V
 ): T & U & V;
+
 /**
  * Merge additions into base object, allowing `null` or `undefined` to replace
  * existing values (simple approach).
@@ -106,10 +114,13 @@ export function merge<T extends object, U, V, W>(
    add2: V,
    add3: W
 ): T & U & V & W;
+
 /**
  * Merge additions into base object, allowing `null` or `undefined` to replace
  * existing values (simple approach).
  */
+export function merge<T extends object>(base: T, ...additions: any[]): any;
+
 export function merge<T extends object>(base: T, ...additions: any[]) {
    return additions
       .filter(add => is.object(add))
