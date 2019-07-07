@@ -22,7 +22,7 @@
       "build:esm": "./node_modules/.bin/tsc --project tsconfig.build.json",
       "build:cjs": "./node_modules/.bin/tsc --project tsconfig.json",
       "prepublishOnly": "npm run build:esm & npm run build:cjs",
-      "test": "jest --coverage"
+      "test": "./node_modules/.bin/jest --coverage"
    },
    "devDependencies": {
       "@toba/develop": "^6.5.0",
