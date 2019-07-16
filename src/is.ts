@@ -102,7 +102,10 @@ function hash<T extends object>(v: object, allowEmpty = true): v is T {
  * Whether value is an object.
  * @param strict Whether to preclude arrays and subclasses (only allow plain objects)
  */
-const object = <T extends object>(v: object, strict = false): v is T =>
+const object = <T extends object>(
+   v: object | string | number,
+   strict = false
+): v is T =>
    value(v) &&
    typeof v === Type.Object &&
    (!strict || (!array(v) && v.constructor.name === 'Object'));
