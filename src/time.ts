@@ -2,7 +2,7 @@ import { leadingZeros, month, is } from './index';
 /**
  * Milliseconds per units of time.
  */
-export enum Duration {
+export const enum Duration {
    Millisecond = 1,
    /** Milliseconds in a second */
    Second = 1000,
@@ -17,15 +17,15 @@ export enum Duration {
    /** Milliseconds in a year */
    Year = Day * 365,
    /** Average milliseconds per quarter */
-   Quarter = Math.floor(Duration.Year / 4),
+   Quarter = Duration.Year / 4,
    /** Average milliseconds per month */
-   Month = Math.floor(Duration.Year / 12)
+   Month = Duration.Year / 12
 }
 
 /**
  * Abbreviations for units of time.
  */
-export enum TimeUnit {
+export const enum TimeUnit {
    Second = 's',
    Minute = 'm',
    Hour = 'h',

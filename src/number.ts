@@ -83,7 +83,7 @@ export function sayNumber(n: number, capitalize = true): string {
 /**
  * Remove non-numeric characters from string.
  *
- * @param {number} not Optional number to return if none found in text
+ * @param not Optional number to return if none found in text
  */
 export function parseNumber(text: string, not = NaN): number {
    text = (text ? text : '').replace(/[^\d\.]/g, '');

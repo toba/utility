@@ -52,7 +52,7 @@ export const weekday = [
    'Saturday'
 ];
 
-export enum Sort {
+export const enum Sort {
    Unknown,
    NewestFirst,
    OldestFirst,
@@ -181,7 +181,7 @@ export enum MimeType {
  * @see https://developer.mozilla.org/en-US/docs/Web/HTML/Link_types
  * @see https://www.w3schools.com/tags/att_a_rel.asp
  */
-export enum LinkRelation {
+export const enum LinkRelation {
    /**
     * If the element is `<link>` and the rel attribute also contains the
     * stylesheet type, the link defines an alternative style sheet; in that case
@@ -403,7 +403,7 @@ export enum LinkRelation {
    Tag = 'tag'
 }
 
-export enum Encoding {
+export const enum Encoding {
    Buffer = 'buffer',
    GZip = 'gzip',
    Hexadecimal = 'hex',
