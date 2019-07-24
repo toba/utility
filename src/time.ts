@@ -7,19 +7,19 @@ export const enum Duration {
    /** Milliseconds in a second */
    Second = 1000,
    /** Milliseconds in a minute */
-   Minute = Second * 60,
+   Minute = 60000,
    /** Milliseconds in an hour */
-   Hour = Minute * 60,
+   Hour = 3600000, //Minute * 60,
    /** Milliseconds in a day */
-   Day = Hour * 24,
+   Day = 86400000, //Hour * 24,
    /** Milliseconds in a week */
-   Week = Day * 7,
+   Week = 604800000, //Day * 7,
    /** Milliseconds in a year */
-   Year = Day * 365,
+   Year = 220752000000, //Day * 365,
    /** Average milliseconds per quarter */
-   Quarter = Duration.Year / 4,
+   Quarter = 55188000000, //Duration.Year / 4,
    /** Average milliseconds per month */
-   Month = Duration.Year / 12
+   Month = 220752000000 //Duration.Year / 12
 }
 
 /**
