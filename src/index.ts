@@ -59,7 +59,9 @@ export {
    LinkRelation,
    CharSet,
    ValueType,
-   Sort
+   Sort,
+   Weekday,
+   Month
 } from './constants';
 export {
    sayNumber,
