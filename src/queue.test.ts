@@ -28,7 +28,7 @@ test('queues several listeners for one operation', async () => {
 });
 
 test('manages listeners for several key operations', async () => {
-   const op = jest.fn(
+   const op = jest.fn<Promise<string>, any[]>(
       key =>
          new Promise(resolve => {
             setTimeout(() => resolve(key), 200);
@@ -52,13 +52,13 @@ test('manages listeners for several key operations', async () => {
 
 test('supports queue chaining', async () => {
    const key = 'key';
-   const op1 = jest.fn(
+   const op1 = jest.fn<Promise<number>, string[]>(
       _key =>
          new Promise(resolve => {
             setTimeout(() => resolve(9), 100);
          })
    );
-   const op2 = jest.fn(
+   const op2 = jest.fn<Promise<string>, number[]>(
       number =>
          new Promise(resolve => {
             setTimeout(() => resolve(sayNumber(number)), 100);
@@ -87,7 +87,7 @@ test('emits operation events', async () => {
    const value = 'nothing';
    const onStart = jest.fn();
    const onEnd = jest.fn();
-   const op = jest.fn(
+   const op = jest.fn<Promise<string>, any[]>(
       () =>
          new Promise(resolve => {
             setTimeout(() => resolve(value), 100);

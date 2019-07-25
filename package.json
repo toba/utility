@@ -1,7 +1,7 @@
 {
    "name": "@toba/tools",
    "description": "Toba Tools",
-   "version": "6.6.5",
+   "version": "6.6.6",
    "private": false,
    "publishConfig": {
       "access": "public"
@@ -24,8 +24,8 @@
       "test": "./node_modules/.bin/jest --coverage"
    },
    "devDependencies": {
-      "@toba/develop": "^6.5.3",
-      "@toba/test": "^3.8.5"
+      "@toba/develop": "^6.5.5",
+      "@toba/test": "^4.1.0"
    },
    "repository": {
       "type": "git",
