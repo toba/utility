@@ -1,4 +1,4 @@
-import { is, MimeType, CharSet } from './index';
+import { is, MimeType, CharSet, ValueType } from './index';
 
 interface Hash {
    [key: string]: any;
@@ -27,7 +27,7 @@ export function clone<T extends object | any[] | null | undefined>(
       if (value != null) {
          if (is.array<any>(value)) {
             copy[i] = value.map(v => clone(v));
-         } else if (typeof value == is.Type.Object) {
+         } else if (typeof value == ValueType.Object) {
             copy[i] = clone(value);
          } else {
             copy[i] = value;
@@ -74,8 +74,8 @@ export function mergeValues<T extends object>(base: T, ...additions: any[]): T {
                if (
                   !exists ||
                   Array.isArray(v) ||
-                  typeof v != is.Type.Object ||
-                  typeof existing[key] != is.Type.Object
+                  typeof v != ValueType.Object ||
+                  typeof existing[key] != ValueType.Object
                ) {
                   existing[key] = v;
                } else {

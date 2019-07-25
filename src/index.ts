@@ -58,6 +58,7 @@ export {
    Encoding,
    LinkRelation,
    CharSet,
+   ValueType,
    Sort
 } from './constants';
 export {

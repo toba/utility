@@ -154,7 +154,7 @@ export enum CharSet {
 /**
  * @see http://www.sitepoint.com/web-foundations/mime-types-complete-list/
  */
-export enum MimeType {
+export const enum MimeType {
    HTML = 'text/html',
    JSON = 'application/json',
    XML = 'text/xml',
@@ -171,6 +171,19 @@ export enum MimeType {
    Binary = 'application/octet-stream',
    RSS = 'application/rss+xml',
    Atom = 'application/atom+xml'
+}
+
+/**
+ * EcmaScript type names.
+ */
+export const enum ValueType {
+   Boolean = 'boolean',
+   Function = 'function',
+   Number = 'number',
+   Object = 'object',
+   String = 'string',
+   Symbol = 'symbol',
+   Undefined = 'undefined'
 }
 
 /**

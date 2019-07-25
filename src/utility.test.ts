@@ -8,9 +8,9 @@ import {
    clone
 } from './index';
 
-type TestThing = {
+interface TestThing {
    [key: string]: string | string[] | TestThing | Function | null;
-};
+}
 
 /**
  * Functionality expected of both `merge` and `mergeAll`.

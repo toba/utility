@@ -1,3 +1,5 @@
+import { ValueType } from './constants';
+
 type TypedArray =
    | Int8Array
    | Uint8Array
@@ -8,19 +10,6 @@ type TypedArray =
    | Uint32Array
    | Float32Array
    | Float64Array;
-
-/**
- * EcmaScript type names.
- */
-enum Type {
-   Boolean = 'boolean',
-   Function = 'function',
-   Number = 'number',
-   Object = 'object',
-   String = 'string',
-   Symbol = 'symbol',
-   Undefined = 'undefined'
-}
 
 /**
  * Whether variable is defined and not null.
@@ -45,7 +34,8 @@ const empty = (x: any): x is null | undefined => !value(x) || x === '';
 /**
  * Whether value exists and is a type of number.
  */
-const number = (n: any): n is number => value(n) && typeof n === Type.Number;
+const number = (n: any): n is number =>
+   value(n) && typeof n === ValueType.Number;
 
 /**
  * Whether value is an integer.
@@ -92,7 +82,7 @@ function typedArray<T extends TypedArray>(x: any, withByteLength = 0): x is T {
 function hash<T extends object>(v: object, allowEmpty = true): v is T {
    return (
       value(v) &&
-      typeof v === Type.Object &&
+      typeof v === ValueType.Object &&
       !(Array.isArray(v) || ArrayBuffer.isView(v)) &&
       (allowEmpty || Object.keys(v).length > 0)
    );
@@ -107,7 +97,7 @@ const object = <T extends object>(
    strict = false
 ): v is T =>
    value(v) &&
-   typeof v === Type.Object &&
+   typeof v === ValueType.Object &&
    (!strict || (!array(v) && v.constructor.name === 'Object'));
 
 /**
@@ -118,13 +108,13 @@ const date = (v: any): v is Date => value(v) && v instanceof Date;
 /**
  * Whether value is text.
  */
-const text = (v: any): v is string => typeof v === Type.String;
+const text = (v: any): v is string => typeof v === ValueType.String;
 
 /**
  * Whether value is a function.
  */
 const callable = (v: any): v is Function =>
-   value(v) && typeof v == Type.Function;
+   value(v) && typeof v == ValueType.Function;
 
 /**
  * Whether value is an asynchronous function.
@@ -135,7 +125,8 @@ const async = (v: any): v is Function =>
 /**
  * Whether value is a boolean.
  */
-const boolean = (v: any): v is boolean => value(v) && typeof v == Type.Boolean;
+const boolean = (v: any): v is boolean =>
+   value(v) && typeof v == ValueType.Boolean;
 
 /**
  * Whether object is a promise.
@@ -147,7 +138,6 @@ const promise = <T>(v: any): v is Promise<T> =>
  * Identity checks.
  */
 export const is = {
-   Type,
    array,
    async,
    boolean,
