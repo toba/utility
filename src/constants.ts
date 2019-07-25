@@ -42,6 +42,24 @@ export const month = [
    'December'
 ];
 
+/**
+ * EcmaScript months are zero-based.
+ */
+export const enum Month {
+   January,
+   February,
+   March,
+   April,
+   May,
+   June,
+   July,
+   August,
+   September,
+   October,
+   November,
+   December
+}
+
 export const weekday = [
    'Sunday',
    'Monday',
@@ -51,6 +69,19 @@ export const weekday = [
    'Friday',
    'Saturday'
 ];
+
+/**
+ * EcmaScript days of the week are zero-based.
+ */
+export const enum Weekday {
+   Sunday,
+   Monday,
+   Tuesday,
+   Wednesday,
+   Thursday,
+   Friday,
+   Saturday
+}
 
 export const enum Sort {
    Unknown,
