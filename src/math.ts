@@ -50,3 +50,11 @@ export const boundary = (
       max: (q3 + range * distance) as number
    };
 };
+
+/**
+ * @param precision Number of decimal places to retain
+ */
+export const round = (n: number, precision = 0): number => {
+   const exp = Math.pow(10, precision);
+   return Math.round(n * exp) / exp;
+};

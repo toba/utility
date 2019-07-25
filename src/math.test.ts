@@ -1,5 +1,17 @@
 import '@toba/test';
-import { median, boundary } from './index';
+import { median, boundary, round } from './index';
+import { numberLiteralTypeAnnotation } from '@babel/types';
+
+test('rounds to given precision', () => {
+   const n = 12.234567;
+   [12, 12.2, 12.23, 12.235, 12.2346, 12.23457, 12.234567].forEach(
+      (a: number, i: number) => {
+         expect(round(n, i)).toBe(a);
+      }
+   );
+
+   expect(round(n, 20)).toBe(n);
+});
 
 test('calculates median', () => {
    expect(median(1, 2, 3)).toBe(2);

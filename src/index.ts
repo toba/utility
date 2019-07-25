@@ -32,7 +32,7 @@ export {
    htmlUnescape,
    wrapText
 } from './text';
-export { median, boundary, Limits } from './math';
+export { median, boundary, Limits, round } from './math';
 export { re } from './regex';
 export { is } from './is';
 export { url } from './url';
