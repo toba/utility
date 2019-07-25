@@ -15,11 +15,11 @@ export const enum Duration {
    /** Milliseconds in a week */
    Week = 604800000, //Day * 7,
    /** Milliseconds in a year */
-   Year = 220752000000, //Day * 365,
+   Year = 31536000000, //Day * 365,
    /** Average milliseconds per quarter */
-   Quarter = 55188000000, //Duration.Year / 4,
+   Quarter = 7884000000, //Duration.Year / 4,
    /** Average milliseconds per month */
-   Month = 220752000000 //Duration.Year / 12
+   Month = 2628000000 //Duration.Year / 12
 }
 
 /**
