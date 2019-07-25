@@ -16,10 +16,10 @@ export const enum Duration {
    Week = 604800000, //Day * 7,
    /** Milliseconds in a year */
    Year = 31536000000, //Day * 365,
-   /** Average milliseconds per quarter */
-   Quarter = 7884000000, //Duration.Year / 4,
-   /** Average milliseconds per month */
-   Month = 2628000000 //Duration.Year / 12
+   /** Milliseconds per quarter as defined by `moment.js` */
+   Quarter = 7952400000, //7884000000, //Duration.Year / 4,
+   /** Milliseconds per month as defined by `moment.js` */
+   Month = 2595600000 //2628000000 //Duration.Year / 12
 }
 
 /**
