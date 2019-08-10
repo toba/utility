@@ -137,6 +137,13 @@ export const wrapText = (
         }, '');
 };
 
+/**
+ * Map symbol characters to their HTML entity sequence. The beginning `&`
+ * and ending `;` expected in most contexts are not included.
+ * @example
+ * "&" maps to "amp"
+ * "<" maps to "lt"
+ */
 export const htmlEntity: Map<string, string> = new Map([
    ['&', 'amp'],
    ['"', 'quot'],
