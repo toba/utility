@@ -93,10 +93,10 @@ function hash<T extends object>(v: object, allowEmpty = true): v is T {
  * @param strict Whether to preclude arrays and subclasses (only allow plain objects)
  */
 const object = <T extends object>(
-   v: object | string | number,
+   v: object | string | number | null | undefined,
    strict = false
 ): v is T =>
-   value(v) &&
+   value<object | string | number>(v) &&
    typeof v === ValueType.Object &&
    (!strict || (!array(v) && v.constructor.name === 'Object'));
 
