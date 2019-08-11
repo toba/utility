@@ -6,35 +6,30 @@ interface Hash {
 
 /**
  * Deep clone an object.
- * @param strict If true then null or undefined is returned
- * as such, otherwise an empty object may be returned.
+ * @param strict If true then null or undefined are returned unchanged,
+ * otherwise they are replaced with an empty object (`{}`)
  */
-export function clone<T extends object | any[] | null | undefined>(
+export function clone<T extends object | any[] | Date | null | undefined>(
    thing: T,
    strict = true
 ): T {
+   if (!is.value<T>(thing)) {
+      return strict ? thing : ({} as T);
+   }
    if (is.array<any>(thing)) {
       return thing.map(v => clone(v)) as T;
    }
-   if (!is.value<object>(thing)) {
-      return strict ? thing : ({} as T);
+   if (is.date(thing)) {
+      return new Date(thing) as T;
    }
-
+   if (!is.object(thing)) {
+      return thing;
+   }
    const copy: { [key: string]: any } = {};
 
    for (const i in thing) {
       const value: any = (thing as any)[i];
-      if (value != null) {
-         if (is.array<any>(value)) {
-            copy[i] = value.map(v => clone(v));
-         } else if (typeof value == ValueType.Object) {
-            copy[i] = clone(value);
-         } else {
-            copy[i] = value;
-         }
-      } else {
-         copy[i] = null;
-      }
+      copy[i] = value === null ? null : clone(value);
    }
    return copy as T;
 }

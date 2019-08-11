@@ -275,4 +275,12 @@ test('clones arrays', () => {
 
    expect(thing2).toBeInstanceOf(Array);
    expect(thing2.length).toBe(2);
+
+   const thing3 = {
+      child: {
+         data: ['one', 'two']
+      }
+   };
+   const thing4 = clone(thing3);
+   expect(thing4).toEqual(thing3);
 });
