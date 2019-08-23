@@ -138,24 +138,56 @@ const promise = <T>(v: any): v is Promise<T> =>
  * Identity checks.
  */
 export const is = {
+   /**
+    * Whether value exists and is an array. This will return `false` for
+    * `TypedArrays` such as `Uint8Array`. For those use `is.typedArray()`.
+    * @param withLength Optionally require array be a certain size
+    */
    array,
    async,
    boolean,
    callable,
    date,
+   /**
+    * Whether named field is defined in the given object.
+    * @param checker Method to execute against field value
+    */
    defined,
    /**
     * Whether value exists and is an object with keys and values, not any of the
     * array variants. An alias for `is.hash()`.
     */
    dictionary: hash,
+   /**
+    * Whether value is null, undefined or an empty string.
+    */
    empty,
+   /**
+    * Whether value exists and is an object with keys and values, not any of the
+    * array variants.
+    * @param allowEmpty If `false` then objects without keys will be `false`
+    */
    hash,
    number,
+   /**
+    * Whether value is numeric even if its type is a string.
+    */
    numeric,
+   /**
+    * Whether value is an object.
+    * @param strict Whether to preclude arrays and subclasses (only allow plain objects)
+    */
    object,
    promise,
    text,
+   /**
+    * Whether value exists and is a `TypedArray`. This will return `false` for
+    * untyped arrays such as `[]`. For those use `is.array()`.
+    * @param withByteLength Optionally require array have a specific byte count
+    */
    typedArray,
+   /**
+    * Whether variable is defined and not null.
+    */
    value
 };
