@@ -222,6 +222,18 @@ test('merges configurations', () => {
    expect(merge(defaultConfig, givenConfig)).toMatchSnapshot();
 });
 
+// https://stackoverflow.com/questions/40291987/javascript-deep-clone-object-with-circular-references
+test('clones objects with circular references', () => {
+   const a: any = {};
+   const b: any = {};
+   a.b = b;
+   b.a = a;
+
+   const cloneOfA = clone(a);
+
+   expect('a' in cloneOfA.b.a.b).toBe(true);
+});
+
 test('replaces all values even if new value is null or undefined', () => {
    expect(mergeAll({ one: 1, two: 2 }, { one: null, two: undefined })).toEqual({
       one: null,
@@ -258,12 +270,12 @@ test('clones objects', () => {
    const thing2 = clone(thing);
    expect(thing2).toHaveProperty('key1', 'value1');
    expect(thing2).toHaveProperty('nested');
-   expect(thing2.nested).toHaveProperty('key3', 'value3');
-   expect(thing2.list).toBeInstanceOf(Array);
+   expect(thing2!.nested).toHaveProperty('key3', 'value3');
+   expect(thing2!.list).toBeInstanceOf(Array);
 
    thing.nested.key3 = 'wooly';
 
-   expect(thing2.nested.key3).toBe('value3');
+   expect(thing2!.nested.key3).toBe('value3');
 
    expect(clone(undefined)).toBeUndefined();
    expect(clone(null)).toBeNull();
@@ -274,7 +286,7 @@ test('clones arrays', () => {
    const thing2 = clone(thing);
 
    expect(thing2).toBeInstanceOf(Array);
-   expect(thing2.length).toBe(2);
+   expect(thing2!.length).toBe(2);
 
    const thing3 = {
       child: {

@@ -8,30 +8,57 @@ interface Hash {
  * Deep clone an object.
  * @param strict If true then null or undefined are returned unchanged,
  * otherwise they are replaced with an empty object (`{}`)
+ * @param done Map of keys that have already been cloned, used to avoid infinite
+ * loops on circular references
+ *
+ * @see https://stackoverflow.com/questions/40291987/javascript-deep-clone-object-with-circular-references
  */
-export function clone<T extends object | any[] | Date | null | undefined>(
-   thing: T,
-   strict = true
-): T {
+export function clone<T extends object | any[] | Date>(
+   thing: T | undefined | null,
+   strict = true,
+   done = new WeakMap<T, T>()
+): T | undefined | null {
+   if (Object(thing) !== thing || thing instanceof Function) {
+      // do not clone primitives or functions
+      return thing;
+   }
    if (!is.value<T>(thing)) {
       return strict ? thing : ({} as T);
    }
-   if (is.array<any>(thing)) {
-      return thing.map(v => clone(v)) as T;
-   }
-   if (is.date(thing)) {
-      return new Date(thing) as T;
-   }
-   if (!is.object(thing)) {
-      return thing;
-   }
-   const copy: { [key: string]: any } = {};
 
-   for (const i in thing) {
-      const value: any = (thing as any)[i];
-      copy[i] = value === null ? null : clone(value);
+   if (done.has(thing)) {
+      return done.get(thing)!;
    }
-   return copy as T;
+   let copy: T;
+
+   try {
+      // attempt to make new instance
+      copy = new (thing as any).constructor();
+   } catch (e) {
+      // if unable to construct then just make it
+      copy = Object.create(Object.getPrototypeOf(thing));
+   }
+
+   if (thing instanceof Map)
+      Array.from(thing, ([key, val]) =>
+         (copy as Map<any, any>).set(
+            clone(key, strict, done),
+            clone(val, strict, done)
+         )
+      );
+   else if (thing instanceof Set)
+      Array.from(thing, key =>
+         (copy as Set<any>).add(clone(key, strict, done))
+      );
+
+   done.set(thing, copy);
+
+   return Object.assign(
+      copy,
+      ...Object.keys(thing).map(key => ({
+         [key]: clone((thing as { [key: string]: any })[key], strict, done)
+      }))
+   );
 }
 
 export function mergeValues<T extends object, U>(base: T, additions: U): T & U;
