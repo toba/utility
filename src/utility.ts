@@ -25,7 +25,9 @@ export function clone<T extends object | any[] | Date>(
    if (!is.value<T>(thing)) {
       return strict ? thing : ({} as T);
    }
-
+   if (is.date(thing)) {
+      return new Date(thing) as T;
+   }
    if (done.has(thing)) {
       return done.get(thing)!;
    }

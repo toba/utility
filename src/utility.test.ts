@@ -258,12 +258,14 @@ test('returns MIME type with standard charset extension', () => {
 });
 
 test('clones objects', () => {
+   const date = new Date(2007, 10, 11, 12, 0, 0);
    const thing = {
       key1: 'value1',
       key2: 'value2',
       nested: {
          key3: 'value3',
-         key4: 'value4'
+         key4: 'value4',
+         key5: date
       },
       list: [{ name: 'one' }, { name: 'two' }]
    };
@@ -271,6 +273,7 @@ test('clones objects', () => {
    expect(thing2).toHaveProperty('key1', 'value1');
    expect(thing2).toHaveProperty('nested');
    expect(thing2!.nested).toHaveProperty('key3', 'value3');
+   expect(thing2!.nested.key5).toEqual(date);
    expect(thing2!.list).toBeInstanceOf(Array);
 
    thing.nested.key3 = 'wooly';
