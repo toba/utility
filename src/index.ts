@@ -34,7 +34,7 @@ export {
    htmlUnescape,
    wrapText
 } from './text';
-export { makeDuoList, makeTrioList } from './tuple';
+export { makeDuoList, makeTrioList, DuoList, TrioList } from './tuple';
 export { median, boundary, Limits, round } from './math';
 export { re } from './regex';
 export { is } from './is';
