@@ -155,3 +155,35 @@ export function findInSet<T>(
    }
    return undefined;
 }
+
+/** Method to call for each item in an array */
+export type ArrayCallback<T, R> = (item: T, index: number) => R;
+
+/**
+ * Execute method for each item in an array (more than twice as fast as
+ * built-in array `forEach`).
+ *
+ * @see https://jsperf.com/toba-array
+ */
+export function forEach<T>(list: T[], fn: ArrayCallback<T, void>) {
+   const length = list.length;
+   for (let i = 0; i < length; i++) {
+      fn(list[i], i);
+   }
+}
+
+/**
+ * @param filter Method that returns `true` if the array item should be processed
+ * @param fn Method applied to array item
+ */
+export function filterEach<T>(
+   list: T[],
+   filter: ArrayCallback<T, boolean>,
+   fn: ArrayCallback<T, void>
+) {
+   forEach(list, (item, index) => {
+      if (filter(item, index)) {
+         fn(item, index);
+      }
+   });
+}
