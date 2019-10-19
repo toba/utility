@@ -150,6 +150,70 @@ const trioFlat = <T, U, V>(a: T[], b: U[], c: V[]): (T | U | V)[] => {
    return flat;
 };
 
+const duoCopy = <T, U>(a: T[], b: U[]): DuoList<T, U> => {
+   const list = makeDuoList<T, U>();
+   forEach(a, (item, index) => {
+      list.push(item, b[index]);
+   });
+   return list;
+};
+
+const trioCopy = <T, U, V>(a: T[], b: U[], c: V[]): TrioList<T, U, V> => {
+   const list = makeTrioList<T, U, V>();
+   forEach(a, (item, index) => {
+      list.push(item, b[index], c[index]);
+   });
+   return list;
+};
+
+const duoRemove = <T, U>(a: T[], b: U[], t?: T, u?: U): boolean => {
+   const index = duoIndexOf(a, b, t, u);
+   if (index == -1) {
+      return false;
+   }
+   a = a.splice(index, 1);
+   b = b.splice(index, 1);
+
+   return true;
+};
+
+const trioRemove = <T, U, V>(
+   a: T[],
+   b: U[],
+   c: V[],
+   t?: T,
+   u?: U,
+   v?: V
+): boolean => {
+   const index = trioIndexOf(a, b, c, t, u, v);
+   if (index == -1) {
+      return false;
+   }
+   a = a.splice(index, 1);
+   b = b.splice(index, 1);
+   c = c.splice(index, 1);
+
+   return true;
+};
+
+function duoUnshift<T, U>(a: T[], b: U[], t: T, u: U): number {
+   a.unshift(t);
+   return b.unshift(u);
+}
+
+function trioUnshift<T, U, V>(
+   a: T[],
+   b: U[],
+   c: V[],
+   t: T,
+   u: U,
+   v: V
+): number {
+   a.unshift(t);
+   b.unshift(u);
+   return c.unshift(v);
+}
+
 interface TupleList<G> {
    size: () => number;
    item: (index: number) => G | undefined;
@@ -167,6 +231,9 @@ export interface DuoList<T, U> extends TupleList<[T, U]> {
    push: (t: T, u: U) => number;
    indexOf: (t?: T, u?: U) => number;
    flat: () => (T | U)[];
+   copy: () => DuoList<T, U>;
+   remove: (t?: T, u?: U) => boolean;
+   unshift: (t: T, u: U) => number;
 }
 
 /**
@@ -179,6 +246,9 @@ export interface TrioList<T, U, V> extends TupleList<[T, U, V]> {
    push: (t: T, u: U, v: V) => number;
    indexOf: (t?: T, u?: U, v?: V) => number;
    flat: () => (T | U | V)[];
+   copy: () => TrioList<T, U, V>;
+   remove: (t?: T, u?: U, v?: V) => boolean;
+   unshift: (t: T, u: U, v: V) => number;
 }
 
 export function makeDuoList<T, U>(...list: [T, U][]): DuoList<T, U> {
@@ -200,7 +270,10 @@ export function makeDuoList<T, U>(...list: [T, U][]): DuoList<T, U> {
       lastItem: () => duoLastItem<T, U>(a, b),
       size: () => a.length,
       indexOf: (t?: T, u?: U) => duoIndexOf(a, b, t, u),
-      flat: () => duoFlat(a, b)
+      flat: () => duoFlat(a, b),
+      copy: () => duoCopy(a, b),
+      remove: (t?: T, u?: U) => duoRemove(a, b, t, u),
+      unshift: (t: T, u: U) => duoUnshift(a, b, t, u)
    };
 }
 
@@ -225,6 +298,9 @@ export function makeTrioList<T, U, V>(...list: [T, U, V][]): TrioList<T, U, V> {
       lastItem: () => trioLastItem<T, U, V>(a, b, c),
       size: () => a.length,
       indexOf: (t?: T, u?: U, v?: V) => trioIndexOf(a, b, c, t, u, v),
-      flat: () => trioFlat(a, b, c)
+      flat: () => trioFlat(a, b, c),
+      copy: () => trioCopy(a, b, c),
+      remove: (t?: T, u?: U, v?: V) => trioRemove(a, b, c, t, u, v),
+      unshift: (t: T, u: U, v: V) => trioUnshift(a, b, c, t, u, v)
    };
 }

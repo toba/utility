@@ -48,6 +48,23 @@ describe('DuoList', () => {
 
       expect(duo.flat()).toEqual(['one', 1, 'two', 2, 'three', 3]);
    });
+
+   it('allows item at index to be removed', () => {
+      const duo = sampleDuo();
+
+      expect(duo.indexOf('two')).toBe(1);
+      expect(duo.remove('two')).toBe(true);
+      expect(duo.indexOf('two')).toBe(-1);
+   });
+
+   it('allows item to be added at beginning', () => {
+      const duo = sampleDuo();
+
+      expect(duo.indexOf('one')).toBe(0);
+      duo.unshift('four', 4);
+      expect(duo.indexOf('one')).toBe(1);
+      expect(duo.indexOf('four')).toBe(0);
+   });
 });
 
 describe('TrioList', () => {
@@ -117,5 +134,24 @@ describe('TrioList', () => {
          3,
          now
       ]);
+   });
+
+   it('allows item at index to be removed', () => {
+      const now = new Date();
+      const trio = sampleTrio(now);
+
+      expect(trio.indexOf('one')).toBe(0);
+      expect(trio.remove('one')).toBe(true);
+      expect(trio.indexOf('one')).toBe(-1);
+   });
+
+   it('allows item to be added at beginning', () => {
+      const now = new Date();
+      const trio = sampleTrio(now);
+
+      expect(trio.indexOf('one')).toBe(0);
+      trio.unshift('four', 4, now);
+      expect(trio.indexOf('one')).toBe(1);
+      expect(trio.indexOf('four')).toBe(0);
    });
 });
