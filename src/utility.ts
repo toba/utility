@@ -14,10 +14,10 @@ interface Hash {
  * @see https://stackoverflow.com/questions/40291987/javascript-deep-clone-object-with-circular-references
  */
 export function clone<T extends object | any[] | Date>(
-   thing: T | undefined | null,
+   thing: T,
    strict = true,
    done = new WeakMap<T, T>()
-): T | undefined | null {
+): T {
    if (Object(thing) !== thing || thing instanceof Function) {
       // do not clone primitives or functions
       return thing;
