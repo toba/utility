@@ -11,7 +11,8 @@ import {
    findInSet,
    unlist,
    sayNumber,
-   forEachKeyValue
+   forEachKeyValue,
+   intersects
 } from './index';
 
 test('removes items from arrays', () => {
@@ -123,4 +124,12 @@ test('executes method on each key/value in object', () => {
 
    expect(fn).toHaveBeenCalledTimes(2);
    expect(fn).toHaveBeenLastCalledWith('two', 2);
+});
+
+test('indicates if two lists share any members', () => {
+   expect(intersects([], [])).toBe(false);
+   expect(intersects([], ['one', 'two'])).toBe(false);
+   expect(intersects(['two', 'three'], ['one', 'two'])).toBe(true);
+   expect(intersects([1, 3], [4, 5])).toBe(false);
+   expect(intersects([1], [4, 5, 1])).toBe(true);
 });

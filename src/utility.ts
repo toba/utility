@@ -1,4 +1,5 @@
 import { is, MimeType, CharSet, ValueType } from './index';
+import { forEachKeyValue } from './list';
 
 interface Hash {
    [key: string]: any;
@@ -86,12 +87,12 @@ export function mergeValues<T extends object>(
    ...additions: any[]
 ): any;
 
+/* eslint-disable valid-typeof */
 export function mergeValues<T extends object>(base: T, ...additions: any[]): T {
    return additions.reduce((existing, add: Hash) => {
       //for (const key of Reflect.ownKeys(add)) {
       if (is.value<Hash>(add)) {
-         for (const key of Object.keys(add)) {
-            const v: any = add[key];
+         forEachKeyValue(add, (key, v) => {
             const exists = is.value(existing[key]);
             if (is.value(v) || !exists) {
                // only replace base value if addition is non-null
@@ -106,7 +107,7 @@ export function mergeValues<T extends object>(base: T, ...additions: any[]): T {
                   existing[key] = mergeValues(existing[key], v);
                }
             }
-         }
+         });
       }
       return existing;
    }, clone(base));
@@ -149,10 +150,9 @@ export function merge<T extends object>(base: T, ...additions: any[]) {
    return additions
       .filter(add => is.object(add))
       .reduce((existing, add) => {
-         for (const key of Object.keys(add)) {
-            const v = add[key];
+         forEachKeyValue(add, (key, v: any) => {
             existing[key] = is.object(v, true) ? merge(existing[key], v) : v;
-         }
+         });
          return existing;
       }, clone(base));
 }
@@ -179,7 +179,7 @@ export function eventCoord(
 /**
  * Generate random letter/number sequence.
  */
-export function randomID(size: number = 7): string {
+export function randomID(size = 7): string {
    const chars: string[] = [];
    const possible =
       'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';

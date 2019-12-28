@@ -197,3 +197,15 @@ export function filterEach<T>(
       }
    });
 }
+
+export function intersects<T>(list1: T[], list2: T[]): boolean {
+   if (list1.length == 0 || list2.length == 0) {
+      return false;
+   }
+   for (let i = 0; i < list1.length; i++) {
+      if (list2.includes(list1[i])) {
+         return true;
+      }
+   }
+   return false;
+}
