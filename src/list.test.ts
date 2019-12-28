@@ -10,7 +10,8 @@ import {
    filterSet,
    findInSet,
    unlist,
-   sayNumber
+   sayNumber,
+   forEachKeyValue
 } from './index';
 
 test('removes items from arrays', () => {
@@ -109,4 +110,17 @@ test('converts arrays to single value', () => {
    expect(unlist('two')).toBe('two');
    expect(unlist([1, 2, 3, 4])).toBe(1);
    expect(unlist([1, 2, 3, 4], true)).toBe(4);
+});
+
+test('executes method on each key/value in object', () => {
+   const fn = jest.fn((k: string, v: number) => k + v);
+   const data = {
+      one: 1,
+      two: 2
+   };
+
+   forEachKeyValue(data, fn);
+
+   expect(fn).toHaveBeenCalledTimes(2);
+   expect(fn).toHaveBeenLastCalledWith('two', 2);
 });

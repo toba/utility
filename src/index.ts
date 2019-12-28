@@ -20,6 +20,7 @@ export {
    findInSet,
    unlist,
    forEach,
+   forEachKeyValue,
    filterEach
 } from './list';
 export {

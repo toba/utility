@@ -148,6 +148,7 @@ export function findInSet<T>(
    s: Set<T>,
    fn: (item: T) => boolean
 ): T | undefined {
+   // eslint-disable-next-line
    for (const item of s) {
       if (fn(item)) {
          return item;
@@ -170,6 +171,15 @@ export function forEach<T>(list: T[], fn: ArrayCallback<T, void>) {
    for (let i = 0; i < length; i++) {
       fn(list[i], i);
    }
+}
+
+export type ObjectCallback<V> = (key: string, value: V) => void;
+
+export function forEachKeyValue<V>(
+   hash: { [key: string]: V },
+   fn: ObjectCallback<V>
+) {
+   forEach(Object.keys(hash), key => fn(key, hash[key]));
 }
 
 /**
