@@ -157,7 +157,9 @@ export function findInSet<T>(
    return undefined;
 }
 
-/** Method to call for each item in an array */
+/**
+ * Method to call for each item in an array.
+ */
 export type ArrayCallback<T, R> = (item: T, index: number) => R;
 
 /**
@@ -166,14 +168,20 @@ export type ArrayCallback<T, R> = (item: T, index: number) => R;
  *
  * @see https://jsperf.com/toba-array
  */
-export function forEach<T>(list: T[], fn: ArrayCallback<T, void>) {
+export function forEach<T>(list: T[], fn: ArrayCallback<T, false | void>) {
    const length = list.length;
    for (let i = 0; i < length; i++) {
-      fn(list[i], i);
+      if (fn(list[i], i) === false) {
+         return;
+      }
    }
 }
 
-export type ObjectCallback<V> = (key: string, value: V) => void;
+/**
+ * Method to call for each key and value in a basic object. Return `false` to
+ * abort the loop.
+ */
+export type ObjectCallback<V> = (key: string, value: V) => false | void;
 
 export function forEachKeyValue<V>(
    hash: { [key: string]: V },
@@ -189,11 +197,12 @@ export function forEachKeyValue<V>(
 export function filterEach<T>(
    list: T[],
    filter: ArrayCallback<T, boolean>,
-   fn: ArrayCallback<T, void>
+   fn: ArrayCallback<T, false | void>
 ) {
+   // eslint-disable-next-line
    forEach(list, (item, index) => {
       if (filter(item, index)) {
-         fn(item, index);
+         return fn(item, index);
       }
    });
 }
