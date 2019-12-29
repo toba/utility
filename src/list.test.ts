@@ -12,7 +12,8 @@ import {
    unlist,
    sayNumber,
    forEachKeyValue,
-   intersects
+   intersects,
+   reverse
 } from './index';
 
 test('removes items from arrays', () => {
@@ -132,4 +133,14 @@ test('indicates if two lists share any members', () => {
    expect(intersects(['two', 'three'], ['one', 'two'])).toBe(true);
    expect(intersects([1, 3], [4, 5])).toBe(false);
    expect(intersects([1], [4, 5, 1])).toBe(true);
+});
+
+test('reverses a list', () => {
+   expect(reverse([])).toEqual([]);
+   expect(reverse([4, 5, 2, 9])).toEqual([9, 2, 5, 4]);
+   expect(reverse(['dog', 'cat', 'chicken'])).toEqual([
+      'chicken',
+      'cat',
+      'dog'
+   ]);
 });

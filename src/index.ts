@@ -22,7 +22,8 @@ export {
    forEach,
    forEachKeyValue,
    filterEach,
-   intersects
+   intersects,
+   reverse
 } from './list';
 export {
    camelize,

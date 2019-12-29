@@ -27,7 +27,7 @@ export function unlist<T>(list: T[] | T, useLastIfList = false): T {
  * @see http://sroucheray.org/blog/2009/11/array-sort-should-not-be-used-to-shuffle-an-array/
  */
 export function shuffle<T>(source: T[] | null): T[] | null {
-   if (!is.array(source) || source.length === 0) {
+   if (!is.array<T>(source) || source.length === 0) {
       return null;
    }
 
@@ -35,7 +35,7 @@ export function shuffle<T>(source: T[] | null): T[] | null {
    // clone source array
    const out = source.slice(0);
 
-   while (--i) {
+   while (--i !== 0) {
       const j = Math.floor(Math.random() * (i + 1));
       const temp = out[i];
       out[i] = out[j];
@@ -198,6 +198,9 @@ export function filterEach<T>(
    });
 }
 
+/**
+ * Whether any items in `list1` are also in `list2`.
+ */
 export function intersects<T>(list1: T[], list2: T[]): boolean {
    if (list1.length == 0 || list2.length == 0) {
       return false;
@@ -208,4 +211,15 @@ export function intersects<T>(list1: T[], list2: T[]): boolean {
       }
    }
    return false;
+}
+
+/**
+ * Reverse a list.
+ */
+export function reverse<T>(list: T[]): T[] {
+   const out = new Array(list.length) as T[];
+   for (let i = list.length - 1, j = 0; i >= 0; i--, j++) {
+      out[j] = list[i];
+   }
+   return out;
 }
