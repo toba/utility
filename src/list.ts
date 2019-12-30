@@ -168,12 +168,10 @@ export type ArrayCallback<T, R> = (item: T, index: number) => R;
  *
  * @see https://jsperf.com/toba-array
  */
-export function forEach<T>(list: T[], fn: ArrayCallback<T, false | void>) {
+export function forEach<T>(list: T[], fn: ArrayCallback<T, void>) {
    const length = list.length;
    for (let i = 0; i < length; i++) {
-      if (fn(list[i], i) === false) {
-         return;
-      }
+      fn(list[i], i);
    }
 }
 
@@ -181,7 +179,7 @@ export function forEach<T>(list: T[], fn: ArrayCallback<T, false | void>) {
  * Method to call for each key and value in a basic object. Return `false` to
  * abort the loop.
  */
-export type ObjectCallback<V> = (key: string, value: V) => false | void;
+export type ObjectCallback<V> = (key: string, value: V) => void;
 
 export function forEachKeyValue<V>(
    hash: { [key: string]: V },
@@ -202,7 +200,7 @@ export function filterEach<T>(
    // eslint-disable-next-line
    forEach(list, (item, index) => {
       if (filter(item, index)) {
-         return fn(item, index);
+         fn(item, index);
       }
    });
 }

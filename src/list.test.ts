@@ -124,19 +124,6 @@ test('executes method on each value in list', () => {
    expect(fn).toHaveBeenCalledTimes(4);
 });
 
-test('allows early return from forEach', () => {
-   // eslint-disable-next-line
-   const fn = jest.fn((v: number) => {
-      if (v == 2) {
-         return false;
-      }
-   });
-   const data = [1, 2, 3, 4];
-
-   forEach(data, fn);
-   expect(fn).toHaveBeenCalledTimes(2);
-});
-
 test('executes method on each key/value in object', () => {
    // eslint-disable-next-line
    const fn = jest.fn((k: string, v: number) => {});
@@ -149,25 +136,6 @@ test('executes method on each key/value in object', () => {
 
    expect(fn).toHaveBeenCalledTimes(2);
    expect(fn).toHaveBeenLastCalledWith('two', 2);
-});
-
-test('allows early return from forEachKeyValue', () => {
-   // eslint-disable-next-line
-   const fn = jest.fn((k: string, v: number) => {
-      if (v == 2) {
-         return false;
-      }
-   });
-   const data = {
-      one: 1,
-      two: 2,
-      three: 3,
-      four: 4
-   };
-
-   forEachKeyValue(data, fn);
-
-   expect(fn).toHaveBeenCalledTimes(2);
 });
 
 test('indicates if two lists share any members', () => {
