@@ -6,15 +6,12 @@ interface Hash {
 }
 
 /**
- * Deep clone an object.
- * @param strict If true then null or undefined are returned unchanged,
- * otherwise they are replaced with an empty object (`{}`)
  * @param done Map of keys that have already been cloned, used to avoid infinite
  * loops on circular references
  *
  * @see https://stackoverflow.com/questions/40291987/javascript-deep-clone-object-with-circular-references
  */
-export function clone<T extends object | any[] | Date>(
+function innerClone<T extends object | any[] | Date>(
    thing: T,
    strict = true,
    done = new WeakMap<T, T>()
@@ -45,13 +42,13 @@ export function clone<T extends object | any[] | Date>(
    if (thing instanceof Map)
       Array.from(thing, ([key, val]) =>
          (copy as Map<any, any>).set(
-            clone(key, strict, done),
-            clone(val, strict, done)
+            innerClone(key, strict, done),
+            innerClone(val, strict, done)
          )
       );
    else if (thing instanceof Set)
       Array.from(thing, key =>
-         (copy as Set<any>).add(clone(key, strict, done))
+         (copy as Set<any>).add(innerClone(key, strict, done))
       );
 
    done.set(thing, copy);
@@ -59,10 +56,20 @@ export function clone<T extends object | any[] | Date>(
    return Object.assign(
       copy,
       ...Object.keys(thing).map(key => ({
-         [key]: clone((thing as { [key: string]: any })[key], strict, done)
+         [key]: innerClone((thing as { [key: string]: any })[key], strict, done)
       }))
    );
 }
+
+/**
+ * Deep clone an object.
+ * @param strict If `true` (the default) then `null` or `undefined` are returned
+ * unchanged, otherwise they are replaced with an empty object (`{}`)
+ */
+export const clone = <T extends object | any[] | Date>(
+   thing: T,
+   strict = true
+): T => innerClone<T>(thing, strict);
 
 export function mergeValues<T extends object, U>(base: T, additions: U): T & U;
 export function mergeValues<T extends object, U, V>(
@@ -110,7 +117,7 @@ export function mergeValues<T extends object>(base: T, ...additions: any[]): T {
          });
       }
       return existing;
-   }, clone(base));
+   }, innerClone(base));
 }
 
 /**
@@ -154,7 +161,7 @@ export function merge<T extends object>(base: T, ...additions: any[]) {
             existing[key] = is.object(v, true) ? merge(existing[key], v) : v;
          });
          return existing;
-      }, clone(base));
+      }, innerClone(base));
 }
 
 /**
