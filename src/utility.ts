@@ -1,8 +1,8 @@
-import { is, MimeType, CharSet, ValueType } from './index';
-import { forEachKeyValue } from './list';
+import { is, MimeType, CharSet, ValueType } from './index'
+import { forEachKeyValue } from './list'
 
 interface Hash {
-   [key: string]: any;
+   [key: string]: any
 }
 
 /**
@@ -18,25 +18,20 @@ function innerClone<T extends object | any[] | Date>(
 ): T {
    if (Object(thing) !== thing || thing instanceof Function) {
       // do not clone primitives or functions
-      return thing;
+      return thing
    }
-   if (!is.value<T>(thing)) {
-      return strict ? thing : ({} as T);
-   }
-   if (is.date(thing)) {
-      return new Date(thing) as T;
-   }
-   if (done.has(thing)) {
-      return done.get(thing)!;
-   }
-   let copy: T;
+   if (!is.value<T>(thing)) return strict ? thing : ({} as T)
+   if (is.date(thing)) return new Date(thing) as T
+   if (done.has(thing)) return done.get(thing)!
+
+   let copy: T
 
    try {
       // attempt to make new instance
-      copy = new (thing as any).constructor();
+      copy = new (thing as any).constructor()
    } catch (e) {
       // if unable to construct then just make it
-      copy = Object.create(Object.getPrototypeOf(thing));
+      copy = Object.create(Object.getPrototypeOf(thing))
    }
 
    if (thing instanceof Map)
@@ -45,20 +40,20 @@ function innerClone<T extends object | any[] | Date>(
             innerClone(key, strict, done),
             innerClone(val, strict, done)
          )
-      );
+      )
    else if (thing instanceof Set)
       Array.from(thing, key =>
          (copy as Set<any>).add(innerClone(key, strict, done))
-      );
+      )
 
-   done.set(thing, copy);
+   done.set(thing, copy)
 
    return Object.assign(
       copy,
       ...Object.keys(thing).map(key => ({
          [key]: innerClone((thing as { [key: string]: any })[key], strict, done)
       }))
-   );
+   )
 }
 
 /**
@@ -69,30 +64,27 @@ function innerClone<T extends object | any[] | Date>(
 export const clone = <T extends object | any[] | Date>(
    thing: T,
    strict = true
-): T => innerClone<T>(thing, strict);
+): T => innerClone<T>(thing, strict)
 
-export function mergeValues<T extends object, U>(base: T, additions: U): T & U;
+export function mergeValues<T extends object, U>(base: T, additions: U): T & U
 export function mergeValues<T extends object, U, V>(
    base: T,
    add1: U,
    add2: V
-): T & U & V;
+): T & U & V
 export function mergeValues<T extends object, U, V, W>(
    base: T,
    add1: U,
    add2: V,
    add3: W
-): T & U & V & W;
+): T & U & V & W
 
 /**
  * Merge additions into a base object, only replacing base values if the
  * additions are not null or undefined. Arrays will not be merged but will be
  * treated as values meaning additions supersede the base.
  */
-export function mergeValues<T extends object>(
-   base: T,
-   ...additions: any[]
-): any;
+export function mergeValues<T extends object>(base: T, ...additions: any[]): any
 
 /* eslint-disable valid-typeof */
 export function mergeValues<T extends object>(base: T, ...additions: any[]): T {
@@ -100,7 +92,7 @@ export function mergeValues<T extends object>(base: T, ...additions: any[]): T {
       //for (const key of Reflect.ownKeys(add)) {
       if (is.value<Hash>(add)) {
          forEachKeyValue(add, (key, v) => {
-            const exists = is.value(existing[key]);
+            const exists = is.value(existing[key])
             if (is.value(v) || !exists) {
                // only replace base value if addition is non-null
                if (
@@ -109,22 +101,22 @@ export function mergeValues<T extends object>(base: T, ...additions: any[]): T {
                   typeof v != ValueType.Object ||
                   typeof existing[key] != ValueType.Object
                ) {
-                  existing[key] = v;
+                  existing[key] = v
                } else {
-                  existing[key] = mergeValues(existing[key], v);
+                  existing[key] = mergeValues(existing[key], v)
                }
             }
-         });
+         })
       }
-      return existing;
-   }, innerClone(base));
+      return existing
+   }, innerClone(base))
 }
 
 /**
  * Merge additions into base object, allowing `null` or `undefined` to replace
  * existing values (simple approach).
  */
-export function merge<T extends object, U>(base: T, add1: U): T & U;
+export function merge<T extends object, U>(base: T, add1: U): T & U
 
 /**
  * Merge additions into base object, allowing `null` or `undefined` to replace
@@ -134,7 +126,7 @@ export function merge<T extends object, U, V>(
    base: T,
    add1: U,
    add2: V
-): T & U & V;
+): T & U & V
 
 /**
  * Merge additions into base object, allowing `null` or `undefined` to replace
@@ -145,23 +137,23 @@ export function merge<T extends object, U, V, W>(
    add1: U,
    add2: V,
    add3: W
-): T & U & V & W;
+): T & U & V & W
 
 /**
  * Merge additions into base object, allowing `null` or `undefined` to replace
  * existing values (simple approach).
  */
-export function merge<T extends object>(base: T, ...additions: any[]): any;
+export function merge<T extends object>(base: T, ...additions: any[]): any
 
 export function merge<T extends object>(base: T, ...additions: any[]) {
    return additions
       .filter(add => is.object(add))
       .reduce((existing, add) => {
          forEachKeyValue(add, (key, v: any) => {
-            existing[key] = is.object(v, true) ? merge(existing[key], v) : v;
-         });
-         return existing;
-      }, innerClone(base));
+            existing[key] = is.object(v, true) ? merge(existing[key], v) : v
+         })
+         return existing
+      }, innerClone(base))
 }
 
 /**
@@ -173,29 +165,29 @@ export function eventCoord(
    if (e) {
       if (e instanceof TouchEvent) {
          if (e.changedTouches && e.changedTouches.length > 0) {
-            const touch = e.changedTouches[0];
-            return { x: touch.clientX, y: touch.clientY };
+            const touch = e.changedTouches[0]
+            return { x: touch.clientX, y: touch.clientY }
          }
       } else if (e.pageX !== undefined) {
-         return { x: e.pageX, y: e.pageY };
+         return { x: e.pageX, y: e.pageY }
       }
    }
-   return { x: 0, y: 0 };
+   return { x: 0, y: 0 }
 }
 
 /**
  * Generate random letter/number sequence.
  */
 export function randomID(size = 7): string {
-   const chars: string[] = [];
+   const chars: string[] = []
    const possible =
-      'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-   const length = possible.length;
+      'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'
+   const length = possible.length
 
    for (let i = 0; i < size; i++) {
-      chars.push(possible.charAt(Math.floor(Math.random() * length)));
+      chars.push(possible.charAt(Math.floor(Math.random() * length)))
    }
-   return chars.join('');
+   return chars.join('')
 }
 
 /**
@@ -203,49 +195,49 @@ export function randomID(size = 7): string {
  */
 export function inferMimeType(fileName: string): MimeType | null {
    if (!fileName.includes('.')) {
-      return null;
+      return null
    }
-   const parts = fileName.split('.');
-   const ext = parts[parts.length - 1].toLowerCase();
+   const parts = fileName.split('.')
+   const ext = parts[parts.length - 1].toLowerCase()
 
    switch (ext) {
       case 'png':
-         return MimeType.PNG;
+         return MimeType.PNG
       case 'jpg':
       case 'jpeg':
-         return MimeType.JPEG;
+         return MimeType.JPEG
       case 'txt':
       case 'text':
-         return MimeType.Text;
+         return MimeType.Text
       case 'xml':
-         return MimeType.XML;
+         return MimeType.XML
       case 'gpx':
-         return MimeType.GPX;
+         return MimeType.GPX
       case 'zip':
-         return MimeType.Zip;
+         return MimeType.Zip
       case 'htm':
       case 'html':
-         return MimeType.HTML;
+         return MimeType.HTML
       case 'json':
-         return MimeType.JSON;
+         return MimeType.JSON
       case 'pdf':
-         return MimeType.PDF;
+         return MimeType.PDF
       case 'gif':
-         return MimeType.GIF;
+         return MimeType.GIF
       case 'css':
-         return MimeType.CSS;
+         return MimeType.CSS
       case 'svg':
-         return MimeType.SVG;
+         return MimeType.SVG
       case 'rss':
-         return MimeType.RSS;
+         return MimeType.RSS
       case 'atom':
-         return MimeType.Atom;
+         return MimeType.Atom
       default:
-         return null;
+         return null
    }
 }
 
 export const addCharSet = (
    type: MimeType,
    charSet: CharSet = CharSet.UTF8
-): string => `${type}; charset=${charSet}`;
+): string => `${type}; charset=${charSet}`

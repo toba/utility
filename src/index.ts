@@ -6,7 +6,7 @@ export {
    inferMimeType,
    addCharSet,
    clone
-} from './utility';
+} from './utility'
 export {
    list,
    removeItem,
@@ -24,7 +24,7 @@ export {
    filterEach,
    intersects,
    reverse
-} from './list';
+} from './list'
 export {
    camelize,
    format,
@@ -36,14 +36,14 @@ export {
    htmlEscape,
    htmlUnescape,
    wrapText
-} from './text';
-export { makeDuoList, makeTrioList, DuoList, TrioList } from './tuple';
-export { median, boundary, Limits, round } from './math';
-export { re } from './regex';
-export { is } from './is';
-export { url } from './url';
-export { retry } from './retry';
-export { session, cookie } from './storage';
+} from './text'
+export { makeDuoList, makeTrioList, DuoList, TrioList } from './tuple'
+export { median, boundary, Limits, round } from './math'
+export { re } from './regex'
+export { is } from './is'
+export { url } from './url'
+export { retry } from './retry'
+export { session, cookie } from './storage'
 export {
    Duration,
    TimeUnit,
@@ -53,7 +53,7 @@ export {
    parseDuration,
    durationString,
    inDaylightSavings
-} from './time';
+} from './time'
 export {
    alphabet,
    month,
@@ -68,13 +68,13 @@ export {
    Sort,
    Weekday,
    Month
-} from './constants';
+} from './constants'
 export {
    sayNumber,
    leadingZeros,
    parseNumber,
    maybeNumber,
    monetize
-} from './number';
-export { EventEmitter } from './emitter';
-export { Queue, QueueEvent } from './queue';
+} from './number'
+export { EventEmitter } from './emitter'
+export { Queue, QueueEvent } from './queue'

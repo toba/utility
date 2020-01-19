@@ -20,12 +20,12 @@ export const re = {
    fileExt: /\.\w{2,4}$/,
 
    get newLine() {
-      return /(\r\n|\n|\r)/gm;
+      return /(\r\n|\n|\r)/gm
    },
    get trailingWhiteSpace() {
-      return /[\r\n\s]*$/g;
+      return /[\r\n\s]*$/g
    },
    get lineBreak() {
-      return /\r*\n/gi;
+      return /\r*\n/gi
    }
-};
+}

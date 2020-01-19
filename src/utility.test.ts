@@ -1,4 +1,4 @@
-import '@toba/test';
+import '@toba/test'
 import {
    merge,
    mergeAll,
@@ -6,10 +6,10 @@ import {
    MimeType,
    addCharSet,
    clone
-} from './index';
+} from './index'
 
 interface TestThing {
-   [key: string]: string | string[] | TestThing | Function | null;
+   [key: string]: string | string[] | TestThing | Function | null
 }
 
 /**
@@ -21,16 +21,16 @@ function commonMergeTests(fn: <T>(base: T, ...additions: any[]) => T) {
          one: 1,
          two: 2,
          three: 3
-      });
-   });
+      })
+   })
 
    test('merges many objects', () => {
       expect(fn({ one: 1 }, { two: 2 }, { three: 3 })).toEqual({
          one: 1,
          two: 2,
          three: 3
-      });
-   });
+      })
+   })
 
    test('handles undefined objects', () => {
       expect(fn({ one: 1 }, null, { two: 2 }, undefined, { three: 3 })).toEqual(
@@ -39,16 +39,16 @@ function commonMergeTests(fn: <T>(base: T, ...additions: any[]) => T) {
             two: 2,
             three: 3
          }
-      );
-   });
+      )
+   })
 
    test('overwrites existing keys', () => {
       expect(fn({ one: 1, two: 2 }, { one: 11, three: 3 })).toEqual({
          one: 11,
          two: 2,
          three: 3
-      });
-   });
+      })
+   })
 
    test('deep merges objects', () => {
       expect(fn({ o: { one: 1 } }, { o: { two: 2 } })).toEqual({
@@ -56,8 +56,8 @@ function commonMergeTests(fn: <T>(base: T, ...additions: any[]) => T) {
             one: 1,
             two: 2
          }
-      });
-   });
+      })
+   })
 
    test('overwrites scalar arrays', () => {
       expect(
@@ -69,58 +69,58 @@ function commonMergeTests(fn: <T>(base: T, ...additions: any[]) => T) {
          countFalse: false,
          exclude: [],
          only: ['one', 'child.two']
-      });
-   });
+      })
+   })
 
    test('replaces booleans', () => {
       expect(fn({ bool: true }, { bool: false })).toEqual({
          bool: false
-      });
+      })
 
       expect(fn({ bool: false }, { bool: true })).toEqual({
          bool: true
-      });
+      })
 
       expect(fn({ bool: true }, { one: null }, { bool: false })).toEqual({
          one: null,
          bool: false
-      });
-   });
+      })
+   })
 
    test('allows rest argument destructuring', () => {
       const additions = [
          { one: 1, two: 2 },
          { one: 11, three: 3 },
          { five: 5, six: 6 }
-      ];
+      ]
       expect(fn({ one: null }, ...additions)).toEqual({
          one: 11,
          two: 2,
          three: 3,
          five: 5,
          six: 6
-      });
-   });
+      })
+   })
 }
 
 test('merges objects', () => {
-   const baseFn = () => 3;
+   const baseFn = () => 3
    const base: TestThing = {
       key1: 'value1',
       key2: 'value2',
       key5: [] as string[],
       key6: null,
       key7: baseFn
-   };
-   const addFn = () => 5;
-   const add1: TestThing = { key1: null, key3: 'value3' };
+   }
+   const addFn = () => 5
+   const add1: TestThing = { key1: null, key3: 'value3' }
    const add2: TestThing = {
       key1: 'newValue1',
       key4: 'value4',
       key5: ['one', 'two'],
       key6: 'newValue6',
       key7: addFn
-   };
+   }
 
    expect(merge(base, add1)).toEqual({
       key1: 'value1',
@@ -129,7 +129,7 @@ test('merges objects', () => {
       key5: [],
       key6: null,
       key7: baseFn
-   });
+   })
 
    expect(merge(base, add1, add2)).toEqual({
       key1: 'newValue1',
@@ -139,8 +139,8 @@ test('merges objects', () => {
       key5: ['one', 'two'],
       key6: 'newValue6',
       key7: addFn
-   });
-});
+   })
+})
 
 test('merges nested objects', () => {
    const base: TestThing = {
@@ -148,14 +148,14 @@ test('merges nested objects', () => {
       key2: 'value2',
       key5: { key10: 'value10', key11: 'value11' },
       key6: null
-   };
-   const add1: TestThing = { key1: null, key3: 'value3' };
+   }
+   const add1: TestThing = { key1: null, key3: 'value3' }
    const add2: TestThing = {
       key1: 'newValue1',
       key4: 'value4',
       key5: { key10: 'new-value10', key12: 'value12' },
       key6: { key13: 'new-value13', key14: 'value14' }
-   };
+   }
 
    expect(merge(base, add1)).toEqual({
       key1: 'value1',
@@ -163,7 +163,7 @@ test('merges nested objects', () => {
       key3: 'value3',
       key5: { key10: 'value10', key11: 'value11' },
       key6: null
-   });
+   })
 
    expect(merge(base, add1, add2)).toEqual({
       key1: 'newValue1',
@@ -172,11 +172,11 @@ test('merges nested objects', () => {
       key4: 'value4',
       key5: { key10: 'new-value10', key11: 'value11', key12: 'value12' },
       key6: { key13: 'new-value13', key14: 'value14' }
-   });
-});
+   })
+})
 
-commonMergeTests(merge);
-commonMergeTests(mergeAll);
+commonMergeTests(merge)
+commonMergeTests(mergeAll)
 
 test('merges configurations', () => {
    const defaultConfig = {
@@ -192,7 +192,7 @@ test('merges configurations', () => {
       maxRetries: 3,
       retryDelay: 500,
       auth: null as any
-   };
+   }
 
    const givenConfig = {
       appID: '72157631007435048',
@@ -217,48 +217,48 @@ test('merges configurations', () => {
             request: null
          }
       }
-   };
+   }
 
-   expect(merge(defaultConfig, givenConfig)).toMatchSnapshot();
-});
+   expect(merge(defaultConfig, givenConfig)).toMatchSnapshot()
+})
 
 // https://stackoverflow.com/questions/40291987/javascript-deep-clone-object-with-circular-references
 test('clones objects with circular references', () => {
-   const a: any = {};
-   const b: any = {};
-   a.b = b;
-   b.a = a;
+   const a: any = {}
+   const b: any = {}
+   a.b = b
+   b.a = a
 
-   const cloneOfA = clone(a);
+   const cloneOfA = clone(a)
 
-   expect('a' in cloneOfA.b.a.b).toBe(true);
-});
+   expect('a' in cloneOfA.b.a.b).toBe(true)
+})
 
 test('replaces all values even if new value is null or undefined', () => {
    expect(mergeAll({ one: 1, two: 2 }, { one: null, two: undefined })).toEqual({
       one: null,
       two: undefined
-   });
-});
+   })
+})
 
 test('infers Mime type from file name', () => {
-   expect(inferMimeType('file.jpg')).toBe(MimeType.JPEG);
-   expect(inferMimeType('long.file.jpeg')).toBe(MimeType.JPEG);
+   expect(inferMimeType('file.jpg')).toBe(MimeType.JPEG)
+   expect(inferMimeType('long.file.jpeg')).toBe(MimeType.JPEG)
 
-   expect(inferMimeType('something.png')).toBe(MimeType.PNG);
-   expect(inferMimeType('my garmin file with spaces.gpx')).toBe(MimeType.GPX);
+   expect(inferMimeType('something.png')).toBe(MimeType.PNG)
+   expect(inferMimeType('my garmin file with spaces.gpx')).toBe(MimeType.GPX)
 
-   expect(inferMimeType('My Good Document.PDF')).toBe(MimeType.PDF);
+   expect(inferMimeType('My Good Document.PDF')).toBe(MimeType.PDF)
 
-   expect(inferMimeType('feed.atom')).toBe(MimeType.Atom);
-});
+   expect(inferMimeType('feed.atom')).toBe(MimeType.Atom)
+})
 
 test('returns MIME type with standard charset extension', () => {
-   expect(addCharSet(MimeType.JSON)).toBe('application/json; charset=utf-8');
-});
+   expect(addCharSet(MimeType.JSON)).toBe('application/json; charset=utf-8')
+})
 
 test('clones objects', () => {
-   const date = new Date(2007, 10, 11, 12, 0, 0);
+   const date = new Date(2007, 10, 11, 12, 0, 0)
    const thing = {
       key1: 'value1',
       key2: 'value2',
@@ -268,34 +268,34 @@ test('clones objects', () => {
          key5: date
       },
       list: [{ name: 'one' }, { name: 'two' }]
-   };
-   const thing2 = clone(thing);
-   expect(thing2).toHaveProperty('key1', 'value1');
-   expect(thing2).toHaveProperty('nested');
-   expect(thing2!.nested).toHaveProperty('key3', 'value3');
-   expect(thing2!.nested.key5).toEqual(date);
-   expect(thing2!.list).toBeInstanceOf(Array);
+   }
+   const thing2 = clone(thing)
+   expect(thing2).toHaveProperty('key1', 'value1')
+   expect(thing2).toHaveProperty('nested')
+   expect(thing2!.nested).toHaveProperty('key3', 'value3')
+   expect(thing2!.nested.key5).toEqual(date)
+   expect(thing2!.list).toBeInstanceOf(Array)
 
-   thing.nested.key3 = 'wooly';
+   thing.nested.key3 = 'wooly'
 
-   expect(thing2!.nested.key3).toBe('value3');
+   expect(thing2!.nested.key3).toBe('value3')
 
    // expect(clone(undefined)).toBeUndefined();
    // expect(clone(null)).toBeNull();
-});
+})
 
 test('clones arrays', () => {
-   const thing = ['one', { value: 'two' }];
-   const thing2 = clone(thing);
+   const thing = ['one', { value: 'two' }]
+   const thing2 = clone(thing)
 
-   expect(thing2).toBeInstanceOf(Array);
-   expect(thing2!.length).toBe(2);
+   expect(thing2).toBeInstanceOf(Array)
+   expect(thing2!.length).toBe(2)
 
    const thing3 = {
       child: {
          data: ['one', 'two']
       }
-   };
-   const thing4 = clone(thing3);
-   expect(thing4).toEqual(thing3);
-});
+   }
+   const thing4 = clone(thing3)
+   expect(thing4).toEqual(thing3)
+})

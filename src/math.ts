@@ -1,19 +1,19 @@
-import { is } from './index';
+import { is } from './index'
 
 /**
  * Middle value or average of the two middle values among a list of numbers.
  * @param values Sorted numbers
  */
 export const median = (...values: number[]) => {
-   const half = Math.floor(values.length / 2);
+   const half = Math.floor(values.length / 2)
    return values.length % 2 !== 0
       ? values[half]
-      : (values[half - 1] + values[half]) / 2.0;
-};
+      : (values[half - 1] + values[half]) / 2.0
+}
 
 export interface Limits {
-   min: number;
-   max: number;
+   min: number
+   max: number
 }
 
 /**
@@ -26,35 +26,30 @@ export interface Limits {
  *
  * @see http://sphweb.bumc.bu.edu/otlt/MPH-Modules/BS/BS704_SummarizingData/BS704_SummarizingData7.html
  */
-export const boundary = (
-   values: number[],
-   distance: number = 3
-): Limits | null => {
-   if (!is.array(values) || values.length === 0) {
-      return null;
-   }
+export const boundary = (values: number[], distance = 3): Limits | null => {
+   if (!is.array(values) || values.length === 0) return null
 
    // sort lowest to highest
-   values.sort((d1, d2) => d1 - d2);
+   values.sort((d1, d2) => d1 - d2)
 
-   const half = Math.floor(values.length / 2);
+   const half = Math.floor(values.length / 2)
    /** first quartile */
-   const q1 = median(...values.slice(0, half));
+   const q1 = median(...values.slice(0, half))
    /** third quartile */
-   const q3 = median(...values.slice(half));
+   const q3 = median(...values.slice(half))
    /** interquartile range: range of the middle 50% of the data */
-   const range = q3 - q1;
+   const range = q3 - q1
 
    return {
       min: (q1 - range * distance) as number,
       max: (q3 + range * distance) as number
-   };
-};
+   }
+}
 
 /**
  * @param precision Number of decimal places to retain
  */
 export const round = (n: number, precision = 0): number => {
-   const exp = Math.pow(10, precision);
-   return Math.round(n * exp) / exp;
-};
+   const exp = 10 ** precision
+   return Math.round(n * exp) / exp
+}

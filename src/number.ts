@@ -1,12 +1,12 @@
-import { is } from './is';
-import { re } from './regex';
+import { is } from './is'
+import { re } from './regex'
 
 /**
  * Pad integer with leading zeroes.
  * @param targetLength Total length the resulting string should be
  */
 export function leadingZeros(d: number, targetLength: number): string {
-   return d.toString().padStart(targetLength, '0');
+   return d.toString().padStart(targetLength, '0')
 }
 
 /**
@@ -14,70 +14,72 @@ export function leadingZeros(d: number, targetLength: number): string {
  * @param capitalize Whether to capitalize the word
  */
 export function sayNumber(n: number, capitalize = true): string {
-   let word = n.toString();
+   let word = n.toString()
    switch (n) {
       case 1:
-         word = 'One';
-         break;
+         word = 'One'
+         break
       case 2:
-         word = 'Two';
-         break;
+         word = 'Two'
+         break
       case 3:
-         word = 'Three';
-         break;
+         word = 'Three'
+         break
       case 4:
-         word = 'Four';
-         break;
+         word = 'Four'
+         break
       case 5:
-         word = 'Five';
-         break;
+         word = 'Five'
+         break
       case 6:
-         word = 'Six';
-         break;
+         word = 'Six'
+         break
       case 7:
-         word = 'Seven';
-         break;
+         word = 'Seven'
+         break
       case 8:
-         word = 'Eight';
-         break;
+         word = 'Eight'
+         break
       case 9:
-         word = 'Nine';
-         break;
+         word = 'Nine'
+         break
       case 10:
-         word = 'Ten';
-         break;
+         word = 'Ten'
+         break
       case 11:
-         word = 'Eleven';
-         break;
+         word = 'Eleven'
+         break
       case 12:
-         word = 'Twelve';
-         break;
+         word = 'Twelve'
+         break
       case 13:
-         word = 'Thirteen';
-         break;
+         word = 'Thirteen'
+         break
       case 14:
-         word = 'Fourteen';
-         break;
+         word = 'Fourteen'
+         break
       case 15:
-         word = 'Fifteen';
-         break;
+         word = 'Fifteen'
+         break
       case 16:
-         word = 'Sixteen';
-         break;
+         word = 'Sixteen'
+         break
       case 17:
-         word = 'Seventeen';
-         break;
+         word = 'Seventeen'
+         break
       case 18:
-         word = 'Eighteen';
-         break;
+         word = 'Eighteen'
+         break
       case 19:
-         word = 'Nineteen';
-         break;
+         word = 'Nineteen'
+         break
       case 20:
-         word = 'Twenty';
-         break;
+         word = 'Twenty'
+         break
+      default:
+         break
    }
-   return capitalize ? word : word.toLowerCase();
+   return capitalize ? word : word.toLowerCase()
 }
 
 /**
@@ -86,8 +88,8 @@ export function sayNumber(n: number, capitalize = true): string {
  * @param not Optional number to return if none found in text
  */
 export function parseNumber(text: string, not = NaN): number {
-   text = (text ? text : '').replace(/[^\d\.]/g, '');
-   return is.empty(text) ? not : parseFloat(text);
+   text = (is.value(text) ? text : '').replace(/[^\d\.]/g, '')
+   return is.empty(text) ? not : parseFloat(text)
 }
 
 /**
@@ -95,7 +97,7 @@ export function parseNumber(text: string, not = NaN): number {
  * return the text unchanged.
  */
 export function maybeNumber(text: string | null): number | string | null {
-   return text !== null && re.numeric.test(text) ? parseFloat(text) : text;
+   return text !== null && re.numeric.test(text) ? parseFloat(text) : text
 }
 
 /**
@@ -103,20 +105,14 @@ export function maybeNumber(text: string | null): number | string | null {
  * @see https://stackoverflow.com/questions/149055/how-can-i-format-numbers-as-dollars-currency-string-in-javascript
  */
 export const monetize = (d: number | string, includeDecimals = true) => {
-   if (!is.value(d)) {
-      return d;
-   }
+   if (!is.value(d)) return d
 
    if (is.text(d)) {
-      d = parseNumber(d);
+      d = parseNumber(d)
       // let caller decide how to handle NaN
-      if (isNaN(d)) {
-         return d;
-      }
+      if (isNaN(d)) return d
    }
-   const re = includeDecimals
-      ? /(\d)(?=(\d{3})+\.)/g
-      : /(\d)(?=(\d{3})+(,|$))/g;
+   const re = includeDecimals ? /(\d)(?=(\d{3})+\.)/g : /(\d)(?=(\d{3})+(,|$))/g
 
-   return '$' + d.toFixed(includeDecimals ? 2 : 0).replace(re, '$1,');
-};
+   return '$' + d.toFixed(includeDecimals ? 2 : 0).replace(re, '$1,')
+}

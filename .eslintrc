@@ -3,5 +3,9 @@
    "rules": {
       "no-param-reassign": "off",
       "prefer-destructuring": "off"
+   },
+   "env": {
+      "node": false,
+      "browser": true
    }
 }

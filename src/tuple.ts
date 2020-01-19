@@ -1,9 +1,9 @@
-import { forEach } from './list';
+import { forEach } from './list'
 
 /** Method to call for both items in equal length array pairs */
-export type DuoCallback<T, U, R> = (t: T, u: U, i: number) => R;
+export type DuoCallback<T, U, R> = (t: T, u: U, i: number) => R
 /** Method to call for all three items in three equal length arrays */
-export type TrioCallback<T, U, V, R> = (t: T, u: U, v: V, i: number) => R;
+export type TrioCallback<T, U, V, R> = (t: T, u: U, v: V, i: number) => R
 
 function trioEach<T, U, V>(
    a: T[],
@@ -11,16 +11,16 @@ function trioEach<T, U, V>(
    c: V[],
    fn: TrioCallback<T, U, V, void>
 ) {
-   const length = a.length;
+   const length = a.length
    for (let i = 0; i < length; i++) {
-      fn(a[i], b[i], c[i], i);
+      fn(a[i], b[i], c[i], i)
    }
 }
 
 function duoEach<T, U>(a: T[], b: U[], fn: DuoCallback<T, U, void>) {
-   const length = a.length;
+   const length = a.length
    for (let i = 0; i < length; i++) {
-      fn(a[i], b[i], i);
+      fn(a[i], b[i], i)
    }
 }
 
@@ -29,16 +29,15 @@ function duoFind<T, U>(
    b: U[],
    fn: DuoCallback<T, U, boolean>
 ): [T, U] | undefined {
-   const length = a.length;
+   const length = a.length
 
    for (let i = 0; i < length; i++) {
-      const t = a[i];
-      const u = b[i];
+      const t = a[i]
+      const u = b[i]
 
-      if (fn(t, u, i)) {
-         return [t, u];
-      }
+      if (fn(t, u, i)) return [t, u]
    }
+   return undefined
 }
 
 function trioFind<T, U, V>(
@@ -47,65 +46,61 @@ function trioFind<T, U, V>(
    c: V[],
    fn: TrioCallback<T, U, V, boolean>
 ): [T, U, V] | undefined {
-   const length = a.length;
+   const length = a.length
 
    for (let i = 0; i < length; i++) {
-      const t = a[i];
-      const u = b[i];
-      const v = c[i];
+      const t = a[i]
+      const u = b[i]
+      const v = c[i]
 
-      if (fn(t, u, v, i)) {
-         return [t, u, v];
-      }
+      if (fn(t, u, v, i)) return [t, u, v]
    }
+   return undefined
 }
 
 const duoPop = <T, U>(a: T[], b: U[]): [T, U] | undefined =>
-   a.length === 0 ? undefined : [a.pop()!, b.pop()!];
+   a.length === 0 ? undefined : [a.pop()!, b.pop()!]
 
 const trioPop = <T, U, V>(a: T[], b: U[], c: V[]): [T, U, V] | undefined =>
-   a.length == 0 ? undefined : [a.pop()!, b.pop()!, c.pop()!];
+   a.length == 0 ? undefined : [a.pop()!, b.pop()!, c.pop()!]
 
 function duoPush<T, U>(a: T[], b: U[], t: T, u: U): number {
-   a.push(t);
-   return b.push(u);
+   a.push(t)
+   return b.push(u)
 }
 
 function trioPush<T, U, V>(a: T[], b: U[], c: V[], t: T, u: U, v: V): number {
-   a.push(t);
-   b.push(u);
-   return c.push(v);
+   a.push(t)
+   b.push(u)
+   return c.push(v)
 }
 
 const duoItem = <T, U>(a: T[], b: U[], i: number): [T, U] | undefined =>
-   a.length <= i ? undefined : [a[i], b[i]];
+   a.length <= i ? undefined : [a[i], b[i]]
 
 const trioItem = <T, U, V>(
    a: T[],
    b: U[],
    c: V[],
    i: number
-): [T, U, V] | undefined => (a.length <= i ? undefined : [a[i], b[i], c[i]]);
+): [T, U, V] | undefined => (a.length <= i ? undefined : [a[i], b[i], c[i]])
 
-const duoLastItem = <T, U>(a: T[], b: U[]) => duoItem(a, b, a.length - 1);
+const duoLastItem = <T, U>(a: T[], b: U[]) => duoItem(a, b, a.length - 1)
 
 const trioLastItem = <T, U, V>(a: T[], b: U[], c: V[]) =>
-   trioItem(a, b, c, a.length - 1);
+   trioItem(a, b, c, a.length - 1)
 
 /**
  * Get the first index that matches _one_ (all do not need to match) of the
  * given values.
  */
 function duoIndexOf<T, U>(a: T[], b: U[], t?: T, u?: U): number {
-   let index = -1;
+   let index = -1
 
-   if (t !== undefined && (index = a.indexOf(t)) >= 0) {
-      return index;
-   }
-   if (u !== undefined && (index = b.indexOf(u)) >= 0) {
-      return index;
-   }
-   return index;
+   if (t !== undefined && (index = a.indexOf(t)) >= 0) return index
+   if (u !== undefined && (index = b.indexOf(u)) >= 0) return index
+
+   return index
 }
 
 /**
@@ -120,62 +115,57 @@ function trioIndexOf<T, U, V>(
    u?: U,
    v?: V
 ): number {
-   let index = -1;
+   let index = -1
 
-   if (t !== undefined && (index = a.indexOf(t)) >= 0) {
-      return index;
-   }
-   if (u !== undefined && (index = b.indexOf(u)) >= 0) {
-      return index;
-   }
-   if (v !== undefined && (index = c.indexOf(v)) >= 0) {
-      return index;
-   }
-   return index;
+   if (t !== undefined && (index = a.indexOf(t)) >= 0) return index
+   if (u !== undefined && (index = b.indexOf(u)) >= 0) return index
+   if (v !== undefined && (index = c.indexOf(v)) >= 0) return index
+
+   return index
 }
 
 const duoFlat = <T, U>(a: T[], b: U[]): (T | U)[] => {
-   const flat: (T | U)[] = [];
+   const flat: (T | U)[] = []
    forEach(a, (item, index) => {
-      flat.push(item, b[index]);
-   });
-   return flat;
-};
+      flat.push(item, b[index])
+   })
+   return flat
+}
 
 const trioFlat = <T, U, V>(a: T[], b: U[], c: V[]): (T | U | V)[] => {
-   const flat: (T | U | V)[] = [];
+   const flat: (T | U | V)[] = []
    forEach(a, (item, index) => {
-      flat.push(item, b[index], c[index]);
-   });
-   return flat;
-};
+      flat.push(item, b[index], c[index])
+   })
+   return flat
+}
 
 const duoCopy = <T, U>(a: T[], b: U[]): DuoList<T, U> => {
-   const list = makeDuoList<T, U>();
+   const list = makeDuoList<T, U>()
    forEach(a, (item, index) => {
-      list.push(item, b[index]);
-   });
-   return list;
-};
+      list.push(item, b[index])
+   })
+   return list
+}
 
 const trioCopy = <T, U, V>(a: T[], b: U[], c: V[]): TrioList<T, U, V> => {
-   const list = makeTrioList<T, U, V>();
+   const list = makeTrioList<T, U, V>()
    forEach(a, (item, index) => {
-      list.push(item, b[index], c[index]);
-   });
-   return list;
-};
+      list.push(item, b[index], c[index])
+   })
+   return list
+}
 
 const duoRemove = <T, U>(a: T[], b: U[], t?: T, u?: U): boolean => {
-   const index = duoIndexOf(a, b, t, u);
+   const index = duoIndexOf(a, b, t, u)
    if (index == -1) {
-      return false;
+      return false
    }
-   a = a.splice(index, 1);
-   b = b.splice(index, 1);
+   a = a.splice(index, 1)
+   b = b.splice(index, 1)
 
-   return true;
-};
+   return true
+}
 
 const trioRemove = <T, U, V>(
    a: T[],
@@ -185,20 +175,20 @@ const trioRemove = <T, U, V>(
    u?: U,
    v?: V
 ): boolean => {
-   const index = trioIndexOf(a, b, c, t, u, v);
+   const index = trioIndexOf(a, b, c, t, u, v)
    if (index == -1) {
-      return false;
+      return false
    }
-   a = a.splice(index, 1);
-   b = b.splice(index, 1);
-   c = c.splice(index, 1);
+   a = a.splice(index, 1)
+   b = b.splice(index, 1)
+   c = c.splice(index, 1)
 
-   return true;
-};
+   return true
+}
 
 function duoUnshift<T, U>(a: T[], b: U[], t: T, u: U): number {
-   a.unshift(t);
-   return b.unshift(u);
+   a.unshift(t)
+   return b.unshift(u)
 }
 
 function trioUnshift<T, U, V>(
@@ -209,16 +199,16 @@ function trioUnshift<T, U, V>(
    u: U,
    v: V
 ): number {
-   a.unshift(t);
-   b.unshift(u);
-   return c.unshift(v);
+   a.unshift(t)
+   b.unshift(u)
+   return c.unshift(v)
 }
 
 interface TupleList<G> {
-   size: () => number;
-   item: (index: number) => G | undefined;
-   pop: () => G | undefined;
-   lastItem: () => G | undefined;
+   size: () => number
+   item: (index: number) => G | undefined
+   pop: () => G | undefined
+   lastItem: () => G | undefined
 }
 
 /**
@@ -226,14 +216,14 @@ interface TupleList<G> {
  * arrays.
  */
 export interface DuoList<T, U> extends TupleList<[T, U]> {
-   each: (fn: DuoCallback<T, U, void>) => void;
-   find: (fn: DuoCallback<T, U, boolean>) => [T, U] | undefined;
-   push: (t: T, u: U) => number;
-   indexOf: (t?: T, u?: U) => number;
-   flat: () => (T | U)[];
-   copy: () => DuoList<T, U>;
-   remove: (t?: T, u?: U) => boolean;
-   unshift: (t: T, u: U) => number;
+   each: (fn: DuoCallback<T, U, void>) => void
+   find: (fn: DuoCallback<T, U, boolean>) => [T, U] | undefined
+   push: (t: T, u: U) => number
+   indexOf: (t?: T, u?: U) => number
+   flat: () => (T | U)[]
+   copy: () => DuoList<T, U>
+   remove: (t?: T, u?: U) => boolean
+   unshift: (t: T, u: U) => number
 }
 
 /**
@@ -241,25 +231,24 @@ export interface DuoList<T, U> extends TupleList<[T, U]> {
  * arrays.
  */
 export interface TrioList<T, U, V> extends TupleList<[T, U, V]> {
-   each: (fn: TrioCallback<T, U, V, void>) => void;
-   find: (fn: TrioCallback<T, U, V, boolean>) => [T, U, V] | undefined;
-   push: (t: T, u: U, v: V) => number;
-   indexOf: (t?: T, u?: U, v?: V) => number;
-   flat: () => (T | U | V)[];
-   copy: () => TrioList<T, U, V>;
-   remove: (t?: T, u?: U, v?: V) => boolean;
-   unshift: (t: T, u: U, v: V) => number;
+   each: (fn: TrioCallback<T, U, V, void>) => void
+   find: (fn: TrioCallback<T, U, V, boolean>) => [T, U, V] | undefined
+   push: (t: T, u: U, v: V) => number
+   indexOf: (t?: T, u?: U, v?: V) => number
+   flat: () => (T | U | V)[]
+   copy: () => TrioList<T, U, V>
+   remove: (t?: T, u?: U, v?: V) => boolean
+   unshift: (t: T, u: U, v: V) => number
 }
-
 export function makeDuoList<T, U>(...list: [T, U][]): DuoList<T, U> {
-   const length = list.length;
-   const a: T[] = new Array(length);
-   const b: U[] = new Array(length);
+   const length = list.length
+   const a: T[] = new Array(length)
+   const b: U[] = new Array(length)
 
    forEach(list, (item, i) => {
-      a[i] = item[0];
-      b[i] = item[1];
-   });
+      a[i] = item[0]
+      b[i] = item[1]
+   })
 
    return {
       each: (fn: DuoCallback<T, U, void>) => duoEach(a, b, fn),
@@ -274,20 +263,20 @@ export function makeDuoList<T, U>(...list: [T, U][]): DuoList<T, U> {
       copy: () => duoCopy(a, b),
       remove: (t?: T, u?: U) => duoRemove(a, b, t, u),
       unshift: (t: T, u: U) => duoUnshift(a, b, t, u)
-   };
+   }
 }
 
 export function makeTrioList<T, U, V>(...list: [T, U, V][]): TrioList<T, U, V> {
-   const length = list.length;
-   const a: T[] = new Array(length);
-   const b: U[] = new Array(length);
-   const c: V[] = new Array(length);
+   const length = list.length
+   const a: T[] = new Array(length)
+   const b: U[] = new Array(length)
+   const c: V[] = new Array(length)
 
    forEach(list, (item, i) => {
-      a[i] = item[0];
-      b[i] = item[1];
-      c[i] = item[2];
-   });
+      a[i] = item[0]
+      b[i] = item[1]
+      c[i] = item[2]
+   })
 
    return {
       each: (fn: TrioCallback<T, U, V, void>) => trioEach(a, b, c, fn),
@@ -302,5 +291,5 @@ export function makeTrioList<T, U, V>(...list: [T, U, V][]): TrioList<T, U, V> {
       copy: () => trioCopy(a, b, c),
       remove: (t?: T, u?: U, v?: V) => trioRemove(a, b, c, t, u, v),
       unshift: (t: T, u: U, v: V) => trioUnshift(a, b, c, t, u, v)
-   };
+   }
 }

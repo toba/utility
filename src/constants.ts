@@ -1,31 +1,8 @@
+// prettier-ignore
 export const alphabet = [
-   'a',
-   'b',
-   'c',
-   'd',
-   'e',
-   'f',
-   'g',
-   'h',
-   'i',
-   'j',
-   'k',
-   'l',
-   'm',
-   'n',
-   'o',
-   'p',
-   'q',
-   'r',
-   's',
-   't',
-   'u',
-   'v',
-   'w',
-   'x',
-   'y',
-   'z'
-];
+   'a','b','c','d','e','f','g','h','i','j','k','l','m',
+   'n','o','p','q','r','s','t','u','v','w','x','y','z'
+]
 
 export const month = [
    'January',
@@ -40,7 +17,7 @@ export const month = [
    'October',
    'November',
    'December'
-];
+]
 
 /**
  * EcmaScript months are zero-based.
@@ -68,7 +45,7 @@ export const weekday = [
    'Thursday',
    'Friday',
    'Saturday'
-];
+]
 
 /**
  * EcmaScript days of the week are zero-based.
@@ -158,7 +135,7 @@ export const Header = {
     * @see https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Vary
     */
    Vary: 'Vary'
-};
+}
 
 export enum HttpStatus {
    OK = 200,
