@@ -26,7 +26,9 @@
    },
    "devDependencies": {
       "@toba/develop": "^6.8.0",
-      "@toba/test": "^4.1.17"
+      "@toba/test": "^4.1.17",
+      "@types/benchmark": "^1.0.31",
+      "benchmark": "^2.1.4"
    },
    "repository": {
       "type": "git",

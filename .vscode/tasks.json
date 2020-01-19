@@ -25,6 +25,17 @@
          "problemMatcher": ["$tsc"]
       },
       {
+         "label": "Benchmark",
+         "presentation": {
+            "clear": true
+         },
+         "command": "node",
+         "args": ["--no-warnings", "./benchmarks/2d-array.mjs"],
+         "type": "shell",
+         "group": "test",
+         "problemMatcher": []
+      },
+      {
          "label": "Build CommonJS",
          "presentation": {
             "clear": true
