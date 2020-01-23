@@ -30,7 +30,7 @@
             "clear": true
          },
          "command": "node",
-         "args": ["--no-warnings", "./benchmarks/2d-array.mjs"],
+         "args": ["--no-warnings", "./benchmarks/each-object-key.mjs"],
          "type": "shell",
          "group": "test",
          "problemMatcher": []
