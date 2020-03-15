@@ -1,7 +1,7 @@
 {
    "name": "@toba/tools",
    "description": "Toba Tools",
-   "version": "6.13.4",
+   "version": "6.13.5",
    "private": false,
    "publishConfig": {
       "access": "public"
@@ -25,8 +25,8 @@
       "test": "jest --coverage"
    },
    "devDependencies": {
-      "@toba/develop": "^6.8.0",
-      "@toba/test": "^4.2.0",
+      "@toba/develop": "^6.8.1",
+      "@toba/test": "^4.2.1",
       "@types/benchmark": "^1.0.31",
       "benchmark": "^2.1.4"
    },
