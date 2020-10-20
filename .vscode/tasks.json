@@ -8,7 +8,9 @@
             "showReuseMessage": false,
             "clear": true
          },
-         "args": ["--verbose"],
+         "args": [
+            "--verbose"
+         ],
          "type": "shell",
          "group": "test",
          "problemMatcher": []
@@ -19,10 +21,15 @@
             "clear": true
          },
          "command": "./node_modules/.bin/tsc",
-         "args": ["--project", "tsconfig.build.json"],
+         "args": [
+            "--project",
+            "tsconfig.build.json"
+         ],
          "type": "shell",
          "group": "build",
-         "problemMatcher": ["$tsc"]
+         "problemMatcher": [
+            "$tsc"
+         ]
       },
       {
          "label": "Benchmark",
@@ -30,7 +37,10 @@
             "clear": true
          },
          "command": "node",
-         "args": ["--no-warnings", "./benchmarks/each-object-key.mjs"],
+         "args": [
+            "--no-warnings",
+            "./benchmarks/each-object-key.mjs"
+         ],
          "type": "shell",
          "group": "test",
          "problemMatcher": []
@@ -41,10 +51,15 @@
             "clear": true
          },
          "command": "./node_modules/.bin/tsc",
-         "args": ["--project", "tsconfig.cjs.json"],
+         "args": [
+            "--project",
+            "tsconfig.cjs.json"
+         ],
          "type": "shell",
          "group": "build",
-         "problemMatcher": ["$tsc"]
+         "problemMatcher": [
+            "$tsc"
+         ]
       },
       {
          "label": "Publish",
@@ -52,7 +67,9 @@
             "clear": true
          },
          "command": "npm",
-         "args": ["publish"],
+         "args": [
+            "publish"
+         ],
          "type": "shell",
          "group": "none",
          "problemMatcher": []
@@ -60,7 +77,10 @@
       {
          "label": "List Production Dependencies",
          "command": "npm",
-         "args": ["ls", "-prod=true"],
+         "args": [
+            "ls",
+            "-prod=true"
+         ],
          "type": "shell",
          "presentation": {
             "echo": false,
@@ -69,6 +89,14 @@
             "panel": "shared"
          },
          "problemMatcher": []
+      },
+      {
+         "type": "npm",
+         "script": "build:esm",
+         "group": "build",
+         "problemMatcher": [],
+         "label": "npm: build:esm",
+         "detail": "./node_modules/.bin/tsc --project ./node_modules/@toba/develop/tsconfig.esm.json"
       }
    ]
 }
