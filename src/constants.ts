@@ -424,10 +424,12 @@ export const enum LinkRelation {
    Tag = 'tag'
 }
 
-export const enum Encoding {
-   Buffer = 'buffer',
-   GZip = 'gzip',
-   Hexadecimal = 'hex',
-   UTF8 = 'utf8',
-   Base64 = 'base64'
+export declare const enum Encoding {
+    Buffer = "buffer",
+    Binary = "binary",
+    GZip = "gzip",
+    Hexadecimal = "hex",
+    UTF8 = "utf8",
+    Base64 = "base64",
+    ASCII = "ascii"
 }
